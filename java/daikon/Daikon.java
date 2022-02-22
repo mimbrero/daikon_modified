@@ -148,6 +148,7 @@ import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
 import daikon.inv.unary.string.CompleteOneOfString;
 import daikon.inv.unary.string.OneOfString;
 import daikon.inv.unary.string.PrintableString;
+import daikon.inv.unary.string.Url;
 import daikon.inv.unary.stringsequence.CommonStringSequence;
 import daikon.inv.unary.stringsequence.EltOneOfString;
 import daikon.inv.unary.stringsequence.OneOfStringSequence;
@@ -653,10 +654,10 @@ public final class Daikon {
     try {
 
       // Airport info
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\dtraceFile.dtrace"
+//      };
 
       // Spotify categories
 //      String[] files = {
@@ -665,10 +666,10 @@ public final class Daikon {
 //      };
 
       // Spotify Create playlist
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\dtraceFile.dtrace"
+      };
 
 
       mainHelper(files);
@@ -1515,6 +1516,9 @@ public final class Daikon {
       proto_invs.add(CompleteOneOfString.get_proto());
       proto_invs.add(CompleteOneOfScalar.get_proto());
 
+      // URL
+      proto_invs.add(Url.get_proto());
+
       // Positive (x > 0) (Postive.java).  Positive is a sample invariant
       // that is only included as an example.
       // proto_invs.add (Postive.get_proto());
@@ -1586,13 +1590,13 @@ public final class Daikon {
     {
       // Int, Float, String comparisons (from IntComparisons.java.jpp)
       proto_invs.add(IntEqual.get_proto());
-      proto_invs.add(IntNonEqual.get_proto());
+//      proto_invs.add(IntNonEqual.get_proto());
       proto_invs.add(IntLessThan.get_proto());
       proto_invs.add(IntGreaterThan.get_proto());
       proto_invs.add(IntLessEqual.get_proto());
       proto_invs.add(IntGreaterEqual.get_proto());
       proto_invs.add(FloatEqual.get_proto());
-      proto_invs.add(FloatNonEqual.get_proto());
+//      proto_invs.add(FloatNonEqual.get_proto());
       proto_invs.add(FloatLessThan.get_proto());
       proto_invs.add(FloatGreaterThan.get_proto());
       proto_invs.add(FloatLessEqual.get_proto());

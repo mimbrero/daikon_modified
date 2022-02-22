@@ -9,6 +9,8 @@ false positives) and adding new domain-specific invariants.
 Invariants can be suppressed by commenting its corresponding line in the setup_proto_invs function of the Daikon.java
 file. The following invariants have been suppressed:
 
+- IntNonEqual
+- FloatNonEqual
 - StringNonEqual
 - StringLessThan
 - StringGreaterThan
@@ -17,3 +19,5 @@ file. The following invariants have been suppressed:
 
 
 # New invariants
+## Unary invariants
+- Url (True if a string is a URL)

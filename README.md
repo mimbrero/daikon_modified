@@ -5,7 +5,8 @@ in the context of RESTful APIs. The original software can be found here: https:/
 This version of Daikon has been modified by suppressing specific invariants (that could result in the generation of
 false positives) and adding new domain-specific invariants.
 
-# Suppressed invariants
+# Invariants
+## Suppressed invariants
 Invariants can be suppressed by commenting its corresponding line in the setup_proto_invs function of the Daikon.java
 file. The following invariants have been suppressed:
 
@@ -18,4 +19,8 @@ file. The following invariants have been suppressed:
 - StringGreaterEqual
 
 
-# New invariants
+## New invariants
+### Unary invariants
+- Url (True if a string is a URL)
+
+# Derived invariants
