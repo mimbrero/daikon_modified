@@ -1,0 +1,10 @@
+# DAIKON
+This is a modified version of the Daikon invariant detector version 5.8.10, configured for detecting invariants
+in the context of RESTful APIs. The original software can be found here: https://plse.cs.washington.edu/daikon/
+
+This version of Daikon has been modified by supressing specific invariants (that could result in the generation of
+false positives) and adding new domain-specific invariants.
+
+# Supressed invariants
+
+# New invariants
