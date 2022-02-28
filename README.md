@@ -2,8 +2,8 @@
 This is a modified version of the Daikon invariant detector version 5.8.10, configured for detecting invariants
 in the context of RESTful APIs. The original software can be found here: https://plse.cs.washington.edu/daikon/
 
-This version of Daikon has been modified by suppressing specific invariants (that could result in the generation of
-false positives) and adding new domain-specific invariants.
+This version of Daikon has been modified by suppressing specific invariants and derived variables (that could result in the generation of
+false positives) and adding new domain-specific invariants and derived variables.
 
 # Invariants
 ## Suppressed invariants
@@ -23,4 +23,6 @@ file. The following invariants have been suppressed:
 ### Unary invariants
 - Url (True if a string is a URL)
 
-# Derived invariants
+# Derived variables
+## Suppressed derived variables
+- 

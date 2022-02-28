@@ -17,7 +17,7 @@ public class Url extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
     // remove fields, you should change this number to the current date.
-    static final long serialVersionUID = 20040728L;
+    static final long serialVersionUID = 20220228L;
 
     // Variables starting with dkconfig_ should only be set via the
     // daikon.config.Configuration interface.
@@ -53,7 +53,6 @@ public class Url extends SingleString {
         return var().name() + " is Url";
     }
 
-    // TODO: Consider modifying the regular expression
     @Override
     public InvariantStatus check_modified(String v, int count) {
 
@@ -67,26 +66,19 @@ public class Url extends SingleString {
         return InvariantStatus.FALSIFIED;
     }
 
-    // TODO: Check abstract class
     @Override
     public InvariantStatus add_modified(String v, int count) { return check_modified(v, count); }
 
-    // TODO: Change this function to a more suitable regular expression
     @Override
     protected  double computeConfidence() {
-        return 1 - Math.pow(.5, ppt.num_samples());
+        return 1 - Math.pow(.1, ppt.num_samples());
     }
 
-    // TODO: Check
     @Pure
     @Override
     public boolean isSameFormula(Invariant other) {
-        assert other instanceof Positive;
+        assert other instanceof Url;
         return true;
     }
-
-
-
-
 
 }
