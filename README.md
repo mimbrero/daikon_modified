@@ -22,6 +22,7 @@ file. The following invariants have been suppressed:
 ## New invariants
 ### Unary invariants
 - Url (True if a string is a URL)
+- FixedLengthString (True if a string always has the same length)
 
 # Derived variables
 ## Suppressed derived variables

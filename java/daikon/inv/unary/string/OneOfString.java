@@ -13,7 +13,7 @@ import java.util.*;
 
 import java.util.Comparator;
 
-  import java.util.regex.*;
+import java.util.regex.*;
 
 import org.checkerframework.checker.initialization.qual.Initialized;
 import org.checkerframework.checker.interning.qual.Interned;

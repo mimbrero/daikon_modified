@@ -145,10 +145,7 @@ import daikon.inv.unary.sequence.SeqIndexIntGreaterThan;
 import daikon.inv.unary.sequence.SeqIndexIntLessEqual;
 import daikon.inv.unary.sequence.SeqIndexIntLessThan;
 import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
-import daikon.inv.unary.string.CompleteOneOfString;
-import daikon.inv.unary.string.OneOfString;
-import daikon.inv.unary.string.PrintableString;
-import daikon.inv.unary.string.Url;
+import daikon.inv.unary.string.*;
 import daikon.inv.unary.stringsequence.CommonStringSequence;
 import daikon.inv.unary.stringsequence.EltOneOfString;
 import daikon.inv.unary.stringsequence.OneOfStringSequence;
@@ -654,10 +651,10 @@ public final class Daikon {
     try {
 
       // Airport info
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\main\\resources\\AirportInfo\\dtraceFile.dtrace"
+      };
 
       // Spotify categories
 //      String[] files = {
@@ -666,10 +663,10 @@ public final class Daikon {
 //      };
 
       // Spotify Create playlist
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\Spotify_createPlaylist\\dtraceFile.dtrace"
+//      };
 
 
       mainHelper(files);
@@ -1518,6 +1515,8 @@ public final class Daikon {
 
       // URL
       proto_invs.add(Url.get_proto());
+      // FixedLengthString
+      proto_invs.add(FixedLengthString.get_proto());
 
       // Positive (x > 0) (Postive.java).  Positive is a sample invariant
       // that is only included as an example.
