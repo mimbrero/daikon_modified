@@ -678,10 +678,10 @@ public final class Daikon {
 
       // Spotify
       // createPlaylist
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\dtraceFile.dtrace"
+      };
 
       // getAlbumTracks
 //      String[] files = {
@@ -696,10 +696,10 @@ public final class Daikon {
 //      };
 
       // YouTube
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\dtraceFile.dtrace"
+//      };
 
 
       mainHelper(files);
@@ -1672,11 +1672,11 @@ public final class Daikon {
       proto_invs.add(SeqSeqFloatGreaterThan.get_proto());
       proto_invs.add(SeqSeqFloatLessEqual.get_proto());
       proto_invs.add(SeqSeqFloatGreaterEqual.get_proto());
-      proto_invs.add(SeqSeqStringEqual.get_proto());
-      proto_invs.add(SeqSeqStringLessThan.get_proto());
-      proto_invs.add(SeqSeqStringGreaterThan.get_proto());
-      proto_invs.add(SeqSeqStringLessEqual.get_proto());
-      proto_invs.add(SeqSeqStringGreaterEqual.get_proto());
+//      proto_invs.add(SeqSeqStringEqual.get_proto());
+//      proto_invs.add(SeqSeqStringLessThan.get_proto());
+//      proto_invs.add(SeqSeqStringGreaterThan.get_proto());
+//      proto_invs.add(SeqSeqStringLessEqual.get_proto());
+//      proto_invs.add(SeqSeqStringGreaterEqual.get_proto());
 
       // Pairwise sequence comparisons (from PairwiseIntComparison.java.jpp)
       proto_invs.add(PairwiseIntEqual.get_proto());
@@ -1690,10 +1690,10 @@ public final class Daikon {
       proto_invs.add(PairwiseFloatLessEqual.get_proto());
       proto_invs.add(PairwiseFloatGreaterEqual.get_proto());
       proto_invs.add(PairwiseStringEqual.get_proto());
-      proto_invs.add(PairwiseStringLessThan.get_proto());
-      proto_invs.add(PairwiseStringGreaterThan.get_proto());
-      proto_invs.add(PairwiseStringLessEqual.get_proto());
-      proto_invs.add(PairwiseStringGreaterEqual.get_proto());
+//      proto_invs.add(PairwiseStringLessThan.get_proto());
+//      proto_invs.add(PairwiseStringGreaterThan.get_proto());
+//      proto_invs.add(PairwiseStringLessEqual.get_proto());
+//      proto_invs.add(PairwiseStringGreaterEqual.get_proto());
 
       // Array Reverse (from Reverse.java.jpp)
       proto_invs.add(Reverse.get_proto());

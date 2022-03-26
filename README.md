@@ -7,7 +7,7 @@ false positives) and adding new domain-specific invariants and derived variables
 
 # Invariants
 ## Suppressed invariants
-Invariants can be suppressed by commenting its corresponding line in the setup_proto_invs function of the Daikon.java
+Invariants can be suppressed by commenting their corresponding line in the setup_proto_invs function of the Daikon.java
 file. The following invariants have been suppressed:
 
 - IntNonEqual
@@ -17,7 +17,15 @@ file. The following invariants have been suppressed:
 - StringGreaterThan
 - StringLessEqual
 - StringGreaterEqual
-
+- SeqSeqStringEqual
+- SeqSeqStringLessThan
+- SeqSeqStringGreaterThan
+- SeqSeqStringLessEqual
+- SeqSeqStringGreaterEqual
+- PairwiseStringLessThan
+- PairwiseStringGreaterThan
+- PairwiseStringLessEqual
+- PairwiseStringGreaterEqual
 
 ## New invariants
 ### Unary invariants
