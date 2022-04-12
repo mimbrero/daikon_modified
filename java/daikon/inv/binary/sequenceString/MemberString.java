@@ -285,7 +285,8 @@ public final class MemberString extends SequenceString {
 
   @Override
   protected double computeConfidence() {
-    return Invariant.CONFIDENCE_JUSTIFIED;
+    return 1 - Math.pow(.1, ppt.num_samples());
+//    return Invariant.CONFIDENCE_JUSTIFIED;
   }
 
   @Pure

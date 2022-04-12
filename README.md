@@ -27,11 +27,15 @@ file. The following invariants have been suppressed:
 - PairwiseStringLessEqual
 - PairwiseStringGreaterEqual
 
-## New invariants
-### Unary invariants
+# New invariants
+## Unary invariants
 - Url (True if a string is a URL)
 - FixedLengthString (True if a string always has the same length)
 
 # Derived variables
 ## Suppressed derived variables
 - 
+
+# Modifications in computeConfidence
+Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"
+- MemberString
