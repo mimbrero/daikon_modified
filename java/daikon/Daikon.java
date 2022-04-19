@@ -675,6 +675,11 @@ public final class Daikon {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\declsFile_20.decls",
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\dtraceFile_20.dtrace"
 //      };
+//      // GitHub
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
+//      };
 
       // Spotify
       // createPlaylist
@@ -684,9 +689,22 @@ public final class Daikon {
 //      };
 
       // getAlbumTracks
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
+//      };
+
+      // OMDb
+      // byIdOrTitle
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\dtraceFile.dtrace"
+//      };
+
+      // bySearch
       String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile_nonsensical.dtrace"
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\dtraceFile.dtrace"
       };
 
       // Yelp
