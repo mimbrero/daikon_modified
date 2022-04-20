@@ -146,6 +146,9 @@ import daikon.inv.unary.sequence.SeqIndexIntLessEqual;
 import daikon.inv.unary.sequence.SeqIndexIntLessThan;
 import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
 import daikon.inv.unary.string.*;
+import daikon.inv.unary.string.dates.IsDateDDMMYYYY;
+import daikon.inv.unary.string.dates.IsDateMMDDYYYY;
+import daikon.inv.unary.string.dates.IsDateYYYYMMDD;
 import daikon.inv.unary.stringsequence.CommonStringSequence;
 import daikon.inv.unary.stringsequence.EltOneOfString;
 import daikon.inv.unary.stringsequence.OneOfStringSequence;
@@ -1570,9 +1573,21 @@ public final class Daikon {
       proto_invs.add(CompleteOneOfScalar.get_proto());
 
       // URL
-      proto_invs.add(Url.get_proto());
+      proto_invs.add(IsUrl.get_proto());
       // FixedLengthString
       proto_invs.add(FixedLengthString.get_proto());
+      // IsNumeric
+      proto_invs.add(IsNumeric.get_proto());
+      // IsEmail
+      proto_invs.add(IsEmail.get_proto());
+
+      // Dates
+          // YYYY/MM/DD format
+      proto_invs.add(IsDateYYYYMMDD.get_proto());
+          // DD/MM/YYYY format
+      proto_invs.add(IsDateDDMMYYYY.get_proto());
+          // MM/DD/YYYY format
+      proto_invs.add(IsDateMMDDYYYY.get_proto());
 
       // Positive (x > 0) (Postive.java).  Positive is a sample invariant
       // that is only included as an example.

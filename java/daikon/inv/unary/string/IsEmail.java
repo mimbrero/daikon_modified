@@ -4,7 +4,6 @@ import daikon.PptSlice;
 import daikon.inv.Invariant;
 import daikon.inv.InvariantStatus;
 import daikon.inv.OutputFormat;
-import daikon.inv.unary.scalar.Positive;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
@@ -13,11 +12,11 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Url extends SingleString {
+public class IsEmail extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
     // remove fields, you should change this number to the current date.
-    static final long serialVersionUID = 20220228L;
+    static final long serialVersionUID = 20220420L;
 
     // Variables starting with dkconfig_ should only be set via the
     // daikon.config.Configuration interface.
@@ -27,14 +26,15 @@ public class Url extends SingleString {
     ///
     /// Required methods
     ///
-    private Url(PptSlice ppt){ super(ppt); }
+    private IsEmail(PptSlice ppt){ super(ppt); }
 
-    private @Prototype Url() { super(); }
+    private @Prototype
+    IsEmail() { super(); }
 
-    private static @Prototype Url proto = new @Prototype Url();
+    private static @Prototype IsEmail proto = new @Prototype IsEmail();
 
     // Returns the prototype invariant
-    public static @Prototype Url get_proto() { return proto; }
+    public static @Prototype IsEmail get_proto() { return proto; }
 
     @Override
     public boolean enabled() {
@@ -42,21 +42,21 @@ public class Url extends SingleString {
     }
 
     @Override
-    public Url instantiate_dyn(@Prototype Url this, PptSlice slice) {
-        return new Url(slice);
+    public IsEmail instantiate_dyn(@Prototype IsEmail this, PptSlice slice) {
+        return new IsEmail(slice);
     }
 
     // A printed representation for user output
     @SideEffectFree
     @Override
-    public String format_using(@GuardSatisfied Url this, OutputFormat format) {
-        return var().name() + " is Url";
+    public String format_using(@GuardSatisfied IsEmail this, OutputFormat format) {
+        return var().name() + " is Email";
     }
 
     @Override
     public InvariantStatus check_modified(String v, int count) {
 
-        Pattern pattern = Pattern.compile("^(?:(?:https?|ftp)://)(?:\\S+(?::\\S*)?@)?(?:(?!10(?:\\.\\d{1,3}){3})(?!127(?:\\.\\d{1,3}){3})(?!169\\.254(?:\\.\\d{1,3}){2})(?!192\\.168(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\x{00a1}-\\x{ffff}0-9]+-?)*[a-z\\x{00a1}-\\x{ffff}0-9]+)(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}0-9]+-?)*[a-z\\x{00a1}-\\x{ffff}0-9]+)*(?:\\.(?:[a-z\\x{00a1}-\\x{ffff}]{2,})))(?::\\d{2,5})?(?:/[^\\s]*)?$");
+        Pattern pattern = Pattern.compile("^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9]^[0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$");
 
         Matcher matcher = pattern.matcher(v);
 
@@ -77,7 +77,7 @@ public class Url extends SingleString {
     @Pure
     @Override
     public boolean isSameFormula(Invariant other) {
-        assert other instanceof Url;
+        assert other instanceof IsEmail;
         return true;
     }
 
