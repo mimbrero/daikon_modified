@@ -670,6 +670,11 @@ public final class Daikon {
 //      };
 
       // ############################################################ EVALUATION ############################################################
+      // AmadeusHotel
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
+      };
       // DB StaDa
 //      String[] files = {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\declsFile_20.decls",
@@ -702,10 +707,10 @@ public final class Daikon {
 //      };
 
       // bySearch
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\dtraceFile.dtrace"
+//      };
 
       // Yelp
 //      String[] files = {
