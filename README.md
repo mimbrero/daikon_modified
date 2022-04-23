@@ -37,7 +37,10 @@ file. The following invariants have been suppressed:
 	- YYYY/MM/DD ("/" can be replaced by "-" or "."):	
 	- DD/MM/YYYY
 	- MM/DD/YYYY
-
+	- HH:MM 24-hour format, optional leading 0
+	- HH:MM:SS 24-hour format with optional leading 0
+	- HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
+	- Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)
 
 # Derived variables
 ## Suppressed derived variables

@@ -146,9 +146,7 @@ import daikon.inv.unary.sequence.SeqIndexIntLessEqual;
 import daikon.inv.unary.sequence.SeqIndexIntLessThan;
 import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
 import daikon.inv.unary.string.*;
-import daikon.inv.unary.string.dates.IsDateDDMMYYYY;
-import daikon.inv.unary.string.dates.IsDateMMDDYYYY;
-import daikon.inv.unary.string.dates.IsDateYYYYMMDD;
+import daikon.inv.unary.string.dates.*;
 import daikon.inv.unary.stringsequence.CommonStringSequence;
 import daikon.inv.unary.stringsequence.EltOneOfString;
 import daikon.inv.unary.stringsequence.OneOfStringSequence;
@@ -674,20 +672,21 @@ public final class Daikon {
 
       // ############################################################ EVALUATION ############################################################
       // AmadeusHotel
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
+//      };
       // DB StaDa
 //      String[] files = {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\declsFile_20.decls",
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\dtraceFile_20.dtrace"
 //      };
-//      // GitHub
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
-//      };
+
+      // GitHub
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
+      };
 
       // Spotify
       // createPlaylist
@@ -723,8 +722,8 @@ public final class Daikon {
 
       // YouTube
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\declsFile_20.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\dtraceFile_20.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\dtraceFile.dtrace"
 //      };
 
 
@@ -1588,6 +1587,14 @@ public final class Daikon {
       proto_invs.add(IsDateDDMMYYYY.get_proto());
           // MM/DD/YYYY format
       proto_invs.add(IsDateMMDDYYYY.get_proto());
+          // HH:MM 24-hour format, optional leading 0
+      proto_invs.add(IsHour.get_proto());
+          // HH:MM:SS 24-hour format with optional leading 0
+      proto_invs.add(IsHourWithSeconds.get_proto());
+          // HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
+      proto_invs.add(IsHourAMPM.get_proto());
+          // YYYY-MM-DDTHH:MM:SS.mmZ format (Miliseconds are optional)
+      proto_invs.add(IsTimestampYYYYMMHHThhmmssmm.get_proto());
 
       // Positive (x > 0) (Postive.java).  Positive is a sample invariant
       // that is only included as an example.
