@@ -46,6 +46,7 @@ file. The following invariants have been suppressed:
 - SequenceStringElementsAreUrl (True if all the elements of an array are of type URL)
 - SequenceFixedLengthString (True if all the elements of an array have the same length)
 - SequenceStringElementsAreNumeric (True if all the elements of an array are Numeric)
+- SequenceStringElementsAreEmail (True if all the elements of an array are Email)
 
 # Derived variables
 ## Suppressed derived variables
