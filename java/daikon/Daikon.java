@@ -148,6 +148,7 @@ import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
 import daikon.inv.unary.string.*;
 import daikon.inv.unary.string.dates.*;
 import daikon.inv.unary.stringsequence.*;
+import daikon.inv.unary.stringsequence.dates.*;
 import daikon.split.ContextSplitterFactory;
 import daikon.split.PptSplitter;
 import daikon.split.SpinfoFile;
@@ -1669,6 +1670,23 @@ public final class Daikon {
       proto_invs.add(SequenceStringElementsAreNumeric.get_proto());
       // SequenceStringElementsAreEmail
       proto_invs.add(SequenceStringElementsAreEmail.get_proto());
+
+      // SequenceStringElements are dates. Formats:
+      // YYYY/MM/DD format
+      proto_invs.add(SequenceStringElementsAreDateYYYYMMDD.get_proto());
+      // DD/MM/YYYY format
+      proto_invs.add(SequenceStringElementsAreDateDDMMYYYY.get_proto());
+      // MM/DD/YYYY format
+      proto_invs.add(SequenceStringElementsAreDateMMDDYYYY.get_proto());
+      // HH:MM 24-hour format, optional leading 0
+      proto_invs.add(SequenceStringElementsAreHour.get_proto());
+      // HH:MM:SS 24-hour format with optional leading 0
+      proto_invs.add(SequenceStringElementsAreHourWithSeconds.get_proto());
+      // HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
+      proto_invs.add(SequenceStringElementsAreHourAMPM.get_proto());
+      // YYYY-MM-DDTHH:MM:SS.mmZ format (Miliseconds are optional)
+      proto_invs.add(SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm.get_proto());
+
     }
 
     // Binary scalar-scalar invariants

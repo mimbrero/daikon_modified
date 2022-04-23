@@ -47,6 +47,14 @@ file. The following invariants have been suppressed:
 - SequenceFixedLengthString (True if all the elements of an array have the same length)
 - SequenceStringElementsAreNumeric (True if all the elements of an array are Numeric)
 - SequenceStringElementsAreEmail (True if all the elements of an array are Email)
+- Elements of sequence are dates. Formats:
+	- YYYY/MM/DD ("/" can be replaced by "-" or "."):	
+	- DD/MM/YYYY
+	- MM/DD/YYYY
+	- HH:MM 24-hour format, optional leading 0
+	- HH:MM:SS 24-hour format with optional leading 0
+	- HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
+	- Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)
 
 # Derived variables
 ## Suppressed derived variables
