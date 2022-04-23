@@ -150,6 +150,7 @@ import daikon.inv.unary.string.dates.*;
 import daikon.inv.unary.stringsequence.CommonStringSequence;
 import daikon.inv.unary.stringsequence.EltOneOfString;
 import daikon.inv.unary.stringsequence.OneOfStringSequence;
+import daikon.inv.unary.stringsequence.SequenceFixedLengthString;
 import daikon.split.ContextSplitterFactory;
 import daikon.split.PptSplitter;
 import daikon.split.SpinfoFile;
@@ -672,10 +673,11 @@ public final class Daikon {
 
       // ############################################################ EVALUATION ############################################################
       // AmadeusHotel
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
+//      };
+
       // DB StaDa
 //      String[] files = {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\declsFile_20.decls",
@@ -696,10 +698,10 @@ public final class Daikon {
 //      };
 
       // getAlbumTracks
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
+      };
 
       // OMDb
       // byIdOrTitle
@@ -1661,6 +1663,9 @@ public final class Daikon {
 
       // CommonStringSequence (CommonStringSubsequence.java)
       proto_invs.add(CommonStringSequence.get_proto());
+
+      // SequenceFixedLengthString
+      proto_invs.add(SequenceFixedLengthString.get_proto());
     }
 
     // Binary scalar-scalar invariants

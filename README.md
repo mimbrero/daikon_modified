@@ -42,9 +42,13 @@ file. The following invariants have been suppressed:
 	- HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
 	- Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)
 
+## Unary invariants for sequences
+
+
 # Derived variables
 ## Suppressed derived variables
-- 
+-
+- SequenceFixedLengthString (True if all the elements of an array have the same length)
 
 # Modifications in computeConfidence
 Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"
