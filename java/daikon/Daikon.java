@@ -147,10 +147,7 @@ import daikon.inv.unary.sequence.SeqIndexIntLessThan;
 import daikon.inv.unary.sequence.SeqIndexIntNonEqual;
 import daikon.inv.unary.string.*;
 import daikon.inv.unary.string.dates.*;
-import daikon.inv.unary.stringsequence.CommonStringSequence;
-import daikon.inv.unary.stringsequence.EltOneOfString;
-import daikon.inv.unary.stringsequence.OneOfStringSequence;
-import daikon.inv.unary.stringsequence.SequenceFixedLengthString;
+import daikon.inv.unary.stringsequence.*;
 import daikon.split.ContextSplitterFactory;
 import daikon.split.PptSplitter;
 import daikon.split.SpinfoFile;
@@ -1666,6 +1663,8 @@ public final class Daikon {
 
       // SequenceFixedLengthString
       proto_invs.add(SequenceFixedLengthString.get_proto());
+      // SequenceStringElementsAreUrl
+      proto_invs.add(SequenceStringElementsAreUrl.get_proto());
     }
 
     // Binary scalar-scalar invariants
