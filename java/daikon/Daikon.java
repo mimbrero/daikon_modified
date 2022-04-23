@@ -1667,6 +1667,8 @@ public final class Daikon {
       proto_invs.add(SequenceStringElementsAreUrl.get_proto());
       // SequenceStringElementsAreNumeric
       proto_invs.add(SequenceStringElementsAreNumeric.get_proto());
+      // SequenceStringElementsAreEmail
+      proto_invs.add(SequenceStringElementsAreEmail.get_proto());
     }
 
     // Binary scalar-scalar invariants
