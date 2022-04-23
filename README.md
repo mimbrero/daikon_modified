@@ -43,12 +43,13 @@ file. The following invariants have been suppressed:
 	- Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)
 
 ## Unary invariants for sequences
-
+- SequenceStringElementsAreUrl (True if all the elements of an array are of type URL)
+- SequenceFixedLengthString (True if all the elements of an array have the same length)
+- SequenceStringElementsAreNumeric (True if all the elements of an array are Numeric)
 
 # Derived variables
 ## Suppressed derived variables
-- SequenceStringElementsAreUrl (True if all the elements of an array are of type URL)
-- SequenceFixedLengthString (True if all the elements of an array have the same length)
+
 
 # Modifications in computeConfidence
 Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"
