@@ -1163,8 +1163,11 @@ public final class PrintInvariants {
       out.print("</INVINFO>");
       out.println();
     } else {
-//      System.out.println(inv.getClass().getName());
-      out.println(inv_rep);
+      // Supressing orig(...) variables
+      if(!inv_rep.contains("orig(")) {
+//        System.out.println(inv.getClass().getName());
+        out.println(inv_rep);
+      }
     }
     if (debug.isLoggable(Level.FINE)) {
       debug.fine(inv.repr());

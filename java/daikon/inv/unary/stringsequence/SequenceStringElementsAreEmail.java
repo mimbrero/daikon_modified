@@ -29,6 +29,9 @@ public class SequenceStringElementsAreEmail extends SingleStringSequence {
   // daikon.config.Configuration interface.
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
+  // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
+  private boolean alwaysEmpty = true;
+
   protected SequenceStringElementsAreEmail(PptSlice ppt) {
     super(ppt);
 
@@ -79,6 +82,10 @@ public class SequenceStringElementsAreEmail extends SingleStringSequence {
 
     Pattern pattern = Pattern.compile("^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9]^[0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$");
 
+    if(a.length>0){
+      alwaysEmpty = false;
+    }
+
     for(int i=0; i<a.length; i++) {
       Matcher matcher = pattern.matcher(a[i]);
       // The invariant is falsified if one of the elements of the array is NOT an email
@@ -98,6 +105,11 @@ public class SequenceStringElementsAreEmail extends SingleStringSequence {
 
   @Override
   protected double computeConfidence() {
+
+    if(alwaysEmpty) {
+      return Invariant.CONFIDENCE_UNJUSTIFIED;
+    }
+
     return 1 - Math.pow(.1, ppt.num_samples());
   }
 

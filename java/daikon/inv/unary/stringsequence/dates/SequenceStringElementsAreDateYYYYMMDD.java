@@ -30,6 +30,9 @@ public class SequenceStringElementsAreDateYYYYMMDD extends SingleStringSequence 
   // daikon.config.Configuration interface.
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
+  // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
+  private boolean alwaysEmpty = true;
+
   protected SequenceStringElementsAreDateYYYYMMDD(PptSlice ppt) {
     super(ppt);
 
@@ -86,6 +89,10 @@ public class SequenceStringElementsAreDateYYYYMMDD extends SingleStringSequence 
      */
     // ^(?:19\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$
     Pattern pattern = Pattern.compile("^(?:19\\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$");
+
+    if(a.length>0){
+      alwaysEmpty = false;
+    }
     
     for(int i=0; i<a.length; i++) {
       Matcher matcher = pattern.matcher(a[i]);
@@ -106,6 +113,11 @@ public class SequenceStringElementsAreDateYYYYMMDD extends SingleStringSequence 
 
   @Override
   protected double computeConfidence() {
+
+    if(alwaysEmpty) {
+      return Invariant.CONFIDENCE_UNJUSTIFIED;
+    }
+
     return 1 - Math.pow(.1, ppt.num_samples());
   }
 

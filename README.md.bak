@@ -61,7 +61,7 @@ file. The following invariants have been suppressed:
 
 # Derived variables
 ## Suppressed derived variables
-- orig() derived variables
+
 
 # Modifications in computeConfidence
 Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"

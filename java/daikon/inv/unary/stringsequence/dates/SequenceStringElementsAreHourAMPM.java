@@ -30,6 +30,9 @@ public class SequenceStringElementsAreHourAMPM extends SingleStringSequence {
   // daikon.config.Configuration interface.
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
+  // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
+  private boolean alwaysEmpty = true;
+
   protected SequenceStringElementsAreHourAMPM(PptSlice ppt) {
     super(ppt);
 
@@ -79,6 +82,10 @@ public class SequenceStringElementsAreHourAMPM extends SingleStringSequence {
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
     Pattern pattern = Pattern.compile("^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$");
+
+    if(a.length>0){
+      alwaysEmpty = false;
+    }
     
     for(int i=0; i<a.length; i++) {
       Matcher matcher = pattern.matcher(a[i]);
@@ -98,7 +105,13 @@ public class SequenceStringElementsAreHourAMPM extends SingleStringSequence {
 
   @Override
   protected double computeConfidence() {
+
+    if(alwaysEmpty) {
+      return Invariant.CONFIDENCE_UNJUSTIFIED;
+    }
+
     return 1 - Math.pow(.1, ppt.num_samples());
+
   }
 
   @Pure

@@ -80,7 +80,7 @@ public class SequenceFixedLengthString extends SingleStringSequence {
   @Override
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
-    if (a==null) {
+    if (a==null || a.length == 0) {
       return InvariantStatus.NO_CHANGE;
     }
 

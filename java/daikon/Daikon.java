@@ -683,10 +683,10 @@ public final class Daikon {
 //      };
 
       // GitHub
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
+      };
 
       // Spotify
       // createPlaylist
@@ -696,10 +696,10 @@ public final class Daikon {
 //      };
 
       // getAlbumTracks
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
+//      };
 
       // OMDb
       // byIdOrTitle
@@ -1546,7 +1546,7 @@ public final class Daikon {
 
       // NonZero (NonZero.java.jpp)
       proto_invs.add(NonZero.get_proto());
-      proto_invs.add(NonZeroFloat.get_proto());
+//      proto_invs.add(NonZeroFloat.get_proto());
 
       proto_invs.add(IsPointer.get_proto());
 

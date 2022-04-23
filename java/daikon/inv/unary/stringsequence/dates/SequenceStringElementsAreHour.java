@@ -30,6 +30,9 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
   // daikon.config.Configuration interface.
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
+  // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
+  private boolean alwaysEmpty = true;
+
   protected SequenceStringElementsAreHour(PptSlice ppt) {
     super(ppt);
 
@@ -80,6 +83,10 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
 
     Pattern pattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
 
+    if(a.length>0){
+      alwaysEmpty = false;
+    }
+
     for(int i=0; i<a.length; i++) {
       Matcher matcher = pattern.matcher(a[i]);
       if(!matcher.matches()) {
@@ -98,6 +105,11 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
 
   @Override
   protected double computeConfidence() {
+
+    if(alwaysEmpty) {
+      return Invariant.CONFIDENCE_UNJUSTIFIED;
+    }
+
     return 1 - Math.pow(.1, ppt.num_samples());
   }
 
