@@ -56,7 +56,8 @@ public class IsNumeric extends SingleString {
     @Override
     public InvariantStatus check_modified(String v, int count) {
 
-        Pattern pattern = Pattern.compile("^\\d+$");
+//        Pattern pattern = Pattern.compile("^\\d+$");
+        Pattern pattern = Pattern.compile("^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$");
 
         Matcher matcher = pattern.matcher(v);
 
