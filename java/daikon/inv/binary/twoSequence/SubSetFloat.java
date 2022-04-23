@@ -219,6 +219,11 @@ public class SubSetFloat extends TwoSequenceFloat {
 
   @Override
   protected double computeConfidence() {
+
+    if(ppt.num_samples()==0) {
+      return CONFIDENCE_UNJUSTIFIED;
+    }
+
     return Invariant.CONFIDENCE_JUSTIFIED;
   }
 

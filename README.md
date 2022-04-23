@@ -65,4 +65,27 @@ file. The following invariants have been suppressed:
 
 # Modifications in computeConfidence
 Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"
-- MemberString
+- unary:
+	- scalar:
+		- RangeFloat
+		- RangeInt
+	- sequence:
+		- EltRangeFloat
+		- EltRangeInt
+- MemberString:
+	- sequenceScalar:
+		- Member
+		- MemberFloat
+	- sequenceString:
+		- MemberString
+	- twoSequence:
+		- Reverse
+		- ReverseFloat
+		- SubSequence
+		- SubSequenceFloat
+		- SubSet
+		- SubSetFloat
+		- SuperSequence
+		- SuperSequenceFloat
+		- SuperSet
+		- SuperSetFloat

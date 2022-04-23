@@ -101,6 +101,11 @@ public abstract class RangeFloat extends SingleFloat {
 
   @Override
   protected double computeConfidence() {
+
+    if(ppt.num_samples() == 0) {
+      return CONFIDENCE_UNJUSTIFIED;
+    }
+
     return CONFIDENCE_JUSTIFIED;
   }
 

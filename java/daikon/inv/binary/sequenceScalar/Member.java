@@ -313,6 +313,11 @@ public final class Member extends SequenceScalar {
 
   @Override
   protected double computeConfidence() {
+
+    if(ppt.num_samples()==0) {
+      return CONFIDENCE_UNJUSTIFIED;
+    }
+
     return Invariant.CONFIDENCE_JUSTIFIED;
   }
 

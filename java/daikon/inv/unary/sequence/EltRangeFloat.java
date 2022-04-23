@@ -115,6 +115,11 @@ public abstract class EltRangeFloat extends SingleFloatSequence {
 
   @Override
   protected double computeConfidence() {
+
+    if(ppt.num_samples()==0) {
+      return CONFIDENCE_UNJUSTIFIED;
+    }
+
     return CONFIDENCE_JUSTIFIED;
   }
 
