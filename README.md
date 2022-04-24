@@ -63,6 +63,9 @@ file. The following invariants have been suppressed:
 ## Suppressed derived variables
 - orig() derived variables
 
+# Suppressed variables
+- FixedLengthString is suppressed by YYYY/MM/DD, DD/MM/YYYY and MM/DD/YYYY
+
 # Modifications in computeConfidence
 Modified the computeConfidence function of Invariant types that simply returned "Invariant.CONFIDENCE_JUSTIFIED"
 - unary:
