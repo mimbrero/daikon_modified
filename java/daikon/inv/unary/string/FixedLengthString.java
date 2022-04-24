@@ -4,8 +4,20 @@ import daikon.PptSlice;
 import daikon.inv.Invariant;
 import daikon.inv.InvariantStatus;
 import daikon.inv.OutputFormat;
+import daikon.inv.unary.sequence.SeqIndexFloatEqual;
+import daikon.inv.unary.sequence.SeqIndexFloatGreaterEqual;
+import daikon.inv.unary.sequence.SeqIndexFloatGreaterThan;
+import daikon.inv.unary.string.dates.IsDateDDMMYYYY;
+import daikon.inv.unary.string.dates.IsDateMMDDYYYY;
+import daikon.inv.unary.string.dates.IsDateYYYYMMDD;
+import daikon.suppress.NISuppressee;
+import daikon.suppress.NISuppression;
+import daikon.suppress.NISuppressionSet;
+import daikon.suppress.NISuppressor;
 import org.checkerframework.checker.interning.qual.Interned;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.checkerframework.framework.qual.Unused;
@@ -93,5 +105,35 @@ public class FixedLengthString extends SingleString {
 
         return true;
     }
+
+    /** NI suppressions, initialized in get_ni_suppressions() */
+    private static @Nullable NISuppressionSet suppressions = null;
+
+    /** returns the ni-suppressions for SeqIndexFloatGreaterEqual */
+    @Pure
+    @Override
+    public @NonNull NISuppressionSet get_ni_suppressions() {
+        if (suppressions == null) {
+
+            NISuppressee suppressee = new NISuppressee(FixedLengthString.class, 1);
+
+            // suppressor definitions (used in suppressions below)
+            NISuppressor isDateMMDDYYYY = new NISuppressor(0, IsDateMMDDYYYY.class);
+            NISuppressor isDateDDMMYYYY = new NISuppressor(0, IsDateDDMMYYYY.class);
+            NISuppressor isDateYYYYMMDD = new NISuppressor(0, IsDateYYYYMMDD.class);
+
+
+            suppressions = new NISuppressionSet(
+                    new NISuppression[]{
+
+                            new NISuppression(isDateMMDDYYYY, suppressee),
+                            new NISuppression(isDateDDMMYYYY, suppressee),
+                            new NISuppression(isDateYYYYMMDD, suppressee),
+
+                    });
+        }
+        return suppressions;
+    }
+
 
 }
