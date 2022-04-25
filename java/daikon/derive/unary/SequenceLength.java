@@ -42,7 +42,7 @@ public final class SequenceLength extends UnaryDerivation {
 
   public SequenceLength(VarInfo vi, int shift) {
     super(vi);
-    this.shift = shift; // typically 0 or -1
+    this.shift = 0; // typically 0 or -1
   }
 
   public static boolean applicable(VarInfo vi) {

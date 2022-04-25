@@ -671,47 +671,54 @@ public final class Daikon {
 
       // ############################################################ EVALUATION ############################################################
       // AmadeusHotel
+      // 1000
       String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\dtraceFile.dtrace"
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\1000\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\1000\\dtraceFile.dtrace"
       };
 
       // DB StaDa
+      // 1000
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\declsFile_20.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Deutschebahn\\dtraceFile_20.dtrace"
+//              "",
+//              ""
 //      };
 
       // GitHub
+      // 1000
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\dtraceFile.dtrace"
-//      };
-
-      // Spotify
-      // createPlaylist
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\declsFile_20.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\dtraceFile_20.dtrace"
-//      };
-
-      // getAlbumTracks
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\1000\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\1000\\dtraceFile.dtrace"
 //      };
 
       // OMDb
       // byIdOrTitle
+      // 1000
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\1000\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\1000\\dtraceFile.dtrace"
 //      };
 
       // bySearch
+      // 1000
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\1000\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\1000\\dtraceFile.dtrace"
+//      };
+
+      // Spotify
+      // createPlaylist
+      // 1000
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\1000\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\1000\\dtraceFile.dtrace"
+//      };
+
+      // getAlbumTracks
+      // 1000
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\1000\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\1000\\dtraceFile.dtrace"
 //      };
 
       // Yelp

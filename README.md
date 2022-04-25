@@ -62,6 +62,7 @@ file. The following invariants have been suppressed:
 # Derived variables
 ## Suppressed derived variables
 - orig() derived variables
+- Removed shift (Now it is always zero) from SequenceLength
 
 # Suppressed variables
 - FixedLengthString is suppressed by YYYY/MM/DD, DD/MM/YYYY and MM/DD/YYYY
