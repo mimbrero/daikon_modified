@@ -89,7 +89,6 @@ public final class PptSlice1 extends PptSlice {
 
     // Instantiate each invariant that is valid over those types
     for (@Prototype Invariant proto : proto_invs) {
-
       // Skip invariant if the types are not appropriate
       if (!proto.valid_types(var_infos) || !proto.instantiate_ok(var_infos)) {
         // Debug.log (proto.getClass(), this, "not created-types not valid");

@@ -34,8 +34,6 @@ file. The following invariants have been suppressed:
 - EltNonZero
 - NumericInt$Square
 - NumericFloat$Square
-- LinearTernary
-- LinearTernaryFloat
 
 # New invariants
 ## Unary invariants

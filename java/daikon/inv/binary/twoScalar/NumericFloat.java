@@ -240,8 +240,8 @@ public abstract class NumericFloat extends TwoFloat {
 
 //      result.add(Divides.get_proto(false));
 //      result.add(Divides.get_proto(true));
-      result.add(Square.get_proto(false));
-      result.add(Square.get_proto(true));
+//      result.add(Square.get_proto(false));
+//      result.add(Square.get_proto(true));
 
       result.add(ZeroTrack.get_proto(false));
       result.add(ZeroTrack.get_proto(true));

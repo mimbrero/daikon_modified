@@ -240,8 +240,8 @@ public abstract class NumericInt extends TwoScalar {
 
 //      result.add(Divides.get_proto(false));
 //      result.add(Divides.get_proto(true));
-      result.add(Square.get_proto(false));
-      result.add(Square.get_proto(true));
+//      result.add(Square.get_proto(false));
+//      result.add(Square.get_proto(true));
 
       result.add(BitwiseComplement.get_proto());
       result.add(BitwiseSubset.get_proto(false));
