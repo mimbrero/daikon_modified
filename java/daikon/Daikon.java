@@ -638,7 +638,8 @@ public final class Daikon {
     try {
 
       // ############################################################ EVALUATION ############################################################
-      String numberTestCases = "50";
+      String numberTestCases = "1000";
+
       // AmadeusHotel
 //      String[] files = {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\"+numberTestCases+"\\declsFile.decls",
@@ -654,10 +655,11 @@ public final class Daikon {
 
       // OMDb
       // byIdOrTitle
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\dtraceFile.dtrace"
+      };
+
 
       // bySearch
 //      String[] files = {
@@ -685,13 +687,25 @@ public final class Daikon {
 //      };
 
       // YouTube
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\dtraceFile.dtrace"
+//      };
+
 
 
       mainHelper(files);
+
+      // #############
+      // Print active invariants
+//      setup_proto_invs();
+//      System.out.println("\n#############################################################\n");
+//      System.out.println(proto_invs.size() + " invariants \n");
+//      for(Invariant proto_inv: proto_invs) {
+//        System.out.println(proto_inv.getClass().getName());
+//      }
+      // End print active invariants
+
     } catch (DaikonTerminationException e) {
       handleDaikonTerminationException(e);
     }
@@ -1509,8 +1523,8 @@ public final class Daikon {
       proto_invs.add(OneOfString.get_proto());
 
       // NonZero (NonZero.java.jpp)
-//      proto_invs.add(NonZero.get_proto());
-//      proto_invs.add(NonZeroFloat.get_proto());
+//      proto_invs.add(NonZero.get_proto());  // Suppressed
+//      proto_invs.add(NonZeroFloat.get_proto()); // Suppressed
 
       proto_invs.add(IsPointer.get_proto());
 
@@ -1536,29 +1550,29 @@ public final class Daikon {
       proto_invs.add(CompleteOneOfScalar.get_proto());
 
       // URL
-      proto_invs.add(IsUrl.get_proto());
+      proto_invs.add(IsUrl.get_proto());  // Added
       // FixedLengthString
-      proto_invs.add(FixedLengthString.get_proto());
+      proto_invs.add(FixedLengthString.get_proto());  // Added
       // IsNumeric
-      proto_invs.add(IsNumeric.get_proto());
+      proto_invs.add(IsNumeric.get_proto());  // Added
       // IsEmail
-      proto_invs.add(IsEmail.get_proto());
+      proto_invs.add(IsEmail.get_proto());  // Added
 
       // Dates
           // YYYY/MM/DD format
-      proto_invs.add(IsDateYYYYMMDD.get_proto());
+      proto_invs.add(IsDateYYYYMMDD.get_proto()); // Added
           // DD/MM/YYYY format
-      proto_invs.add(IsDateDDMMYYYY.get_proto());
+      proto_invs.add(IsDateDDMMYYYY.get_proto()); // Added
           // MM/DD/YYYY format
-      proto_invs.add(IsDateMMDDYYYY.get_proto());
+      proto_invs.add(IsDateMMDDYYYY.get_proto()); // Added
           // HH:MM 24-hour format, optional leading 0
-      proto_invs.add(IsHour.get_proto());
+      proto_invs.add(IsHour.get_proto()); // Added
           // HH:MM:SS 24-hour format with optional leading 0
-      proto_invs.add(IsHourWithSeconds.get_proto());
+      proto_invs.add(IsHourWithSeconds.get_proto());  // Added
           // HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
-      proto_invs.add(IsHourAMPM.get_proto());
+      proto_invs.add(IsHourAMPM.get_proto()); // Added
           // YYYY-MM-DDTHH:MM:SS.mmZ format (Miliseconds are optional)
-      proto_invs.add(IsTimestampYYYYMMHHThhmmssmm.get_proto());
+      proto_invs.add(IsTimestampYYYYMMHHThhmmssmm.get_proto()); // Added
 
       // Positive (x > 0) (Postive.java).  Positive is a sample invariant
       // that is only included as an example.
@@ -1606,8 +1620,8 @@ public final class Daikon {
       proto_invs.add(EltwiseFloatGreaterThan.get_proto());
 
       // EltNonZero (EltNonZero.java.jpp)
-//      proto_invs.add(EltNonZero.get_proto());
-//      proto_invs.add(EltNonZeroFloat.get_proto());
+//      proto_invs.add(EltNonZero.get_proto()); // Suppressed
+//      proto_invs.add(EltNonZeroFloat.get_proto());  // Suppressed
 
       // No Duplicates (NoDuplicates.java.jpp)
       proto_invs.add(NoDuplicates.get_proto());
@@ -1627,29 +1641,29 @@ public final class Daikon {
       proto_invs.add(CommonStringSequence.get_proto());
 
       // SequenceFixedLengthString
-      proto_invs.add(SequenceFixedLengthString.get_proto());
+      proto_invs.add(SequenceFixedLengthString.get_proto());  // Added
       // SequenceStringElementsAreUrl
-      proto_invs.add(SequenceStringElementsAreUrl.get_proto());
+      proto_invs.add(SequenceStringElementsAreUrl.get_proto()); // Added
       // SequenceStringElementsAreNumeric
-      proto_invs.add(SequenceStringElementsAreNumeric.get_proto());
+      proto_invs.add(SequenceStringElementsAreNumeric.get_proto()); // Added
       // SequenceStringElementsAreEmail
-      proto_invs.add(SequenceStringElementsAreEmail.get_proto());
+      proto_invs.add(SequenceStringElementsAreEmail.get_proto()); // Added
 
       // SequenceStringElements are dates. Formats:
       // YYYY/MM/DD format
-      proto_invs.add(SequenceStringElementsAreDateYYYYMMDD.get_proto());
+      proto_invs.add(SequenceStringElementsAreDateYYYYMMDD.get_proto());  // Added
       // DD/MM/YYYY format
-      proto_invs.add(SequenceStringElementsAreDateDDMMYYYY.get_proto());
+      proto_invs.add(SequenceStringElementsAreDateDDMMYYYY.get_proto());  // Added
       // MM/DD/YYYY format
-      proto_invs.add(SequenceStringElementsAreDateMMDDYYYY.get_proto());
+      proto_invs.add(SequenceStringElementsAreDateMMDDYYYY.get_proto());  // Added
       // HH:MM 24-hour format, optional leading 0
-      proto_invs.add(SequenceStringElementsAreHour.get_proto());
+      proto_invs.add(SequenceStringElementsAreHour.get_proto());  // Added
       // HH:MM:SS 24-hour format with optional leading 0
-      proto_invs.add(SequenceStringElementsAreHourWithSeconds.get_proto());
+      proto_invs.add(SequenceStringElementsAreHourWithSeconds.get_proto()); // Added
       // HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)
-      proto_invs.add(SequenceStringElementsAreHourAMPM.get_proto());
+      proto_invs.add(SequenceStringElementsAreHourAMPM.get_proto());  // Added
       // YYYY-MM-DDTHH:MM:SS.mmZ format (Miliseconds are optional)
-      proto_invs.add(SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm.get_proto());
+      proto_invs.add(SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm.get_proto());  // Added
 
     }
 
@@ -1657,31 +1671,31 @@ public final class Daikon {
     {
       // Int, Float, String comparisons (from IntComparisons.java.jpp)
       proto_invs.add(IntEqual.get_proto());
-//      proto_invs.add(IntNonEqual.get_proto());
+//      proto_invs.add(IntNonEqual.get_proto());  // Suppressed
       proto_invs.add(IntLessThan.get_proto());
       proto_invs.add(IntGreaterThan.get_proto());
       proto_invs.add(IntLessEqual.get_proto());
       proto_invs.add(IntGreaterEqual.get_proto());
       proto_invs.add(FloatEqual.get_proto());
-//      proto_invs.add(FloatNonEqual.get_proto());
+//      proto_invs.add(FloatNonEqual.get_proto());  // Suppressed
       proto_invs.add(FloatLessThan.get_proto());
       proto_invs.add(FloatGreaterThan.get_proto());
       proto_invs.add(FloatLessEqual.get_proto());
       proto_invs.add(FloatGreaterEqual.get_proto());
       proto_invs.add(StringEqual.get_proto());
-//      proto_invs.add(StringNonEqual.get_proto());
-//      proto_invs.add(StringLessThan.get_proto());
-//      proto_invs.add(StringGreaterThan.get_proto());
-//      proto_invs.add(StringLessEqual.get_proto());
-//      proto_invs.add(StringGreaterEqual.get_proto());
+//      proto_invs.add(StringNonEqual.get_proto()); // Suppressed
+//      proto_invs.add(StringLessThan.get_proto()); // Suppressed
+//      proto_invs.add(StringGreaterThan.get_proto());  // Suppressed
+//      proto_invs.add(StringLessEqual.get_proto());  // Suppressed
+//      proto_invs.add(StringGreaterEqual.get_proto()); // Suppressed
 
       // LinearBinary over integer/float (from LinearBinary.java.jpp)
       proto_invs.add(LinearBinary.get_proto());
       proto_invs.add(LinearBinaryFloat.get_proto());
 
       // Numeric invariants (from Numeric.java.jpp)
-      proto_invs.addAll(NumericInt.get_proto_all());
-      proto_invs.addAll(NumericFloat.get_proto_all());
+      proto_invs.addAll(NumericInt.get_proto_all());  // Modified
+      proto_invs.addAll(NumericFloat.get_proto_all());  // Modified
 
       // Standard binary string invariants
       proto_invs.addAll(StdString.get_proto_all());
@@ -1707,11 +1721,11 @@ public final class Daikon {
       proto_invs.add(SeqSeqFloatGreaterThan.get_proto());
       proto_invs.add(SeqSeqFloatLessEqual.get_proto());
       proto_invs.add(SeqSeqFloatGreaterEqual.get_proto());
-//      proto_invs.add(SeqSeqStringEqual.get_proto());
-//      proto_invs.add(SeqSeqStringLessThan.get_proto());
-//      proto_invs.add(SeqSeqStringGreaterThan.get_proto());
-//      proto_invs.add(SeqSeqStringLessEqual.get_proto());
-//      proto_invs.add(SeqSeqStringGreaterEqual.get_proto());
+//      proto_invs.add(SeqSeqStringEqual.get_proto());  // Suppressed
+//      proto_invs.add(SeqSeqStringLessThan.get_proto()); // Suppressed
+//      proto_invs.add(SeqSeqStringGreaterThan.get_proto());  // Suppressed
+//      proto_invs.add(SeqSeqStringLessEqual.get_proto());  // Suppressed
+//      proto_invs.add(SeqSeqStringGreaterEqual.get_proto()); // Suppressed
 
       // Pairwise sequence comparisons (from PairwiseIntComparison.java.jpp)
       proto_invs.add(PairwiseIntEqual.get_proto());
@@ -1725,10 +1739,10 @@ public final class Daikon {
       proto_invs.add(PairwiseFloatLessEqual.get_proto());
       proto_invs.add(PairwiseFloatGreaterEqual.get_proto());
       proto_invs.add(PairwiseStringEqual.get_proto());
-//      proto_invs.add(PairwiseStringLessThan.get_proto());
-//      proto_invs.add(PairwiseStringGreaterThan.get_proto());
-//      proto_invs.add(PairwiseStringLessEqual.get_proto());
-//      proto_invs.add(PairwiseStringGreaterEqual.get_proto());
+//      proto_invs.add(PairwiseStringLessThan.get_proto()); // Suppressed
+//      proto_invs.add(PairwiseStringGreaterThan.get_proto());  // Suppressed
+//      proto_invs.add(PairwiseStringLessEqual.get_proto());  // Suppressed
+//      proto_invs.add(PairwiseStringGreaterEqual.get_proto()); // Suppressed
 
       // Array Reverse (from Reverse.java.jpp)
       proto_invs.add(Reverse.get_proto());
@@ -1778,8 +1792,8 @@ public final class Daikon {
       proto_invs.addAll(FunctionBinaryFloat.get_proto_all());
 
       // LinearTernary (LinearTernary.java.jpp)
-//      proto_invs.add(LinearTernary.get_proto());
-//      proto_invs.add(LinearTernaryFloat.get_proto());
+//      proto_invs.add(LinearTernary.get_proto());  // Suppressed
+//      proto_invs.add(LinearTernaryFloat.get_proto()); // Suppressed
     }
 
     // User-defined invariants

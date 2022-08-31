@@ -238,10 +238,10 @@ public abstract class NumericInt extends TwoScalar {
 
     List<@Prototype Invariant> result = new ArrayList<>();
 
-//      result.add(Divides.get_proto(false));
-//      result.add(Divides.get_proto(true));
-//      result.add(Square.get_proto(false));
-//      result.add(Square.get_proto(true));
+//      result.add(Divides.get_proto(false)); // Suppressed
+//      result.add(Divides.get_proto(true));  // Suppressed
+//      result.add(Square.get_proto(false));  // Suppressed
+//      result.add(Square.get_proto(true)); // Suppressed
 
       result.add(BitwiseComplement.get_proto());
       result.add(BitwiseSubset.get_proto(false));
