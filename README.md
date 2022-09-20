@@ -37,6 +37,18 @@ file. The following invariants have been suppressed:
 - LinearTernary
 - LinearTernaryFloat
 
+## Enabled invariants
+
+daikon.inv.binary.twoString.StdString.SubString.enabled
+daikon.inv.binary.twoSequence.SubSequence.enabled
+daikon.inv.binary.twoSequence.SubSequenceFloat.enabled
+daikon.inv.binary.twoSequence.SubSet.enabled
+daikon.inv.binary.twoSequence.SubSetFloat.enabled
+daikon.inv.binary.twoSequence.SuperSequence.enabled
+daikon.inv.binary.twoSequence.SuperSequenceFloat.enabled
+daikon.inv.binary.twoSequence.SuperSet.enabled
+daikon.inv.binary.twoSequence.SuperSetFloat.enabled
+
 # New invariants
 ## Unary invariants
 - Url (True if a string is a URL)

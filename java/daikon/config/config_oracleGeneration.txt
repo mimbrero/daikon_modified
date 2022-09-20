@@ -1,0 +1,21 @@
+# For invariants ...
+daikon.inv.binary.twoString.StdString.SubString.enabled = true
+daikon.inv.binary.twoSequence.SubSequence.enabled = true
+daikon.inv.binary.twoSequence.SubSequenceFloat.enabled = true
+daikon.inv.binary.twoSequence.SubSet.enabled = true
+daikon.inv.binary.twoSequence.SubSetFloat.enabled = true
+daikon.inv.binary.twoSequence.SuperSequence.enabled = true
+daikon.inv.binary.twoSequence.SuperSequenceFloat.enabled = true
+daikon.inv.binary.twoSequence.SuperSet.enabled = true
+daikon.inv.binary.twoSequence.SuperSetFloat.enabled = true
+
+
+# For derived variables ...
+
+# daikon.derive.unary.SequenceInitial.enabled = 1
+# daikon.derive.unary.SequenceSum.enabled = 1
+
+# For splitters ...
+
+# daikon.split.SplitterList.all_splitters = true
+# daikon.split.SplitterFactory.compiler = javac
