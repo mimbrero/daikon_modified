@@ -628,59 +628,80 @@ public final class Daikon {
     try {
 
       // ############################################################ EVALUATION ############################################################
-      String numberTestCases = "1000";
+      String numberTestCases = "10000";
 
       // AmadeusHotel
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\AmadeusHotel\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
 
       // GitHub
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\"+numberTestCases+"\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\GitHub\\"+numberTestCases+"\\dtraceFile.dtrace"
-      };
+      // createOrganizationRepository
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
+
+
+      // getOrganizationRepositories
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
+
+      // Marvel
+      // getComicById
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
 
       // OMDb
       // byIdOrTitle
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\byIdOrTitle\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
 
       // bySearch
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\OMDb\\bySearch\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
       // Spotify
       // createPlaylist
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\createPlaylists\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
       // getAlbumTracks
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\dtraceFile.dtrace"
+//      };
+
+      // getArtistAlbums
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
       // Yelp
 //      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Yelp\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\Yelp\\"+numberTestCases+"\\dtraceFile.dtrace"
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
       // YouTube
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluation\\YouTube\\"+numberTestCases+"\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace"
+      };
 
 
       List<String> filesList = new ArrayList<>(Arrays.asList(files));
