@@ -37,6 +37,9 @@ file. The following invariants have been suppressed:
 - LinearTernary
 - LinearTernaryFloat
 
+## Modified invariants
+- StdString$SubString: Minimum length constraint added
+
 ## Enabled invariants
 
 daikon.inv.binary.twoString.StdString.SubString.enabled

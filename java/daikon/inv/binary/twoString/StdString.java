@@ -267,14 +267,27 @@ public abstract class StdString extends TwoString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
     // remove fields, you should change this number to the current date.
-    static final long serialVersionUID = 20081113L;
+    static final long serialVersionUID = 20221029L;
+
+    // Minimum length of the contained string
+    private static int minLength = 2;
+
+    // Number of instances in which the length of the contained string was greater or equal than minLength
+    private Integer counter;
+
 
     protected SubString(PptSlice ppt, boolean swap) {
       super(ppt, swap);
+
+      // Initialize the counter as zero
+      counter = 0;
     }
 
     protected SubString(boolean swap) {
       super(swap);
+
+      // Initialize the counter as zero
+      counter = 0;
     }
 
     private static @Prototype SubString proto = new @Prototype SubString(false);
@@ -321,13 +334,20 @@ public abstract class StdString extends TwoString {
 
     @Override
     public boolean eq_check(String x, String y) {
+
+      // Increase the counter only if x reaches the minimum length
+      if(y.contains(x) && x.length()>=minLength){
+        counter = counter + 1;
+      }
+
       return (y.contains(x));
     }
 
     /** Justified as long as there are samples. */
     @Override
     protected double computeConfidence() {
-      if (ppt.num_samples() == 0) {
+      // If counter is 0, the invariant is not reported
+      if (ppt.num_samples() == 0 || counter == 0) {
         return Invariant.CONFIDENCE_UNJUSTIFIED;
       }
 

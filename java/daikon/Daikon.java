@@ -628,7 +628,7 @@ public final class Daikon {
     try {
 
       // ############################################################ EVALUATION ############################################################
-      String numberTestCases = "10000";
+      String numberTestCases = "1000";
 
       // AmadeusHotel
 //      String[] files = {
@@ -646,10 +646,10 @@ public final class Daikon {
 
 
       // getOrganizationRepositories
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
+      };
 
       // Marvel
       // getComicById
@@ -698,10 +698,10 @@ public final class Daikon {
 //      };
 
       // YouTube
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
 
 
       List<String> filesList = new ArrayList<>(Arrays.asList(files));

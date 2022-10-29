@@ -16,7 +16,10 @@ public class IsNumeric extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
     // remove fields, you should change this number to the current date.
-    static final long serialVersionUID = 20220420L;
+    static final long serialVersionUID = 20221029L;
+
+    // True if the string is always empty
+    private boolean alwaysEmpty;
 
     // Variables starting with dkconfig_ should only be set via the
     // daikon.config.Configuration interface.
@@ -26,7 +29,10 @@ public class IsNumeric extends SingleString {
     ///
     /// Required methods
     ///
-    private IsNumeric(PptSlice ppt){ super(ppt); }
+    private IsNumeric(PptSlice ppt){
+        super(ppt);
+        alwaysEmpty = true;
+    }
 
     private @Prototype
     IsNumeric() { super(); }
@@ -61,6 +67,10 @@ public class IsNumeric extends SingleString {
 
         Matcher matcher = pattern.matcher(v);
 
+        if (v.length()>0) {
+            alwaysEmpty = false;
+        }
+
         if (matcher.matches()) {
             return InvariantStatus.NO_CHANGE;
         }
@@ -68,10 +78,15 @@ public class IsNumeric extends SingleString {
     }
 
     @Override
-    public InvariantStatus add_modified(String v, int count) { return check_modified(v, count); }
+    public InvariantStatus add_modified(String v, int count) {
+        return check_modified(v, count);
+    }
 
     @Override
     protected  double computeConfidence() {
+        if(alwaysEmpty){
+            return Invariant.CONFIDENCE_UNJUSTIFIED;
+        }
         return 1 - Math.pow(.1, ppt.num_samples());
     }
 
