@@ -26,6 +26,8 @@ import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.plumelib.util.Intern;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 // originally from pass1.
 public final class SequenceLength extends UnaryDerivation {
   // We are Serializable, so we specify a version to allow changes to
@@ -42,7 +44,12 @@ public final class SequenceLength extends UnaryDerivation {
 
   public SequenceLength(VarInfo vi, int shift) {
     super(vi);
-    this.shift = 0; // typically 0 or -1
+    if(use_modified_daikon_version){
+      this.shift = 0; // typically 0 or -1
+    } else {
+      this.shift = shift;
+    }
+
   }
 
   public static boolean applicable(VarInfo vi) {

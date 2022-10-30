@@ -38,7 +38,7 @@ file. The following invariants have been suppressed:
 - LinearTernaryFloat
 
 ## Modified invariants
-- StdString$SubString: 
+- StdString$SubString: Minimum length constraint added
 
 ## Enabled invariants
 

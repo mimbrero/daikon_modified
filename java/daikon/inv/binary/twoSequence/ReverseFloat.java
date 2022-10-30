@@ -13,6 +13,8 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 /**
  * Represents two sequences of double where one is in the reverse order of the other. Prints as
  * {@code x[] is the reverse of y[]}.
@@ -203,8 +205,10 @@ public class ReverseFloat extends TwoSequenceFloat {
   @Override
   protected double computeConfidence() {
 
-    if(ppt.num_samples()==0) {
-      return CONFIDENCE_UNJUSTIFIED;
+    if(use_modified_daikon_version) {
+      if (ppt.num_samples() == 0) {
+        return CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
     return Invariant.CONFIDENCE_JUSTIFIED;

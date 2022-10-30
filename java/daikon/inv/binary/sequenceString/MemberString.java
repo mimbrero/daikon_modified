@@ -22,6 +22,8 @@ import org.plumelib.util.Pair;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 /**
  * Represents String scalars that are always members of a sequence of String values. Prints as
  * {@code x in y[]} where {@code x} is a String scalar and {@code y[]} is a sequence
@@ -285,8 +287,11 @@ public final class MemberString extends SequenceString {
 
   @Override
   protected double computeConfidence() {
-    return 1 - Math.pow(.1, ppt.num_samples());
-//    return Invariant.CONFIDENCE_JUSTIFIED;
+    if(use_modified_daikon_version) {
+      return 1 - Math.pow(.1, ppt.num_samples());
+    } else {
+      return Invariant.CONFIDENCE_JUSTIFIED;
+    }
   }
 
   @Pure

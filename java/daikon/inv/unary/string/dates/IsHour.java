@@ -22,7 +22,7 @@ public class IsHour extends SingleString {
     // Variables starting with dkconfig_ should only be set via the
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
-    public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
+    public static boolean dkconfig_enabled = false;
 
     ///
     /// Required methods

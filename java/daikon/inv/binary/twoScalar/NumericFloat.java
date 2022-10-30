@@ -238,10 +238,10 @@ public abstract class NumericFloat extends TwoFloat {
 
     List<@Prototype Invariant> result = new ArrayList<>();
 
-//      result.add(Divides.get_proto(false)); // Suppressed
-//      result.add(Divides.get_proto(true)); // Suppressed
-//      result.add(Square.get_proto(false)); // Suppressed
-//      result.add(Square.get_proto(true)); // Suppressed
+      result.add(Divides.get_proto(false)); // Suppressed
+      result.add(Divides.get_proto(true)); // Suppressed
+      result.add(Square.get_proto(false)); // Suppressed
+      result.add(Square.get_proto(true)); // Suppressed
 
       result.add(ZeroTrack.get_proto(false));
       result.add(ZeroTrack.get_proto(true));

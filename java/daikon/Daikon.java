@@ -620,6 +620,7 @@ public final class Daikon {
     }
   }
 
+  public static boolean use_modified_daikon_version = true;
   /**
    * The arguments to daikon.Daikon are file names. Declaration file names end in ".decls", and data
    * trace file names end in ".dtrace".
@@ -704,13 +705,17 @@ public final class Daikon {
 //      };
 
 
-      List<String> filesList = new ArrayList<>(Arrays.asList(files));
-      filesList.add("--config=daikon/config/config_oracleGeneration.txt");
-      files = filesList.toArray(files);
+      if(use_modified_daikon_version) {
+        List<String> filesList = new ArrayList<>(Arrays.asList(files));
+        filesList.add("--config=daikon/config/config_oracleGeneration.txt");
+        files = filesList.toArray(files);
+      }
+
       mainHelper(files);
 
       // #############
       // Print active invariants
+//      FileOptions files1 = read_options(files, usage);
 //      setup_proto_invs();
 //      System.out.println("\n#############################################################\n");
 //      System.out.println(proto_invs.size() + " invariants \n");
@@ -1536,8 +1541,8 @@ public final class Daikon {
       proto_invs.add(OneOfString.get_proto());
 
       // NonZero (NonZero.java.jpp)
-//      proto_invs.add(NonZero.get_proto());  // Suppressed
-//      proto_invs.add(NonZeroFloat.get_proto()); // Suppressed
+      proto_invs.add(NonZero.get_proto());  // Suppressed
+      proto_invs.add(NonZeroFloat.get_proto()); // Suppressed
 
       proto_invs.add(IsPointer.get_proto());
 
@@ -1633,8 +1638,8 @@ public final class Daikon {
       proto_invs.add(EltwiseFloatGreaterThan.get_proto());
 
       // EltNonZero (EltNonZero.java.jpp)
-//      proto_invs.add(EltNonZero.get_proto()); // Suppressed
-//      proto_invs.add(EltNonZeroFloat.get_proto());  // Suppressed
+      proto_invs.add(EltNonZero.get_proto()); // Suppressed
+      proto_invs.add(EltNonZeroFloat.get_proto());  // Suppressed
 
       // No Duplicates (NoDuplicates.java.jpp)
       proto_invs.add(NoDuplicates.get_proto());
@@ -1684,23 +1689,23 @@ public final class Daikon {
     {
       // Int, Float, String comparisons (from IntComparisons.java.jpp)
       proto_invs.add(IntEqual.get_proto());
-//      proto_invs.add(IntNonEqual.get_proto());  // Suppressed
+      proto_invs.add(IntNonEqual.get_proto());  // Suppressed
       proto_invs.add(IntLessThan.get_proto());
       proto_invs.add(IntGreaterThan.get_proto());
       proto_invs.add(IntLessEqual.get_proto());
       proto_invs.add(IntGreaterEqual.get_proto());
       proto_invs.add(FloatEqual.get_proto());
-//      proto_invs.add(FloatNonEqual.get_proto());  // Suppressed
+      proto_invs.add(FloatNonEqual.get_proto());  // Suppressed
       proto_invs.add(FloatLessThan.get_proto());
       proto_invs.add(FloatGreaterThan.get_proto());
       proto_invs.add(FloatLessEqual.get_proto());
       proto_invs.add(FloatGreaterEqual.get_proto());
       proto_invs.add(StringEqual.get_proto());
-//      proto_invs.add(StringNonEqual.get_proto()); // Suppressed
-//      proto_invs.add(StringLessThan.get_proto()); // Suppressed
-//      proto_invs.add(StringGreaterThan.get_proto());  // Suppressed
-//      proto_invs.add(StringLessEqual.get_proto());  // Suppressed
-//      proto_invs.add(StringGreaterEqual.get_proto()); // Suppressed
+      proto_invs.add(StringNonEqual.get_proto()); // Suppressed
+      proto_invs.add(StringLessThan.get_proto()); // Suppressed
+      proto_invs.add(StringGreaterThan.get_proto());  // Suppressed
+      proto_invs.add(StringLessEqual.get_proto());  // Suppressed
+      proto_invs.add(StringGreaterEqual.get_proto()); // Suppressed
 
       // LinearBinary over integer/float (from LinearBinary.java.jpp)
       proto_invs.add(LinearBinary.get_proto());
@@ -1734,11 +1739,11 @@ public final class Daikon {
       proto_invs.add(SeqSeqFloatGreaterThan.get_proto());
       proto_invs.add(SeqSeqFloatLessEqual.get_proto());
       proto_invs.add(SeqSeqFloatGreaterEqual.get_proto());
-//      proto_invs.add(SeqSeqStringEqual.get_proto());  // Suppressed
-//      proto_invs.add(SeqSeqStringLessThan.get_proto()); // Suppressed
-//      proto_invs.add(SeqSeqStringGreaterThan.get_proto());  // Suppressed
-//      proto_invs.add(SeqSeqStringLessEqual.get_proto());  // Suppressed
-//      proto_invs.add(SeqSeqStringGreaterEqual.get_proto()); // Suppressed
+      proto_invs.add(SeqSeqStringEqual.get_proto());  // Suppressed
+      proto_invs.add(SeqSeqStringLessThan.get_proto()); // Suppressed
+      proto_invs.add(SeqSeqStringGreaterThan.get_proto());  // Suppressed
+      proto_invs.add(SeqSeqStringLessEqual.get_proto());  // Suppressed
+      proto_invs.add(SeqSeqStringGreaterEqual.get_proto()); // Suppressed
 
       // Pairwise sequence comparisons (from PairwiseIntComparison.java.jpp)
       proto_invs.add(PairwiseIntEqual.get_proto());
@@ -1752,10 +1757,10 @@ public final class Daikon {
       proto_invs.add(PairwiseFloatLessEqual.get_proto());
       proto_invs.add(PairwiseFloatGreaterEqual.get_proto());
       proto_invs.add(PairwiseStringEqual.get_proto());
-//      proto_invs.add(PairwiseStringLessThan.get_proto()); // Suppressed
-//      proto_invs.add(PairwiseStringGreaterThan.get_proto());  // Suppressed
-//      proto_invs.add(PairwiseStringLessEqual.get_proto());  // Suppressed
-//      proto_invs.add(PairwiseStringGreaterEqual.get_proto()); // Suppressed
+      proto_invs.add(PairwiseStringLessThan.get_proto()); // Suppressed
+      proto_invs.add(PairwiseStringGreaterThan.get_proto());  // Suppressed
+      proto_invs.add(PairwiseStringLessEqual.get_proto());  // Suppressed
+      proto_invs.add(PairwiseStringGreaterEqual.get_proto()); // Suppressed
 
       // Array Reverse (from Reverse.java.jpp)
       proto_invs.add(Reverse.get_proto());
@@ -1805,8 +1810,8 @@ public final class Daikon {
       proto_invs.addAll(FunctionBinaryFloat.get_proto_all());
 
       // LinearTernary (LinearTernary.java.jpp)
-//      proto_invs.add(LinearTernary.get_proto());  // Suppressed
-//      proto_invs.add(LinearTernaryFloat.get_proto()); // Suppressed
+      proto_invs.add(LinearTernary.get_proto());  // Suppressed
+      proto_invs.add(LinearTernaryFloat.get_proto()); // Suppressed
     }
 
     // User-defined invariants

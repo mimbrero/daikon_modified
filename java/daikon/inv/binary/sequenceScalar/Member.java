@@ -22,6 +22,8 @@ import org.plumelib.util.Pair;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 /**
  * Represents long scalars that are always members of a sequence of long values. Prints as
  * {@code x in y[]} where {@code x} is a long scalar and {@code y[]} is a sequence
@@ -314,8 +316,10 @@ public final class Member extends SequenceScalar {
   @Override
   protected double computeConfidence() {
 
-    if(ppt.num_samples()==0) {
-      return CONFIDENCE_UNJUSTIFIED;
+    if(use_modified_daikon_version) {
+      if (ppt.num_samples() == 0) {
+        return CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
     return Invariant.CONFIDENCE_JUSTIFIED;

@@ -34,6 +34,10 @@ file. The following invariants have been suppressed:
 - EltNonZero
 - NumericInt$Square
 - NumericFloat$Square
+- PairwiseNumericInt$Divides
+- PairwiseNumericInt$Square
+- PairwiseNumericFloat$Divides
+- PairwiseNumericFloat$Square
 - LinearTernary
 - LinearTernaryFloat
 

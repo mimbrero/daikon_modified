@@ -17,6 +17,8 @@ import org.plumelib.util.ArraysPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 /**
  * Represents two sequences of long values where one of the sequences is a subset of the other; that
  * is each element of one sequence appears in the other. Prints as either
@@ -220,8 +222,10 @@ public class SubSet extends TwoSequence {
   @Override
   protected double computeConfidence() {
 
-    if(ppt.num_samples()==0) {
-      return CONFIDENCE_UNJUSTIFIED;
+    if(use_modified_daikon_version) {
+      if(ppt.num_samples()==0) {
+        return CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
     return Invariant.CONFIDENCE_JUSTIFIED;

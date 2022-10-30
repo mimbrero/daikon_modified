@@ -21,6 +21,8 @@ import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.Daikon.use_modified_daikon_version;
+
 /**
  * Baseclass for unary range based invariants. Each invariant is a special stateless version of
  * bound or oneof. For example EqualZero, BooleanVal, etc). These are never printed, but are used
@@ -102,8 +104,10 @@ public abstract class RangeInt extends SingleScalar {
   @Override
   protected double computeConfidence() {
 
-    if(ppt.num_samples()==0) {
-      return CONFIDENCE_UNJUSTIFIED;
+    if(use_modified_daikon_version) {
+      if (ppt.num_samples() == 0) {
+        return CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
     return CONFIDENCE_JUSTIFIED;
