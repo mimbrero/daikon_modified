@@ -1,0 +1,31 @@
+# For invariants ...
+# New invariants
+
+
+# Enabled invariants
+
+
+# Disabled/Suppressed invariants
+# String non equal
+daikon.inv.binary.twoString.StringNonEqual.enabled = false
+
+# String compareTo invariants
+daikon.inv.binary.twoString.StringLessThan.enabled = false
+daikon.inv.binary.twoString.StringGreaterThan.enabled = false
+daikon.inv.binary.twoString.StringLessEqual.enabled = false
+daikon.inv.binary.twoString.StringGreaterEqual.enabled = false
+
+daikon.inv.binary.twoSequence.SeqSeqStringLessThan.enabled = false
+daikon.inv.binary.twoSequence.SeqSeqStringGreaterThan.enabled = false
+daikon.inv.binary.twoSequence.SeqSeqStringLessEqual.enabled = false
+daikon.inv.binary.twoSequence.SeqSeqStringGreaterEqual.enabled = false
+
+daikon.inv.binary.twoSequence.PairwiseStringLessThan.enabled = false
+daikon.inv.binary.twoSequence.PairwiseStringGreaterThan.enabled = false
+daikon.inv.binary.twoSequence.PairwiseStringLessEqual.enabled = false
+daikon.inv.binary.twoSequence.PairwiseStringGreaterEqual.enabled = false
+
+
+
+
+

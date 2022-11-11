@@ -884,9 +884,10 @@ public final class PrintInvariants {
 
     if (wrap_xml) {
       out.println("<!-- " + DASHES + " -->");
-    } else {
-      out.println(DASHES);
     }
+//    else {
+//      out.println(DASHES);
+//    }
 
     print_invariants(ppt, out, all_ppts);
 
@@ -1166,7 +1167,7 @@ public final class PrintInvariants {
       // Supressing orig(...) variables
       if(!inv_rep.contains("orig(")) {
 //        System.out.println(inv.getClass().getName());
-        out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName()); // CSV-like
+        out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames()); // CSV-like
 //        out.println(inv_rep);   // Original
       }
     }
@@ -1349,7 +1350,8 @@ public final class PrintInvariants {
     // make names easier to read before printing
     ppt.simplify_variable_names();
 
-    print_sample_data(ppt, out);
+    // Prints the ppt name
+//    print_sample_data(ppt, out);
     print_modified_vars(ppt, out);
 
     // Dump some debugging info, if enabled
