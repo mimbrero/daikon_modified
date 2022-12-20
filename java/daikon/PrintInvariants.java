@@ -1,5 +1,6 @@
 package daikon;
 
+import static daikon.Daikon.csv_print;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import daikon.FileIO.ParentRelation;
@@ -885,9 +886,11 @@ public final class PrintInvariants {
     if (wrap_xml) {
       out.println("<!-- " + DASHES + " -->");
     }
-//    else {
-//      out.println(DASHES);
-//    }
+    else {
+      if(!csv_print){
+        out.println(DASHES);
+      }
+    }
 
     print_invariants(ppt, out, all_ppts);
 
@@ -1167,8 +1170,12 @@ public final class PrintInvariants {
       // Supressing orig(...) variables
       if(!inv_rep.contains("orig(")) {
 //        System.out.println(inv.getClass().getName());
-        out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames()); // CSV-like
-//        out.println(inv_rep);   // Original
+        if(csv_print) {
+          out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames()); // CSV-like
+        } else {
+          out.println(inv_rep);   // Original
+        }
+
       }
     }
     if (debug.isLoggable(Level.FINE)) {
@@ -1351,7 +1358,9 @@ public final class PrintInvariants {
     ppt.simplify_variable_names();
 
     // Prints the ppt name
-//    print_sample_data(ppt, out);
+    if(!csv_print) {
+      print_sample_data(ppt, out);
+    }
     print_modified_vars(ppt, out);
 
     // Dump some debugging info, if enabled
