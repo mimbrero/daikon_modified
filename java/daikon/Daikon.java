@@ -621,7 +621,8 @@ public final class Daikon {
   }
 
   public static boolean use_modified_daikon_version = true;
-  public static boolean csv_print = false;
+  public static boolean csv_print = true;
+  public static boolean remove_substring_redundancies = true;
   /**
    * The arguments to daikon.Daikon are file names. Declaration file names end in ".decls", and data
    * trace file names end in ".dtrace".
@@ -630,7 +631,7 @@ public final class Daikon {
     try {
 
       // ############################################################ EVALUATION ############################################################
-      String numberTestCases = "50";
+      String numberTestCases = "1000";
 
       // AmadeusHotel
 //      String[] files = {
@@ -648,10 +649,10 @@ public final class Daikon {
 
 
       // getOrganizationRepositories
-//      String[] files = {
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
+      String[] files = {
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
+      };
 
       // Marvel
       // getComicById
@@ -669,10 +670,10 @@ public final class Daikon {
 
 
       // bySearch
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
 
       // Spotify
       // createPlaylist

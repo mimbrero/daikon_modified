@@ -1,6 +1,8 @@
 package daikon;
 
 import static daikon.Daikon.csv_print;
+import static daikon.Daikon.remove_substring_redundancies;
+import static daikon.RemoveSubStringRedundancies.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import daikon.FileIO.ParentRelation;
@@ -1484,6 +1486,15 @@ public final class PrintInvariants {
     // System.out.printf("  var %s canbemissing = %b%n", vi, vi.canBeMissing);
 
     int index = 0;
+
+    // Remove redundancies in invariants of type SubString
+    if(remove_substring_redundancies){
+      List<Invariant> subStringInvariants = getSubStringInvariants(invariants);
+      List<Invariant> redundantInvariants = getRedundantInvariants(subStringInvariants);
+      invariants.removeAll(redundantInvariants);
+    }
+    // End remove redundancies
+
     for (Invariant inv : invariants) {
       index++;
       Invariant guarded = inv.createGuardedInvariant(false);
