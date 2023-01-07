@@ -76,9 +76,28 @@ public class RemoveSubStringRedundancies {
 
     private static Pair<String, String> getPairFromSingleInvariant(Invariant invariant) {
 
-        String[] variables = invariant.varNames().replace("(", "").replace(")", "").split(",");
-        return new Pair<>(variables[0].trim(), variables[1].trim());
+        List<String> variables = getVariablesSorted(
+                Arrays.asList(invariant.varNames().replace("(", "").replace(")", "").split(",")),
+                invariant.toString()
+                );
+        return new Pair<>(variables.get(0).trim(), variables.get(1).trim());
 
+    }
+
+    private static List<String> getVariablesSorted(List<String> variables, String invariant) {
+        Collections.sort(variables, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                int index1 = invariant.indexOf(s1.replace("[..]", "[]"));
+                int index2 = invariant.indexOf(s2.replace("[..]", "[]"));
+                if (index1 != -1 && index2 != -1) {
+                    return Integer.compare(index1, index2);
+                } else {
+                    return s1.compareTo(s2);
+                }
+            }
+        });
+        return variables;
     }
 
 
@@ -87,12 +106,20 @@ public class RemoveSubStringRedundancies {
         Map<String, Set<String>> matrix = input.stream()
                 .collect(Collectors.groupingBy(Pair::getKey, Collectors.mapping(Pair::getValue, Collectors.toSet())));
 
+//        for(String key: matrix.keySet()) {
+//            System.out.println("# " + key + ":");
+//            for(String value: matrix.get(key)) {
+//                System.out.println(value);
+//            }
+//        }
+
         // Remove redundancies
         Set<String> keys = keySort(matrix);
         for(String key: keys) {
             Set<String> value = matrix.get(key);
 
             // Iterate over a copy of the values to avoid ConcurrentModificationException
+            // TODO: ORDER?
             for(String valueInRow: new HashSet<>(value)) {
                 if(matrix.containsKey(valueInRow)) {
                     value.removeAll(matrix.get(valueInRow));
