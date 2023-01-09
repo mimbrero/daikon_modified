@@ -3,6 +3,7 @@
 
 package daikon;
 
+import com.google.errorprone.bugpatterns.SystemOut;
 import daikon.config.Configuration;
 import daikon.derive.Derivation;
 import daikon.inv.Equality;
@@ -146,11 +147,8 @@ import daikon.suppress.NIS;
 import daikon.suppress.NIS.SuppressionProcessor;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.LineNumberReader;
+
+import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
@@ -627,11 +625,10 @@ public final class Daikon {
    * The arguments to daikon.Daikon are file names. Declaration file names end in ".decls", and data
    * trace file names end in ".dtrace".
    */
-  public static void main(final String[] args) {
+  public static void main(final String[] args) throws IOException {
     try {
 
       // ############################################################ EVALUATION ############################################################
-      String numberTestCases = "100";
 
       // AmadeusHotel
 //      String[] files = {
@@ -677,10 +674,10 @@ public final class Daikon {
 
       // Spotify
       // createPlaylist
-      String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace"
-      };
+//      String[] files = {
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
+//              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace"
+//      };
 
       // getAlbumTracks
 //      String[] files = {
@@ -706,20 +703,147 @@ public final class Daikon {
 //              "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace"
 //      };
 
+      for(String numberTestCases: new String[]{"50", "100", "500", "1000", "10000"}) {
 
-      if(use_modified_daikon_version) {
-        List<String> filesList = new ArrayList<>(Arrays.asList(files));
-        filesList.add("--config=daikon/config/config_oracleGeneration.txt");
-        files = filesList.toArray(files);
-      }
-      else {
-        // Suppress only compareTo strings
-        List<String> filesList = new ArrayList<>(Arrays.asList(files));
-        filesList.add("--config=daikon/config/config_original.txt");
-        files = filesList.toArray(files);
-      }
+        String [][] paths = {
+                // AmadeusHotel
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "AmadeusHotel",
+                        "getMultiHotelOffers"
+                },
 
-      mainHelper(files);
+
+                // GitHub
+                // createOrganizationRepository
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "GitHub",
+                        "createOrganizationRepository"
+                },
+
+
+                // getOrganizationRepositories
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "GitHub",
+                        "getOrganizationRepositories"
+                },
+
+                // Marvel
+                // getComicById
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "Marvel",
+                        "getComicById"
+                },
+
+                // OMDb
+                // byIdOrTitle
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "OMDb",
+                        "byIdOrTitle"
+                },
+
+
+                // bySearch
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "OMDb",
+                        "bySearch"
+                },
+
+                // Spotify
+                // createPlaylist
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "Spotify",
+                        "createPlaylist"
+                },
+
+                // getAlbumTracks
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\dtraceFile.dtrace",
+                        "Spotify",
+                        "getAlbumTracks"
+                },
+
+                // getArtistAlbums
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "Spotify",
+                        "getArtistAlbums"
+                },
+
+                // Yelp
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "Yelp",
+                        "getBusinesses"
+                },
+
+                // YouTube
+                {
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
+                        "C:\\Users\\jcav\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace",
+                        "YouTube",
+                        "listVideos"
+                }
+        };
+
+        for (String[] experiment : paths) {
+
+
+          // Select Daikon version
+          String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
+          String apiName = experiment[2];
+          String operationName = experiment[3];
+          String nOperationsFile = numberTestCases.equals("10000") ? "10K" : numberTestCases;
+          String selectedConfiguration = use_modified_daikon_version ? "modified" : "original";
+
+          String[] files = {
+                  experiment[0],
+                  experiment[1],
+                  configFile
+          };
+
+          // Change output file
+          String folderPath = String.format("evaluation_results/%s/%s/%s/",
+                  apiName, operationName, numberTestCases);
+          String filename = String.format("invariants_%s_%s.csv", nOperationsFile, selectedConfiguration);
+          String completePath = folderPath + filename;
+
+          File reportFolder = new File(folderPath);
+          File reportFile = new File(completePath);
+
+          // Delete directory (and content) if exists
+          reportFile.delete();
+          // Create directory
+          reportFolder.mkdirs();
+          reportFile.createNewFile();
+
+          // Change output
+          FileOutputStream fos = new FileOutputStream(completePath);
+          PrintStream ps = new PrintStream(fos);
+          System.setOut(ps);
+
+          // Detect invariants
+          mainHelper(files);
+
+        }
+
+      }   // End for loop of number of test cases
 
       // #############
       // Print active invariants
@@ -809,8 +933,10 @@ public final class Daikon {
     // Set up debug traces; note this comes after reading command line options.
     LogHelper.setupLogs(Global.debugAll ? LogHelper.FINE : LogHelper.INFO);
 
-    if (!noversion_output) {
-      if (!Daikon.dkconfig_quiet) System.out.println(release_string);
+    if(!csv_print) {
+      if (!noversion_output) {
+        if (!Daikon.dkconfig_quiet) System.out.println(release_string);
+      }
     }
 
     // figure out which algorithm to use in NIS to process suppressions
@@ -977,8 +1103,10 @@ public final class Daikon {
     }
 
     // Done
-    if (!Daikon.dkconfig_quiet) {
-      System.out.println("Exiting Daikon.");
+    if(!csv_print) {
+      if (!Daikon.dkconfig_quiet) {
+        System.out.println("Exiting Daikon.");
+      }
     }
   }
 
@@ -2148,18 +2276,23 @@ public final class Daikon {
   private static PptMap load_decls_files(Set<File> decl_files) {
     long startTime = System.nanoTime();
     try {
-      if (!Daikon.dkconfig_quiet) {
-        System.out.print("Reading declaration files ");
+      if(!csv_print) {
+        if (!Daikon.dkconfig_quiet) {
+          System.out.print("Reading declaration files ");
+        }
       }
       PptMap all_ppts = FileIO.read_declaration_files(decl_files);
       if (debugTrace.isLoggable(Level.FINE)) {
         debugTrace.fine("Initializing partial order");
       }
       fileio_progress.clear();
-      if (!Daikon.dkconfig_quiet && decl_files.size() > 0) {
-        System.out.print("\r(read ");
-        System.out.print(StringsPlume.nplural(decl_files.size(), "decls file"));
-        System.out.println(")");
+
+      if(!csv_print) {
+        if (!Daikon.dkconfig_quiet && decl_files.size() > 0) {
+          System.out.print("\r(read ");
+          System.out.print(StringsPlume.nplural(decl_files.size(), "decls file"));
+          System.out.println(")");
+        }
       }
       return all_ppts;
     } catch (IOException e) {
@@ -2386,11 +2519,13 @@ public final class Daikon {
     // Processing (actually using dtrace files)
     try {
       fileio_progress.clear();
-      if (!Daikon.dkconfig_quiet) {
-        System.out.println(
-            "Processing trace data; reading "
-                + StringsPlume.nplural(dtrace_files.size(), "dtrace file")
-                + ":");
+      if(!csv_print) {
+        if (!Daikon.dkconfig_quiet) {
+          System.out.println(
+                  "Processing trace data; reading "
+                          + StringsPlume.nplural(dtrace_files.size(), "dtrace file")
+                          + ":");
+        }
       }
       FileIO.read_data_trace_files(dtrace_files, all_ppts);
       // Final update, so "100%", not "99.70%", is the last thing printed.
@@ -2398,8 +2533,10 @@ public final class Daikon {
       fileio_progress.display();
       fileio_progress.shouldStop = true;
       fileio_progress.display();
-      if (!Daikon.dkconfig_quiet) {
-        System.out.println();
+      if(!csv_print) {
+        if (!Daikon.dkconfig_quiet) {
+          System.out.println();
+        }
       }
       // System.out.print("Creating implications "); // XXX untested code
       // for (PptTopLevel ppt : all_ppts) {

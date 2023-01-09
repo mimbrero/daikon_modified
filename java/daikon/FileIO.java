@@ -307,7 +307,7 @@ public final class FileIO {
     for (File file : files) {
       Daikon.progress = "Reading " + file;
       if (!Daikon.dkconfig_quiet) {
-        System.out.print("."); // show progress
+//        System.out.print("."); // show progress
       }
       read_declaration_file(file, all_ppts);
     }

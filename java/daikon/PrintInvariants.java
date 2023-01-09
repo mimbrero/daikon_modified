@@ -725,9 +725,11 @@ public final class PrintInvariants {
   @RequiresNonNull("FileIO.new_decl_format")
   public static void print_invariants(PptMap all_ppts) {
 
-    if (out_stream == null) {
+    // Uncommented to enable change of Printstream for experiment automation
+//    if (out_stream == null) {
       out_stream = System.out;
-    }
+//    }
+
     PrintWriter pw =
         new PrintWriter(new BufferedWriter(new OutputStreamWriter(out_stream, UTF_8)), true);
     if (wrap_xml) {
