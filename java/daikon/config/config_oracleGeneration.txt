@@ -40,10 +40,14 @@ daikon.inv.binary.twoSequence.SuperSetFloat.enabled = true
 # Disabled/Suppressed invariants
 daikon.inv.unary.scalar.NonZero.enabled = false
 daikon.inv.unary.scalar.NonZeroFloat.enabled = false
+daikon.inv.unary.scalar.RangeInt.PowerOfTwo.enabled = false
 daikon.inv.unary.sequence.EltNonZero.enabled = false
 daikon.inv.unary.sequence.EltNonZeroFloat.enabled = false
+daikon.inv.unary.sequence.EltRangeInt.PowerOfTwo.enabled = false
 daikon.inv.binary.twoScalar.IntNonEqual.enabled = false
 daikon.inv.binary.twoScalar.FloatNonEqual.enabled = false
+daikon.inv.binary.twoScalar.LinearBinary.enabled = false
+daikon.inv.binary.twoScalar.LinearBinaryFloat.enabled = false
 daikon.inv.binary.twoString.StringNonEqual.enabled = false
 daikon.inv.binary.twoString.StringLessThan.enabled = false
 daikon.inv.binary.twoString.StringGreaterThan.enabled = false
@@ -68,6 +72,8 @@ daikon.inv.binary.twoSequence.PairwiseNumericInt.Divides.enabled = false
 daikon.inv.binary.twoSequence.PairwiseNumericInt.Square.enabled = false
 daikon.inv.binary.twoSequence.PairwiseNumericFloat.Divides.enabled = false
 daikon.inv.binary.twoSequence.PairwiseNumericFloat.Square.enabled = false
+daikon.inv.binary.twoSequence.PairwiseLinearBinary.enabled = false
+daikon.inv.binary.twoSequence.PairwiseLinearBinaryFloat.enabled = false
 
 # For derived variables ...
 
