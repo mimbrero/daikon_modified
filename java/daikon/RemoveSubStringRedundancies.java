@@ -7,6 +7,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * @author Juan C. Alonso
+ */
 public class RemoveSubStringRedundancies {
 
 
@@ -84,7 +87,7 @@ public class RemoveSubStringRedundancies {
 
     }
 
-    private static List<String> getVariablesSorted(List<String> variables, String invariant) {
+    public static List<String> getVariablesSorted(List<String> variables, String invariant) {
         Collections.sort(variables, new Comparator<String>() {
             @Override
             public int compare(String s1, String s2) {

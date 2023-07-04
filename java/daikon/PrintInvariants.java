@@ -1,8 +1,9 @@
 package daikon;
 
-import static daikon.Daikon.csv_print;
-import static daikon.Daikon.remove_substring_redundancies;
+import static daikon.Daikon.*;
 import static daikon.RemoveSubStringRedundancies.*;
+import static daikon.SuppressInputOnlyInvariants.getInputOnlyInvariants;
+import static daikon.SuppressInvariantsByCategory.getSuppressedCategoriesInvariants;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import daikon.FileIO.ParentRelation;
@@ -1495,7 +1496,15 @@ public final class PrintInvariants {
       List<Invariant> redundantInvariants = getRedundantInvariants(subStringInvariants);
       invariants.removeAll(redundantInvariants);
     }
-    // End remove redundancies
+
+    // Remove invariants that only contain input properties
+    if(suppress_input_invariants) {
+      List<Invariant> inputOnlyInvariants = getInputOnlyInvariants(invariants);
+      invariants.removeAll(inputOnlyInvariants);
+    }
+
+    List<Invariant> invariantsToSuppressByCategory = getSuppressedCategoriesInvariants(invariants);
+    invariants.removeAll(invariantsToSuppressByCategory);
 
     for (Invariant inv : invariants) {
       index++;

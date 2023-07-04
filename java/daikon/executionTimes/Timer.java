@@ -58,7 +58,7 @@ public class Timer {
     public static void generateTimeReport(String dtracePath) {
         Path path = Paths.get(dtracePath);
         Path dir = path.getParent();
-        Path fn = path.getFileSystem().getPath("time_report_daikon.csv");
+        Path fn = path.getFileSystem().getPath("time_report_daikon_default_configuration.csv");
         Path target = (dir == null) ? fn : dir.resolve(fn);
         String timePath = target.toString();
 

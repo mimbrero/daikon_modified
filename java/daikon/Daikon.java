@@ -625,6 +625,19 @@ public final class Daikon {
   public static boolean use_modified_daikon_version = true;
   public static boolean csv_print = true;
   public static boolean remove_substring_redundancies = true;
+
+  // Suppress inputs
+  public static boolean suppress_input_invariants=true;
+
+  // Suppress by category
+  public static boolean suppress_arithmetic_comparisons = false;
+  public static boolean suppress_string_comparisons = false;
+  public static boolean suppress_specific_formats = false;
+  public static boolean suppress_specific_values = false;
+  public static boolean suppress_array_properties = false;
+
+
+  private static List<String> argsList;
   /**
    * The arguments to daikon.Daikon are file names. Declaration file names end in ".decls", and data
    * trace file names end in ".dtrace".
@@ -632,239 +645,66 @@ public final class Daikon {
   public static void main(final String[] args) throws IOException {
     try {
 
-      // Begin execution times
-//      measureExecutionTimes("10000");
-      // End execution times
+      argsList = Arrays.asList(args);
+      readParameterValues();
 
-      // ############################################################ EVALUATION ############################################################
-
-      int numberTestCases = 50;
-      // AmadeusHotel
-      String[] experiment = {
-              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\declsFile.decls",
-              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\dtraceFile.dtrace"
-      };
-
-
-      // GitHub
-      // createOrganizationRepository
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-
-      // getOrganizationRepositories
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // Marvel
-      // getComicById
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // OMDb
-      // byIdOrTitle
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-
-      // bySearch
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // Spotify
-      // createPlaylist
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // getAlbumTracks
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\dtraceFile.dtrace"
-//      };
-
-      // getArtistAlbums
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // Yelp
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-      // YouTube
-//      String[] experiment = {
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
-//              "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace"
-//      };
-
-//       For a single experiment
-
-      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
+//      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
+      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
 
       String[] files = {
-              experiment[0],
-              experiment[1],
+              args[0],
+              args[1],
               configFile
       };
       mainHelper(files);
-      // End for a single experiment
 
-      // #############
-      // Print active invariants
-//      FileOptions files1 = read_options(files, usage);
-//      setup_proto_invs();
-//      System.out.println("\n#############################################################\n");
-//      System.out.println(proto_invs.size() + " invariants \n");
-//      for(Invariant proto_inv: proto_invs) {
-//        System.out.println(proto_inv.getClass().getName());
-//      }
-      // End print active invariants
 
     } catch (DaikonTerminationException e) {
       handleDaikonTerminationException(e);
     }
   }
 
+  private static void readParameterValues() {
 
-  private static void measureExecutionTimes(String numberTestCases) {
-    String [][] paths = {
-            // AmadeusHotel
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\AmadeusHotel\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "AmadeusHotel",
-                    "getMultiHotelOffers"
-            },
-
-
-            // GitHub
-            // createOrganizationRepository
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\createOrganizationRepository\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "GitHub",
-                    "createOrganizationRepository"
-            },
-
-
-            // getOrganizationRepositories
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\GitHub\\getOrganizationRepositories\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "GitHub",
-                    "getOrganizationRepositories"
-            },
-
-            // Marvel
-            // getComicById
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Marvel\\getComicById\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "Marvel",
-                    "getComicById"
-            },
-
-            // OMDb
-            // byIdOrTitle
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\byIdOrTitle\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "OMDb",
-                    "byIdOrTitle"
-            },
-
-
-            // bySearch
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\OMDb\\bySearch\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "OMDb",
-                    "bySearch"
-            },
-
-            // Spotify
-            // createPlaylist
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\createPlaylist\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "Spotify",
-                    "createPlaylist"
-            },
-
-            // getAlbumTracks
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getAlbumTracks\\"+numberTestCases+"\\dtraceFile.dtrace",
-                    "Spotify",
-                    "getAlbumTracks"
-            },
-
-            // getArtistAlbums
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Spotify\\getArtistAlbums\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "Spotify",
-                    "getArtistAlbums"
-            },
-
-            // Yelp
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\Yelp\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "Yelp",
-                    "getBusinesses"
-            },
-
-            // YouTube
-            {
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\declsFile.decls",
-                    "C:\\Users\\---\\Documents\\GitHub\\oas-instrumenter\\src\\test\\resources\\evaluationOracles\\YouTube\\" + numberTestCases + "\\dtraceFile.dtrace",
-                    "YouTube",
-                    "listVideos"
-            }
-    };
-
-    for(String[] experiment: paths) {
-      System.out.println("Measuring compute time for operation " + experiment[3] + " of the " + experiment[2] + " API");
-      // Select Daikon version
-      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
-      String apiName = experiment[2];
-      String operationName = experiment[3];
-      String nOperationsFile = numberTestCases.equals("10000") ? "10K" : numberTestCases;
-      String selectedConfiguration = use_modified_daikon_version ? "modified" : "original";
-
-      String[] files = {
-              experiment[0],
-              experiment[1],
-              configFile
-      };
-
-      // 10 Executions
-      for(int i=0; i<10; i++) {
-        System.out.println("Execution " + i);
-        Timer.startCounting(i);
-        mainHelper(files);
-        Timer.stopCounting(i);
-
-      }
-      generateTimeReport(experiment[1]);
-
+    if (readParameterValue("use_modified_daikon_version") != null) {
+      use_modified_daikon_version = Boolean.parseBoolean(readParameterValue("use_modified_daikon_version"));
     }
+
+    if (readParameterValue("suppress_input_invariants") != null) {
+      suppress_input_invariants = Boolean.parseBoolean(readParameterValue("suppress_input_invariants"));
+    }
+
+    if (readParameterValue("suppress_arithmetic_comparisons") != null) {
+      suppress_arithmetic_comparisons = Boolean.parseBoolean(readParameterValue("suppress_arithmetic_comparisons"));
+    }
+
+    if (readParameterValue("suppress_string_comparisons") != null) {
+      suppress_string_comparisons = Boolean.parseBoolean(readParameterValue("suppress_string_comparisons"));
+    }
+
+    if (readParameterValue("suppress_specific_formats") != null) {
+      suppress_specific_formats = Boolean.parseBoolean(readParameterValue("suppress_specific_formats"));
+    }
+
+    if (readParameterValue("suppress_specific_values") != null) {
+      suppress_specific_values = Boolean.parseBoolean(readParameterValue("suppress_specific_values"));
+    }
+
+    if (readParameterValue("suppress_array_properties") != null) {
+      suppress_array_properties = Boolean.parseBoolean(readParameterValue("suppress_array_properties"));
+    }
+
+
+  }
+
+  // Read the parameter value from CLI
+  private static String readParameterValue(String propertyName) {
+    String value = null;
+
+    if(argsList.stream().anyMatch(arg -> arg.matches("^" + propertyName + "=.*"))) {
+      value = argsList.stream().filter(arg -> arg.matches("^" + propertyName + "=.*")).findFirst().get().split("=")[1];
+    }
+    return value;
   }
 
   /**
