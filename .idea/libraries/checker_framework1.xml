@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="checker-framework1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/checker-framework/javac.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/checker-framework/checker.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

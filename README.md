@@ -85,8 +85,7 @@ Represented as x is Timestamp. Format: `YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are
 optional)`.
 
 1. **SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm:** Indicates that all elements of an array
-of strings are timestamps. Represented as All the elements of x are Timestamps. Format:
-   `YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)`.
+of strings are timestamps. Represented as `All the elements of x are Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)`
 
 ## Disabled invariants
 Section [5.5 Invariant list](https://plse.cs.washington.edu/daikon/download/doc/daikon.html#Invariant-list) of the Daikon user manual contains a description of each one of these invariants.

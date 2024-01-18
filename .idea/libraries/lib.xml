@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/checker-qual.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/java-getopt-1.0.14.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/commons-exec-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/junit-4.13.2-Daikon.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/hamcrest-core-1.3-Daikon.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/daikon-plumelib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/require-javadoc-1.0.2-all.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/reflection-util-1.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/bcel-util-1.1.13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/bcel-6.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/options-1.0.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/json-20230227.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/lib/plume-util-1.5.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="javacc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/jtb/bin/lib/javacc.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="daikon_modified">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/ChicoryPremain.jar!/" />
+      <root url="jar://$PROJECT_DIR$/java/out/production/daikon_modified/dcomp_premain.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
