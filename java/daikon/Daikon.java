@@ -623,6 +623,7 @@ public final class Daikon {
   }
 
   public static boolean use_modified_daikon_version = true;
+  public static boolean use_agora_pp = true;
   public static boolean csv_print = true;
   public static boolean remove_substring_redundancies = true;
 
@@ -648,14 +649,20 @@ public final class Daikon {
       argsList = Arrays.asList(args);
       readParameterValues();
 
-//      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
-      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
+      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
+//      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
 
       String[] files = {
-              args[0],
-              args[1],
-              configFile
+              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\iTunes\\10000\\declsFile.decls",
+              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\iTunes\\10000\\dtraceFile.dtrace",
+              "--config=C:\\Users\\jcav\\Documents\\GitHub\\daikon_modified\\java\\daikon\\config\\config_oracleGeneration.txt"
       };
+
+//      String[] files = {
+//              args[0],
+//              args[1],
+//              configFile
+//      };
       mainHelper(files);
 
 
@@ -668,6 +675,15 @@ public final class Daikon {
 
     if (readParameterValue("use_modified_daikon_version") != null) {
       use_modified_daikon_version = Boolean.parseBoolean(readParameterValue("use_modified_daikon_version"));
+
+      // Unless explicitly stated otherwise, if we are using the default configuration of Daikon, agora_pp is not applied
+      if (!use_modified_daikon_version) {
+        use_agora_pp = false;
+      }
+    }
+
+    if (readParameterValue("use_agora_pp") != null) {
+      use_agora_pp = Boolean.parseBoolean(readParameterValue("use_agora_pp"));
     }
 
     if (readParameterValue("suppress_input_invariants") != null) {
