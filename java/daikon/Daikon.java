@@ -649,20 +649,14 @@ public final class Daikon {
       argsList = Arrays.asList(args);
       readParameterValues();
 
-      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
-//      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
+//      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
+      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
 
       String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\iTunes\\10000\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\iTunes\\10000\\dtraceFile.dtrace",
-              "--config=C:\\Users\\jcav\\Documents\\GitHub\\daikon_modified\\java\\daikon\\config\\config_oracleGeneration.txt"
+              args[0],
+              args[1],
+              configFile
       };
-
-//      String[] files = {
-//              args[0],
-//              args[1],
-//              configFile
-//      };
       mainHelper(files);
 
 
