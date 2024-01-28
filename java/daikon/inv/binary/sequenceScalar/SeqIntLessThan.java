@@ -15,9 +15,12 @@ import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents an invariant between a long scalar and a a sequence of long values. Prints
@@ -37,6 +40,14 @@ public final class SeqIntLessThan extends SequenceScalar {
 
   public static final Logger debug =
     Logger.getLogger("daikon.inv.binary.sequenceScalar.SeqIntLessThan");
+
+  // If AGORA++ is applied, do not report the invariant if the maximum value of the elements of a
+  // is less than the minimum value of x
+  @Unused(when=Prototype.class)
+  private Long aElementsMaxValue = Long.MIN_VALUE;
+
+  @Unused(when= Prototype.class)
+  private Long xMinValue = Long.MAX_VALUE;
 
   static boolean debugSeqIntComparison = false;
 
@@ -202,7 +213,18 @@ public final class SeqIntLessThan extends SequenceScalar {
     /*if (logDetail() || debug.isLoggable(Level.FINE))
       log(debug,"(< " + Arrays.toString(a)
       + " " + x);*/
+
+    // Update the minimum value of x
+    if(x < xMinValue) {
+      x = xMinValue;
+    }
+
     for (int i = 0; i < a.length; i++) {
+
+      // Update the maximum value of the elements of a
+      if(a[i] > aElementsMaxValue) {
+        aElementsMaxValue = a[i];
+      }
 
         // assert seqvar().type.elementIsIntegral();
 
@@ -230,6 +252,14 @@ public final class SeqIntLessThan extends SequenceScalar {
     ValueSet.ValueSetScalarArray vs = (ValueSet.ValueSetScalarArray) seqvar().get_value_set();
     if (vs.elem_cnt() == 0) {
       return CONFIDENCE_UNJUSTIFIED;
+    }
+
+    // If AGORA++ is applied, do not report the invariant if the maximum value of the elements of a
+    // is less than the minimum value of x
+    if(use_agora_pp) {
+      if(aElementsMaxValue < xMinValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
       // return 1 - Math.pow(.5, vs.elem_cnt());

@@ -15,9 +15,12 @@ import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents an invariant between a double scalar and a a sequence of double values. Prints
@@ -37,6 +40,14 @@ public final class SeqFloatGreaterEqual extends SequenceFloat {
 
   public static final Logger debug =
     Logger.getLogger("daikon.inv.binary.sequenceScalar.SeqFloatGreaterEqual");
+
+  // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of a
+  // is greater than the maximum value of x
+  @Unused(when= Prototype.class)
+  private Double aElementsMinValue = Double.MAX_VALUE;
+
+  @Unused(when= Prototype.class)
+  private Double xMaxValue = Double.MIN_VALUE;
 
   static boolean debugSeqIntComparison = false;
 
@@ -198,7 +209,18 @@ public final class SeqFloatGreaterEqual extends SequenceFloat {
     /*if (logDetail() || debug.isLoggable(Level.FINE))
       log(debug,"(>= " + Arrays.toString(a)
       + " " + x);*/
+
+    // Update maximum value of x
+    if(x > xMaxValue) {
+      xMaxValue = x;
+    }
+
     for (int i = 0; i < a.length; i++) {
+
+      // Update minimum value of elements of a
+      if(a[i] < aElementsMinValue) {
+        aElementsMinValue = a[i];
+      }
 
         // assert seqvar().type.elementIsIntegral();
 
@@ -226,6 +248,14 @@ public final class SeqFloatGreaterEqual extends SequenceFloat {
     ValueSet.ValueSetFloatArray vs = (ValueSet.ValueSetFloatArray) seqvar().get_value_set();
     if (vs.elem_cnt() == 0) {
       return CONFIDENCE_UNJUSTIFIED;
+    }
+
+    // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of a
+    // is greater than the maximum value of x
+    if(use_agora_pp) {
+      if (aElementsMinValue > xMaxValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
     }
 
       // return 1 - Math.pow(.5, vs.elem_cnt());
