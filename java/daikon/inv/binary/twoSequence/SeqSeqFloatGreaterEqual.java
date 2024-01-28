@@ -14,10 +14,13 @@ import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.ArraysPlume;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents invariants between two sequences of double values. If order matters for each
@@ -43,6 +46,14 @@ public class SeqSeqFloatGreaterEqual extends TwoSequenceFloat
 
   /** Debugging logger. */
   static final Logger debug = Logger.getLogger("daikon.inv.binary.twoSequence.SeqSeqFloatGreaterEqual");
+
+  // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of v1 is greater than
+  // the maximum value of the elements of v2
+  @Unused(when=Prototype.class)
+  private Double v1ElementsMinValue = Double.MAX_VALUE;
+
+  @Unused(when=Prototype.class)
+  private Double v2ElementsMaxValue = Double.MIN_VALUE;
 
   static Comparator<double[]> comparator = Global.fuzzy.new DoubleArrayComparatorLexical();
 
@@ -213,6 +224,19 @@ public class SeqSeqFloatGreaterEqual extends TwoSequenceFloat
     //   return;
     // }
 
+    // Update minimum value of v1 elements
+    Double currentV1MinValue = Arrays.stream(v1).min().orElse(Double.MAX_VALUE);
+    if(currentV1MinValue < v1ElementsMinValue) {
+      v1ElementsMinValue = currentV1MinValue;
+    }
+
+    // Update maximum value of v2 elements
+    Double currentV2MaxValue = Arrays.stream(v2).max().orElse(Double.MIN_VALUE);
+    if(currentV2MaxValue > v2ElementsMaxValue) {
+      v2ElementsMaxValue = currentV2MaxValue;
+    }
+
+
     int comparison = 0;
     if (orderMatters) {
       // Standard element wise comparison
@@ -238,6 +262,14 @@ public class SeqSeqFloatGreaterEqual extends TwoSequenceFloat
 
   @Override
   protected double computeConfidence() {
+
+    // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of v1 is greater than
+    // the maximum value of the elements of v2
+    if(use_agora_pp) {
+      if(v1ElementsMinValue > v2ElementsMaxValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
+    }
 
     return 1 - Math.pow(.5, ppt.num_values());
   }

@@ -14,10 +14,13 @@ import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.ArraysPlume;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents invariants between two sequences of long values. If order matters for each
@@ -43,6 +46,14 @@ public class SeqSeqIntLessEqual extends TwoSequence
 
   /** Debugging logger. */
   static final Logger debug = Logger.getLogger("daikon.inv.binary.twoSequence.SeqSeqIntLessEqual");
+
+  // If AGORA++ is applied, do not report the invariant if the maximum value of the elements of v1 is less than
+  // the minimum value of the elements of v2
+  @Unused(when=Prototype.class)
+  private Long v1ElementsMaxValue = Long.MIN_VALUE;
+
+  @Unused(when=Prototype.class)
+  private Long v2ElementsMinValue = Long.MAX_VALUE;
 
   static Comparator<long[]> comparator = new ArraysPlume.LongArrayComparatorLexical();
 
@@ -213,6 +224,18 @@ public class SeqSeqIntLessEqual extends TwoSequence
     //   return;
     // }
 
+    // Update maximum value of v1 elements
+    Long currentV1MaxValue = Arrays.stream(v1).max().orElse(Long.MIN_VALUE);
+    if(currentV1MaxValue > v1ElementsMaxValue) {
+      v1ElementsMaxValue = currentV1MaxValue;
+    }
+
+    // Update minimum value of v2 elements
+    Long currentV2MinValue = Arrays.stream(v2).min().orElse(Long.MAX_VALUE);
+    if(currentV2MinValue < v2ElementsMinValue) {
+      v2ElementsMinValue = currentV2MinValue;
+    }
+
     int comparison = 0;
     if (orderMatters) {
       // Standard element wise comparison
@@ -238,6 +261,14 @@ public class SeqSeqIntLessEqual extends TwoSequence
 
   @Override
   protected double computeConfidence() {
+
+    // If AGORA++ is applied, do not report the invariant if the maximum value of the elements of v1 is less than
+    // the minimum value of the elements of v2
+    if(use_agora_pp) {
+      if (v1ElementsMaxValue < v2ElementsMinValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
+    }
 
     return 1 - Math.pow(.5, ppt.num_values());
   }
