@@ -21,9 +21,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents an invariant of &lt; between two long scalars. Prints as {@code x < y}.
@@ -41,6 +44,13 @@ public final class IntLessThan extends TwoScalar {
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
   public static final Logger debug = Logger.getLogger("daikon.inv.binary.twoScalar.IntLessThan");
+
+  // If AGORA++ is applied, do not report the invariant if the maximum value of v1 is less than the minimum value of v2
+  @Unused(when=Prototype.class)
+  private Long v1MaxValue = Long.MIN_VALUE;
+
+  @Unused(when=Prototype.class)
+  private Long v2MinValue = Long.MAX_VALUE;
 
   IntLessThan(PptSlice ppt) {
     super(ppt);
@@ -173,6 +183,16 @@ public final class IntLessThan extends TwoScalar {
   @Override
   @SuppressWarnings("UnnecessaryParentheses")  // generated code; parens are sometimes necessary
   public InvariantStatus check_modified(long v1, long v2, int count) {
+    // Update maximum value of v1
+    if(v1 > v1MaxValue) {
+      v1MaxValue = v1;
+    }
+
+    // Update minimumn value of v2
+    if(v2 < v2MinValue) {
+      v2MinValue = v2;
+    }
+
     if (!(v1 < v2)) {
       return InvariantStatus.FALSIFIED;
     }
@@ -199,6 +219,13 @@ public final class IntLessThan extends TwoScalar {
   // missing.
   @Override
   protected double computeConfidence() {
+    // If AGORA++ is applied, do not report the invariant if the maximum value of v1 is less than the minimum value of v2
+    if(use_agora_pp) {
+      if(v1MaxValue < v2MinValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
+    }
+
     // Should perhaps check number of samples and be unjustified if too few
     // samples.
 

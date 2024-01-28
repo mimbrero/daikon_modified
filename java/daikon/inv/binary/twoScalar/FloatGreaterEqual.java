@@ -21,9 +21,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents an invariant of &ge; between two double scalars. Prints as {@code x >= y}.
@@ -41,6 +44,13 @@ public final class FloatGreaterEqual extends TwoFloat {
   public static boolean dkconfig_enabled = Invariant.invariantEnabledDefault;
 
   public static final Logger debug = Logger.getLogger("daikon.inv.binary.twoScalar.FloatGreaterEqual");
+
+  // If AGORA++ is applied, do not report the invariant if the minimum value of v1 is greater than the maximum value of v2
+  @Unused(when=Prototype.class)
+  private Double v1MinValue = Double.MAX_VALUE;
+
+  @Unused(when=Prototype.class)
+  private Double v2MaxValue = Double.MIN_VALUE;
 
   FloatGreaterEqual(PptSlice ppt) {
     super(ppt);
@@ -166,6 +176,16 @@ public final class FloatGreaterEqual extends TwoFloat {
   @Override
   @SuppressWarnings("UnnecessaryParentheses")  // generated code; parens are sometimes necessary
   public InvariantStatus check_modified(double v1, double v2, int count) {
+    // Update minimum value of v1
+    if(v1 < v1MinValue){
+      v1MinValue = v1;
+    }
+
+    // Update maximum value of v2
+    if(v2 > v2MaxValue) {
+      v2MaxValue = v2;
+    }
+
     if (!Global.fuzzy.gte(v1, v2)) {
       return InvariantStatus.FALSIFIED;
     }
@@ -192,6 +212,14 @@ public final class FloatGreaterEqual extends TwoFloat {
   // missing.
   @Override
   protected double computeConfidence() {
+
+    // If AGORA++ is applied, do not report the invariant if the minimum value of v1 is greater than the maximum value of v2
+    if(use_agora_pp) {
+      if(v1MinValue > v2MaxValue) {
+        return Invariant.CONFIDENCE_UNJUSTIFIED;
+      }
+    }
+
     // Should perhaps check number of samples and be unjustified if too few
     // samples.
 
