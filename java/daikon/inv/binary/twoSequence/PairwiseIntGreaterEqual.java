@@ -18,10 +18,13 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.dataflow.qual.SideEffectFree;
+import org.checkerframework.framework.qual.Unused;
 import org.plumelib.util.ArraysPlume;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.Daikon.use_agora_pp;
 
 /**
  * Represents an invariant between corresponding elements of two sequences of long values. The
@@ -38,6 +41,14 @@ public class PairwiseIntGreaterEqual extends TwoSequence {
   /** Debug tracer. */
   public static final Logger debug =
     Logger.getLogger("daikon.inv.binary.twoSequence.PairwiseIntGreaterEqual");
+
+  // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of a1 is greater than
+  // the maximum value of the elements of a2
+  @Unused(when=Prototype.class)
+  private Long a1ElementsMinValue = Long.MAX_VALUE;
+
+  @Unused(when=Prototype.class)
+  private Long a2ElementsMaxValue = Long.MIN_VALUE;
 
   // Variables starting with dkconfig_ should only be set via the
   // daikon.config.Configuration interface.
@@ -277,6 +288,17 @@ public class PairwiseIntGreaterEqual extends TwoSequence {
     for (int i = 0; i < len; i++) {
       long v1 = a1[i];
       long v2 = a2[i];
+
+      // Update minimum value of a1 elements
+      if(v1 < a1ElementsMinValue) {
+        a1ElementsMinValue = v1;
+      }
+
+      // Update maximum value of a2 elements
+      if(v2 > a2ElementsMaxValue) {
+        a2ElementsMaxValue = v2;
+      }
+
       if (!(v1 >= v2) ) {
         //  destroyAndFlow();
         return InvariantStatus.FALSIFIED;
@@ -303,6 +325,14 @@ public class PairwiseIntGreaterEqual extends TwoSequence {
     if (num_values == 0) {
       return Invariant.CONFIDENCE_UNJUSTIFIED;
     } else {
+
+      // If AGORA++ is applied, do not report the invariant if the minimum value of the elements of a1 is greater than
+      // the maximum value of the elements of a2
+      if(use_agora_pp) {
+        if(a1ElementsMinValue > a2ElementsMaxValue) {
+          return Invariant.CONFIDENCE_UNJUSTIFIED;
+        }
+      }
 
       return 1 - Math.pow(.5, num_values);
     }
