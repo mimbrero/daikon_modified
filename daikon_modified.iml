@@ -15,5 +15,111 @@
     <orderEntry type="library" name="daikon_modified1" level="project" />
     <orderEntry type="library" name="error-prone" level="project" />
     <orderEntry type="library" name="checker-framework1" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/javac.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/caffeine-2.8.4.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/dataflow-shaded-3.11.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/error_prone_core-2.7.1-with-dependencies.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/diffutils-1.3.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/javacutil-3.1.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/jFormatString-3.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/threeten-extra-1.5.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/bcel-6.5.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/bcel-util-1.1.13.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/commons-exec-1.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-qual.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/daikon-plumelib.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/hamcrest-core-1.3-Daikon.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/java-getopt-1.0.14.0.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/json-20230227.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/junit-4.13.2-Daikon.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/options-1.0.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/plume-util-1.5.5.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/reflection-util-1.0.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/require-javadoc-1.0.2-all.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/error_prone_core-2.7.1-with-dependencies.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/error-prone/jFormatString-3.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/java-getopt-1.0.14.0.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.base/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.base/unix/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.base/windows/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.compiler/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.datatransfer/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.desktop/macosx/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.desktop/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.desktop/unix/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.desktop/windows/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.instrument/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.logging/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.management/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.naming/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.prefs/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.rmi/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.scripting/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.security.jgss/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.security.sasl/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.smartcardio/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.sql.rowset/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.sql/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.xml.crypto/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/java.xml/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.accessibility/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.aot/share/classes/jdk.tools.jaotc.binformat/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.aot/share/classes/jdk.tools.jaotc/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.attach/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.compiler/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.crypto.cryptoki/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.crypto.ucrypto/solaris/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.hotspot.agent/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.jvmstat/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.ci/share/classes/jdk.vm.ci.code/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.ci/share/classes/jdk.vm.ci.hotspot/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.ci/share/classes/jdk.vm.ci.meta/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/jdk.internal.vm.compiler.collections/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.code/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.core.common/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.graph/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.hotspot/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.java/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.lir.amd64/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.lir.sparc/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.lir/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.nodes/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.compiler.virtual/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.internal.vm.compiler/share/classes/org.graalvm.util/src" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.javadoc/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jcmd/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jconsole/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jdeps/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jdi/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jfr/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jlink/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.jshell/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.management.agent/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.management/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.naming.dns/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.security.auth/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.unsupported/share/classes" />
+          <root url="jar://$MODULE_DIR$/java/lib/checker-framework/checker.jar!/annotated-jdk/src/jdk.zipfs/share/classes" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_202/lib/tools.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://C:/Program Files/Java/jdk1.8.0_202/lib/tools.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
