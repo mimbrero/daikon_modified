@@ -212,7 +212,7 @@ public final class SeqFloatLessThan extends SequenceFloat {
 
     // Update the minimum value of x
     if(x < xMinValue) {
-      x = xMinValue;
+      xMinValue = x;
     }
 
     for (int i = 0; i < a.length; i++) {
