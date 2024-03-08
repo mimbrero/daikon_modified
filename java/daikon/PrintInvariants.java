@@ -1176,7 +1176,7 @@ public final class PrintInvariants {
       if(!inv_rep.contains("orig(")) {
 //        System.out.println(inv.getClass().getName());
         if(csv_print) {
-          out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames()); // CSV-like
+          out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames() + ";" + inv.format_using(OutputFormat.POSTMAN));     // CSV-like
         } else {
           out.println(inv_rep);   // Original
         }

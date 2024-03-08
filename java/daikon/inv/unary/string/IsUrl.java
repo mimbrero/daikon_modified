@@ -51,7 +51,16 @@ public class IsUrl extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsUrl this, OutputFormat format) {
-        return var().name() + " is Url";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Url";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override
