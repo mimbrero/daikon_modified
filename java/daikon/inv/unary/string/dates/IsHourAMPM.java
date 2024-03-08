@@ -51,7 +51,16 @@ public class IsHourAMPM extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsHourAMPM this, OutputFormat format) {
-        return var().name() + " is Hour: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Hour: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

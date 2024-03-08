@@ -50,7 +50,16 @@ public class IsEmail extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsEmail this, OutputFormat format) {
-        return var().name() + " is Email";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Email";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

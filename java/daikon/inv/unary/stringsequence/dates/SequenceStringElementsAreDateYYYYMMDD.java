@@ -74,7 +74,16 @@ public class SequenceStringElementsAreDateYYYYMMDD extends SingleStringSequence 
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreDateYYYYMMDD this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are dates. Format: YYYY/MM/DD";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are dates. Format: YYYY/MM/DD";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 

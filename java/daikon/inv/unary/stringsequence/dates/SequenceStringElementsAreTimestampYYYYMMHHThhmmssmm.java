@@ -74,7 +74,16 @@ public class SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm extends SingleS
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 

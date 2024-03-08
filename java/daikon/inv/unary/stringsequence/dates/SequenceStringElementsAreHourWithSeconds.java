@@ -74,7 +74,16 @@ public class SequenceStringElementsAreHourWithSeconds extends SingleStringSequen
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreHourWithSeconds this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Hours: HH:MM:SS 24-hour format with optional leading 0";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Hours: HH:MM:SS 24-hour format with optional leading 0";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 

@@ -73,7 +73,16 @@ public class SequenceStringElementsAreEmail extends SingleStringSequence {
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreEmail this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are emails";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are emails";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 

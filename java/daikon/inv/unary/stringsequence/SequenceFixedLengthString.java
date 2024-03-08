@@ -73,7 +73,16 @@ public class SequenceFixedLengthString extends SingleStringSequence {
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceFixedLengthString this, OutputFormat format) {
-    return "All the elements of " + var().name() + " have LENGTH=" + length;
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " have LENGTH=" + length;
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 

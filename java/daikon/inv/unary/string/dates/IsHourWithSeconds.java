@@ -51,7 +51,16 @@ public class IsHourWithSeconds extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsHourWithSeconds this, OutputFormat format) {
-        return var().name() + " is Hour: HH:MM:SS 24-hour format with optional leading 0";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Hour: HH:MM:SS 24-hour format with optional leading 0";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

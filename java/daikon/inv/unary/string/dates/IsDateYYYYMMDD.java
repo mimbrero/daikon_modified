@@ -51,7 +51,16 @@ public class IsDateYYYYMMDD extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsDateYYYYMMDD this, OutputFormat format) {
-        return var().name() + " is a Date. Format: YYYY/MM/DD";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is a Date. Format: YYYY/MM/DD";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

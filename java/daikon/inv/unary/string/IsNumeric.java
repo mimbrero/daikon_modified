@@ -56,7 +56,16 @@ public class IsNumeric extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsNumeric this, OutputFormat format) {
-        return var().name() + " is Numeric";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Numeric";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

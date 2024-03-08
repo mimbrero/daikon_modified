@@ -51,7 +51,15 @@ public class IsDateMMDDYYYY extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsDateMMDDYYYY this, OutputFormat format) {
-        return var().name() + " is a Date. Format: MM/DD/YYYY";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is a Date. Format: MM/DD/YYYY";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
     }
 
     @Override

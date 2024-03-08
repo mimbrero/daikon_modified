@@ -67,9 +67,19 @@ public class FixedLengthString extends SingleString {
 
     @SideEffectFree
     @Override
-    public String format_using(@GuardSatisfied FixedLengthString this, OutputFormat format) { return "LENGTH(" + var().name() + ")==" + length; }
+    public String format_using(@GuardSatisfied FixedLengthString this, OutputFormat format) {
+        if (format == OutputFormat.DAIKON) {
+            return "LENGTH(" + var().name() + ")==" + length;
+        }
 
-    // TODO: CLONE?
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
+    }
+
 
     @Override
     public InvariantStatus add_modified(@Interned String a, int count) { return check_modified(a, count); }

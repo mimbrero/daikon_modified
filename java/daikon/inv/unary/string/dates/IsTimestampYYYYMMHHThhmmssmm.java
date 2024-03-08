@@ -51,7 +51,16 @@ public class IsTimestampYYYYMMHHThhmmssmm extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsTimestampYYYYMMHHThhmmssmm this, OutputFormat format) {
-        return var().name() + " is Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override

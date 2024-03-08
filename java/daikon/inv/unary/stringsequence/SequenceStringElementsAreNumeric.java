@@ -73,7 +73,15 @@ public class SequenceStringElementsAreNumeric extends SingleStringSequence {
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreNumeric this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Numeric";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Numeric";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
   }
 
 

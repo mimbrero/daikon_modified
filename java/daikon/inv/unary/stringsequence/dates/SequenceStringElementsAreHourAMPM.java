@@ -74,7 +74,16 @@ public class SequenceStringElementsAreHourAMPM extends SingleStringSequence {
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreHourAMPM this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Hours: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Hours: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 
