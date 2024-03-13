@@ -3101,6 +3101,9 @@ public final @Interned class VarInfo implements Cloneable, Serializable {
     if (format == OutputFormat.CSHARPCONTRACT) {
       return csharp_name();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return name();
+    }
     throw new UnsupportedOperationException("Unknown format requested: " + format);
   }
 
