@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.*;
 
+import daikon.inv.unary.string.OneOfString;
 import org.checkerframework.checker.initialization.qual.Initialized;
 import org.checkerframework.checker.interning.qual.Interned;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
@@ -30,6 +31,8 @@ import org.plumelib.util.StringsPlume;
 import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 // This subsumes an "exact" invariant that says the value is always exactly
 // a specific value.  Do I want to make that a separate invariant
@@ -263,6 +266,8 @@ public final class OneOfScalar extends SingleScalar implements OneOf {
       return result;
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -305,6 +310,45 @@ public final class OneOfScalar extends SingleScalar implements OneOf {
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied OneOfScalar this) {
+
+    String postmanVariableName = getPostmanVariableName(var().name());
+
+    if(num_elts == 1) {
+
+      if (is_boolean()) {
+        if ((elts[0] != 0) && (elts[0] != 1)) {
+          System.out.println("WARNING:: Variable "
+                  + var().name() + " is of type boolean, but has non boolean value: "
+                  + elts[0]);
+        }
+
+        String expectedValue = (elts[0] == 0) ? "false": "true";
+
+        return "pm.expect(" + postmanVariableName + ").to.eql(" + expectedValue + ")";
+      } else if (is_hashcode()) {
+        if (elts[0] == 0) {
+          return "pm.expect(" + postmanVariableName + ").to.be.null";
+        } else {
+          return ""; // We cannot check this in AGORA
+        }
+      } else {
+        return "pm.expect([" + elts[0] + "].includes(" + postmanVariableName + ")).to.be.true";
+      }
+
+    } else {
+
+      String arrayString = "[" + elts[0];
+      for(int i = 1; i <num_elts; i ++) {
+        arrayString = arrayString + ", " + elts[i];
+      }
+      arrayString = arrayString + "]";
+
+      return "pm.expect(" + arrayString + ".includes(" + postmanVariableName + ")).to.be.true";
+    }
+
   }
 
   public String format_esc(@GuardSatisfied OneOfScalar this) {

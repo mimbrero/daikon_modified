@@ -75,7 +75,6 @@ public class FixedLengthString extends SingleString {
         }
 
         if (format == OutputFormat.POSTMAN) {
-//            return "pm.expect(" + getPostmanVariableName(var().name()) + ".length).to.eql(" + length + ")";
             return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.have.length(" + length + ")";
         }
 
