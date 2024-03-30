@@ -13,6 +13,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class IsDateYYYYMMDD extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
@@ -23,6 +25,8 @@ public class IsDateYYYYMMDD extends SingleString {
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
+
+    private static String regex = "^(?:19\\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$";
 
     ///
     /// Required methods
@@ -56,7 +60,7 @@ public class IsDateYYYYMMDD extends SingleString {
         }
 
         if (format == OutputFormat.POSTMAN) {
-            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.match(/" + regex + "/)";
         }
 
         return format_unimplemented(format);
@@ -73,7 +77,7 @@ public class IsDateYYYYMMDD extends SingleString {
         *       - 2050-10-30
         */
         // ^(?:19\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$
-        Pattern pattern = Pattern.compile("^(?:19\\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$");
+        Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(v);
 
