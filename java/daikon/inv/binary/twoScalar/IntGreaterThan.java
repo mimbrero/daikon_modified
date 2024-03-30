@@ -181,7 +181,7 @@ public final class IntGreaterThan extends TwoScalar {
     }
 
     if (format == OutputFormat.POSTMAN) {
-      return "pm.expect(" + getPostmanVariableName(var1().name())+").to.be.greaterThan(" + getPostmanVariableName(var2().name()) + ")";
+      return "pm.expect(" + getPostmanVariableName(var1().name()) + ").to.be.greaterThan(" + getPostmanVariableName(var2().name()) + ")";
     }
 
     return format_unimplemented(format);
