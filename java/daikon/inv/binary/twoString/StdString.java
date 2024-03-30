@@ -8,6 +8,8 @@ import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.checkerframework.checker.lock.qual.GuardSatisfied;
 import org.checkerframework.dataflow.qual.Pure;
 import org.checkerframework.checker.nullness.qual.Nullable;
+
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 import static daikon.inv.Invariant.asInvClass;
 
 import daikon.*;
@@ -325,8 +327,9 @@ public abstract class StdString extends TwoString {
       } else if (format.isJavaFamily()) {
         return "%var2%.contains(%var1%)";
       } else if (format == OutputFormat.CSHARPCONTRACT) {
-
-          return "%var2%.Contains(%var1%)";
+        return "%var2%.Contains(%var1%)";
+      } else if (format == OutputFormat.POSTMAN) {
+        return "pm.expect(" + getPostmanVariableName(var2().name()) + ".includes(" + getPostmanVariableName(var1().name()) + ")).to.be.true";
       } else {
         return format_unimplemented(format);
       }
