@@ -16,6 +16,8 @@ import org.plumelib.util.ArraysPlume;
 import org.plumelib.util.Intern;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -78,7 +80,7 @@ public class SequenceFixedLengthString extends SingleStringSequence {
     }
 
     if (format == OutputFormat.POSTMAN) {
-      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => element.length === " + length + ")).to.be.true";
     }
 
     return format_unimplemented(format);
