@@ -27,6 +27,8 @@ import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 // This subsumes an "exact" invariant that says the value is always exactly
 // a specific value.  Do I want to make that a separate invariant
 // nonetheless?  Probably not, as this will simplify implication and such.
@@ -278,6 +280,8 @@ public final class OneOfSequence extends SingleScalarSequence implements OneOf {
       return result;
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -320,6 +324,46 @@ public final class OneOfSequence extends SingleScalarSequence implements OneOf {
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied OneOfSequence this) {
+
+    String postmanVariableName = getPostmanVariableName(var().name());
+
+    if(is_hashcode()) {
+      // We only have one value, because add_modified dies if more
+      assert num_elts == 1;
+      long @Interned [] value = elts[0];
+
+      if (value.length == 0) {
+        return "pm.expect(" + "[[]]" + ".some(value => pm.expect(" + postmanVariableName + ").to.deep.equal(value).that)).to.be.true";
+      } else if ((value.length == 1) && (value[0] == 0)) {
+        return "pm.expect(" + "[[null]]" + ".some(value => pm.expect(" + postmanVariableName + ").to.deep.equal(value).that)).to.be.true";
+      } else if (no_nulls(0)) {
+        // varname + " contains no nulls and has only one value, of length " + value.length;
+        // We cannot check that it only has one value with Postman
+        return "pm.expect(" + postmanVariableName + ").to.have.lengthOf(" + value.length + ").and.to.not.include(null)";
+      } else if (all_nulls(0)) {
+        // varname + " contains only nulls and has only one value, of length " + value.length;
+        // We cannot check that it only has one value with Postman
+        return "pm.expect(" + postmanVariableName + ").to.have.lengthOf(" + value.length + ").and.to.satisfy(arr => arr.every(value => value == null))";
+      } else {
+        // return varname + " has only one value, of length " + value.length;
+        return "pm.expect(" + postmanVariableName + ").to.have.lengthOf(" + value.length + ")";
+      }
+
+    } else {                // Array of scalars
+      StringBuilder specificValues = new StringBuilder("[");
+      specificValues.append(Arrays.toString(elts[0]));
+
+      for(int i = 1; i< num_elts; i++) {
+        specificValues.append(", ").append(Arrays.toString(elts[i]));
+      }
+      specificValues.append("]");
+
+      return "pm.expect(" + specificValues + ".some(value => pm.expect(" + postmanVariableName + ").to.deep.equal(value).that)).to.be.true";
+    }
+
   }
 
   public String format_esc(@GuardSatisfied OneOfSequence this) {
