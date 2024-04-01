@@ -25,6 +25,8 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents an invariant of == between two double scalars. Prints as {@code x == y}.
  */
@@ -161,6 +163,10 @@ public final class FloatEqual extends TwoFloat implements EqualityComparison {
           + " "
           + var2().simplifyFixup(var2name)
           + ")";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var1().name()) + ").to.eql(" + getPostmanVariableName(var2().name()) + ")";
     }
 
     return format_unimplemented(format);
