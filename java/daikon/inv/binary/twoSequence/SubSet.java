@@ -120,7 +120,7 @@ public class SubSet extends TwoSequence {
     return v1 + " is a subset of " + v2;
   }
 
-  public String format_postman() {
+  public String format_postman(@GuardSatisfied SubSet this) {
     String array1 = getPostmanVariableName(var1().name());
     String array2 = getPostmanVariableName(var2().name());
     return "pm.expect(" + array1 + ".every(element => " + array2 + ".includes(element))).to.be.true";
