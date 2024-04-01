@@ -295,16 +295,7 @@ public final class OneOfFloat extends SingleFloat implements OneOf {
   }
 
   public String format_postman(@GuardSatisfied OneOfFloat this) {
-
-    String postmanVariableName = getPostmanVariableName(var().name());
-
-    String arrayString = "[" + elts[0];
-    for(int i = 1; i <num_elts; i ++) {
-      arrayString = arrayString + ", " + elts[i];
-    }
-    arrayString = arrayString + "]";
-
-    return "pm.expect(" + arrayString + ".includes(" + postmanVariableName + ")).to.be.true";
+    return "pm.expect(" + Arrays.toString(elts) + ".includes(" + getPostmanVariableName(var().name()) + ")).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied OneOfFloat this) {
