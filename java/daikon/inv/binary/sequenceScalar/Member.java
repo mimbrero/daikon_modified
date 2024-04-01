@@ -23,6 +23,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_modified_daikon_version;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents long scalars that are always members of a sequence of long values. Prints as
@@ -229,6 +230,8 @@ public final class Member extends SequenceScalar {
       return format_esc();
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -238,6 +241,10 @@ public final class Member extends SequenceScalar {
     String sclname = sclvar().name();
     String seqname = seqvar().name();
     return sclname + " in " + seqname;
+  }
+
+  public String format_postman(@GuardSatisfied Member this) {
+    return "pm.expect(" + getPostmanVariableName(seqvar().name()) + ".includes(" + getPostmanVariableName(sclvar().name()) + ")).to.be.true";
   }
 
   public String format_java() {
