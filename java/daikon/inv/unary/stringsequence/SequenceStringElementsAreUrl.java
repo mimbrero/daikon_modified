@@ -15,6 +15,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -78,7 +80,7 @@ public class SequenceStringElementsAreUrl extends SingleStringSequence {
     }
 
     if (format == OutputFormat.POSTMAN) {
-      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => /^(?:(?:https?|ftp):\\/\\/)(?:\\S+(?::\\S*)?)?(?:(?!10(?:\\.\\d{1,3}){3})(?!127(?:\\.\\d{1,3}){3})(?!169\\.254(?:\\.\\d{1,3}){2})(?!192\\.168(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[\\w0-9]+-?)*[\\w0-9]+)(?:\\.(?:[\\w0-9]+-)*[\\w0-9]+)*(?:\\.(?:[a-zA-Z0-9]{2,})))(?::\\d{2,5})?(?:\\/[^\\s]*)?$/.test(element))).to.be.true";
     }
 
     return format_unimplemented(format);
