@@ -21,7 +21,9 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
-  /**
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
+/**
    * Represents the invariant that each element of a sequence of long values is greater than or
    * equal to a constant. Prints as {@code x[] elements >= c}.
    */
@@ -136,6 +138,8 @@ public class EltLowerBound extends SingleScalarSequence {
       return format_esc();
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     }
 
     return format_unimplemented(format);
@@ -167,6 +171,10 @@ public class EltLowerBound extends SingleScalarSequence {
     }
 
     return var().name() + " elements >= " + core.min1;
+  }
+
+  public String format_postman() {
+    return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => element >= " + core.min1 + ")).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied EltLowerBound this) {
