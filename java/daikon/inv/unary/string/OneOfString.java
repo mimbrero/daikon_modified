@@ -251,14 +251,7 @@ public final class OneOfString extends SingleString implements OneOf {
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
     } else if (format == OutputFormat.POSTMAN) {
-
-      String arrayString = "[\"" + elts[0] + "\"";
-      for(int i = 1; i <num_elts; i ++) {
-        arrayString = arrayString + ", \"" + elts[i] + "\"";
-      }
-      arrayString = arrayString + "]";
-
-      return "pm.expect(" + arrayString + ".includes(" + getPostmanVariableName(var().name()) + ")).to.be.true";
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -300,6 +293,16 @@ public final class OneOfString extends SingleString implements OneOf {
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied OneOfString this) {
+    String arrayString = "[\"" + elts[0] + "\"";
+    for(int i = 1; i <num_elts; i ++) {
+      arrayString = arrayString + ", \"" + elts[i] + "\"";
+    }
+    arrayString = arrayString + "]";
+
+    return "pm.expect(" + arrayString + ".includes(" + getPostmanVariableName(var().name()) + ")).to.be.true";
   }
 
   @Pure
