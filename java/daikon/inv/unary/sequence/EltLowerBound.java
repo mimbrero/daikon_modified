@@ -173,7 +173,7 @@ public class EltLowerBound extends SingleScalarSequence {
     return var().name() + " elements >= " + core.min1;
   }
 
-  public String format_postman() {
+  public String format_postman(@GuardSatisfied EltLowerBound this) {
     return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => element >= " + core.min1 + ")).to.be.true";
   }
 
