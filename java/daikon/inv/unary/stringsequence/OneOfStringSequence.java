@@ -263,7 +263,7 @@ public final class OneOfStringSequence extends SingleStringSequence implements O
     return "pm.expect(" + specificValues + ".some(value => pm.expect(" + getPostmanVariableName(var().name()) + ").to.deep.equal(value).that)).to.be.true";
   }
 
-  private String getStringArrayAsString(String[] inputArray) {
+  private static String getStringArrayAsString(String[] inputArray) {
     if(inputArray.length == 0) {
       return "[]";
     }
