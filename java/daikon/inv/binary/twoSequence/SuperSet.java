@@ -18,6 +18,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_modified_daikon_version;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents two sequences of long values where one of the sequences is a subset of the other; that
@@ -103,6 +104,9 @@ public class SuperSet extends TwoSequence {
     if (format.isJavaFamily()) {
       return format_java_family(format);
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
@@ -114,6 +118,12 @@ public class SuperSet extends TwoSequence {
     String v2 = var2().name();
 
     return v1 + " is a superset of " + v2;
+  }
+
+  public String format_postman(@GuardSatisfied SuperSet this) {
+    String array1 = getPostmanVariableName(var1().name());
+    String array2 = getPostmanVariableName(var2().name());
+    return "pm.expect(" + array2 + ".every(element => " + array1 + ".includes(element))).to.be.true";
   }
 
   public String format_csharp_contract(@GuardSatisfied SuperSet this) {
