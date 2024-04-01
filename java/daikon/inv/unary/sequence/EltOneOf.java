@@ -30,6 +30,8 @@ import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 // This subsumes an "exact" invariant that says the value is always exactly
 // a specific value.  Do I want to make that a separate invariant
 // nonetheless?  Probably not, as this will simplify implication and such.
@@ -259,6 +261,8 @@ public final class EltOneOf extends SingleScalarSequence implements OneOf {
       return result;
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -301,6 +305,38 @@ public final class EltOneOf extends SingleScalarSequence implements OneOf {
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied EltOneOf this) {
+
+    String postmanVariableName = getPostmanVariableName(var().name());
+
+    if (num_elts == 1) {
+
+      if (is_boolean()) {
+        if ((elts[0] != 0) && (elts[0] != 1)) {
+          System.out.println("WARNING:: Variable "
+                  + postmanVariableName + " is of type boolean, but has non boolean value: "
+                  + elts[0]);
+        }
+
+        String expectedValue = (elts[0] == 0) ? "false": "true";
+
+        return "pm.expect(" + postmanVariableName + ".every(element => [" + expectedValue + "].includes(element))).to.be.true";
+
+      } else if (is_hashcode()) {
+        if (elts[0] == 0) {
+          return "pm.expect(" + postmanVariableName + ".every(element => element == null)).to.be.true";
+        } else {
+          return ""; // We cannot check this in AGORA
+        }
+      } else {
+        return "pm.expect(" + postmanVariableName + ".every(element => " + Arrays.toString(elts) + ".includes(element))).to.be.true";
+      }
+    } else {
+      return "pm.expect(" + postmanVariableName + ".every(element => " + Arrays.toString(elts) + ".includes(element))).to.be.true";
+    }
+
   }
 
   public String format_esc(@GuardSatisfied EltOneOf this) {
