@@ -293,7 +293,6 @@ public final class EltOneOfString extends SingleStringSequence implements OneOf 
   }
 
   public String format_postman(@GuardSatisfied EltOneOfString this) {
-    String postmanVariableName = getPostmanVariableName(var().name());
 
     String arrayString = "[\"" + elts[0] + "\"";
     for(int i = 1; i <num_elts; i ++) {
@@ -301,7 +300,7 @@ public final class EltOneOfString extends SingleStringSequence implements OneOf 
     }
     arrayString = arrayString + "]";
 
-    return "pm.expect(" + postmanVariableName + ".every(element => " + arrayString + ".includes(element))).to.be.true";
+    return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => " + arrayString + ".includes(element))).to.be.true";
 
   }
 
