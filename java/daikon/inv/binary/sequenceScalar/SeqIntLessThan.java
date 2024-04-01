@@ -21,6 +21,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_agora_pp;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents an invariant between a long scalar and a a sequence of long values. Prints
@@ -170,12 +171,19 @@ public final class SeqIntLessThan extends SequenceScalar {
     if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
 
   public String format_daikon(@GuardSatisfied SeqIntLessThan this) {
     return seqvar().name() + " elements < " + sclvar().name();
+  }
+
+  public String format_postman(@GuardSatisfied SeqIntLessThan this) {
+    return "pm.expect(" + getPostmanVariableName(seqvar().name()) + ".every(element => element < " + getPostmanVariableName(sclvar().name()) + ")).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied SeqIntLessThan this) {
