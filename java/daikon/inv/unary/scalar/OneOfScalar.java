@@ -339,14 +339,7 @@ public final class OneOfScalar extends SingleScalar implements OneOf {
       }
 
     } else {
-
-      String arrayString = "[" + elts[0];
-      for(int i = 1; i <num_elts; i ++) {
-        arrayString = arrayString + ", " + elts[i];
-      }
-      arrayString = arrayString + "]";
-
-      return "pm.expect(" + arrayString + ".includes(" + postmanVariableName + ")).to.be.true";
+      return "pm.expect(" + Arrays.toString(elts) + ".includes(" + postmanVariableName + ")).to.be.true";
     }
 
   }
