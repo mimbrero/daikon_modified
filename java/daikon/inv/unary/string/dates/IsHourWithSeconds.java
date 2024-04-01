@@ -13,6 +13,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class IsHourWithSeconds extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
@@ -23,6 +25,8 @@ public class IsHourWithSeconds extends SingleString {
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
+
+    private static String regex = "^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$";
 
     ///
     /// Required methods
@@ -56,7 +60,7 @@ public class IsHourWithSeconds extends SingleString {
         }
 
         if (format == OutputFormat.POSTMAN) {
-            return "TODO: IMPLEMENT POSTMAN ASSERTION";
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.match(/" + regex + "/)";
         }
 
         return format_unimplemented(format);
@@ -65,7 +69,7 @@ public class IsHourWithSeconds extends SingleString {
 
     @Override
     public InvariantStatus check_modified(String v, int count) {
-        Pattern pattern = Pattern.compile("^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$");
+        Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(v);
 
