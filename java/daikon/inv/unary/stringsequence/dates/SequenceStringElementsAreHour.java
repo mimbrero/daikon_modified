@@ -16,6 +16,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -32,6 +34,8 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
 
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
+
+  private static String regex = "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
   protected SequenceStringElementsAreHour(PptSlice ppt) {
     super(ppt);
@@ -79,7 +83,7 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
     }
 
     if (format == OutputFormat.POSTMAN) {
-      return "TODO: IMPLEMENT POSTMAN ASSERTION";
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => /" + regex + "/.test(element))).to.be.true";
     }
 
     return format_unimplemented(format);
@@ -90,7 +94,7 @@ public class SequenceStringElementsAreHour extends SingleStringSequence {
   @Override
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
-    Pattern pattern = Pattern.compile("^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$");
+    Pattern pattern = Pattern.compile(regex);
 
     if(a.length>0){
       alwaysEmpty = false;
