@@ -2,6 +2,7 @@
 
 package daikon.inv.unary.stringsequence;
 
+import com.sun.org.apache.regexp.internal.RE;
 import daikon.*;
 import daikon.inv.*;
 import daikon.inv.unary.OneOf;
@@ -28,6 +29,8 @@ import org.plumelib.util.StringsPlume;
 import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
+
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 // This subsumes an "exact" invariant that says the value is always exactly
 // a specific value.  Do I want to make that a separate invariant
@@ -231,6 +234,8 @@ public final class OneOfStringSequence extends SingleStringSequence implements O
       return result;
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -244,6 +249,32 @@ public final class OneOfStringSequence extends SingleStringSequence implements O
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied OneOfStringSequence this) {
+    StringBuilder specificValues = new StringBuilder("[");
+
+    specificValues.append(getStringArrayAsString(elts[0]));
+    for(int i = 1; i< num_elts; i++) {
+      specificValues.append(", ").append(getStringArrayAsString(elts[i]));
+    }
+    specificValues.append("]");
+
+    return "pm.expect(" + specificValues + ".some(value => pm.expect(" + getPostmanVariableName(var().name()) + ").to.deep.equal(value).that)).to.be.true";
+  }
+
+  private String getStringArrayAsString(String[] inputArray) {
+    if(inputArray.length == 0) {
+      return "[]";
+    }
+
+    StringBuilder arrayString = new StringBuilder("[\"" + inputArray[0] + "\"");
+    for(int i = 1; i < inputArray.length; i ++) {
+      arrayString.append(", \"").append(inputArray[i]).append("\"");
+    }
+    arrayString.append("]");
+
+    return arrayString.toString();
   }
 
   private static Pattern dollar_char_pat = Pattern.compile("\\$([A-Za-z])");
