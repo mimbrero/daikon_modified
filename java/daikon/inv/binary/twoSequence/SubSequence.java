@@ -24,6 +24,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_modified_daikon_version;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents two sequences of long values where one sequence is a subsequence of the
@@ -91,6 +92,9 @@ public class SubSequence extends TwoSequence {
     if (format.isJavaFamily()) {
       return format_unimplemented(format);
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
@@ -99,6 +103,12 @@ public class SubSequence extends TwoSequence {
     String v1 = var1().name();
     String v2 = var2().name();
     return v1 + " is a subsequence of " + v2;
+  }
+
+  public String format_postman(@GuardSatisfied SubSequence this) {
+    String array1 = getPostmanVariableName(var1().name());
+    String array2 = getPostmanVariableName(var2().name());
+    return "pm.expect(" + array2 + ".slice(" + array2 + ".findIndex((element, index) => index >= " + array2 + ".indexOf(" + array1 + "[0]) && " + array1 + ".every((value, i) => value === " + array2 + "[index + i]))).includes(" + array1 + "[0])).to.be.true";
   }
 
   public String format_csharp_contract(@GuardSatisfied SubSequence this) {
