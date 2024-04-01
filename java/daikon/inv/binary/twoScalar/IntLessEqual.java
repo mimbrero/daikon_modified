@@ -27,6 +27,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_agora_pp;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents an invariant of &le; between two long scalars. Prints as {@code x <= y}.
@@ -175,6 +176,10 @@ public final class IntLessEqual extends TwoScalar {
           + " "
           + var2().simplifyFixup(var2name)
           + ")";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var1().name()) + ").to.be.lte(" + getPostmanVariableName(var2().name()) + ")";
     }
 
     return format_unimplemented(format);
