@@ -14,6 +14,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_modified_daikon_version;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents two sequences of long where one is in the reverse order of the other. Prints as
@@ -103,12 +104,22 @@ public class Reverse extends TwoSequence {
     if (format == OutputFormat.SIMPLIFY) {
       return format_simplify();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
 
   public String format_daikon(@GuardSatisfied Reverse this) {
     return var1().name() + " is the reverse of " + var2().name();
+  }
+
+  public String format_postman(@GuardSatisfied Reverse this) {
+    String array1 = getPostmanVariableName(var1().name());
+    String array2 = getPostmanVariableName(var2().name());
+
+    return "pm.expect(" + array1 + ".length === " + array2 + ".length && " + array1 + ".every((value, index) => value === " + array2+"[" + array2 + ".length - 1 - index])).to.be.true";
   }
 
   public String format_java_family(@GuardSatisfied Reverse this, OutputFormat format) {

@@ -27,6 +27,8 @@ import org.plumelib.util.UtilPlume;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 // This subsumes an "exact" invariant that says the value is always exactly
 // a specific value.  Do I want to make that a separate invariant
 // nonetheless?  Probably not, as this will simplify implication and such.
@@ -229,6 +231,8 @@ public final class OneOfFloatSequence extends SingleFloatSequence implements One
       return result;
     } else if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
+    } else if (format == OutputFormat.POSTMAN) {
+      return format_postman();
     } else {
       return format_unimplemented(format);
     }
@@ -242,6 +246,19 @@ public final class OneOfFloatSequence extends SingleFloatSequence implements One
     } else {
       return varname + " one of " + subarray_rep();
     }
+  }
+
+  public String format_postman(@GuardSatisfied OneOfFloatSequence this) {
+    StringBuilder specificValues = new StringBuilder("[");
+    specificValues.append(Arrays.toString(elts[0]));
+
+    for(int i = 1; i< num_elts; i++) {
+      specificValues.append(", ").append(Arrays.toString(elts[i]));
+    }
+    specificValues.append("]");
+
+    return "pm.expect(" + specificValues + ".some(value => pm.expect(" + getPostmanVariableName(var().name()) + ").to.deep.equal(value).that)).to.be.true";
+
   }
 
   public String format_esc(@GuardSatisfied OneOfFloatSequence this) {

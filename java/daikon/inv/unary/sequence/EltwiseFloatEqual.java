@@ -17,7 +17,9 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
-  /**
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
+/**
    * Represents equality between adjacent elements (x[i], x[i+1]) of a double sequence. Prints as
    * {@code x[] elements are equal}.
    */
@@ -104,6 +106,9 @@ public class EltwiseFloatEqual extends EltwiseFloatComparison {
     if (format == OutputFormat.SIMPLIFY) {
       return format_simplify();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
@@ -114,6 +119,13 @@ public class EltwiseFloatEqual extends EltwiseFloatComparison {
     }
 
     return (var().name() + " sorted by ==");
+  }
+
+  public String format_postman(@GuardSatisfied EltwiseFloatEqual this) {
+
+    String postmanVariableName = getPostmanVariableName(var().name());
+
+    return "pm.expect(" + postmanVariableName + ".every(element => element === " + postmanVariableName + "[0])).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied EltwiseFloatEqual this) {

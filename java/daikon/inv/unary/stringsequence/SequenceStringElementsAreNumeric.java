@@ -15,6 +15,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -31,6 +33,8 @@ public class SequenceStringElementsAreNumeric extends SingleStringSequence {
 
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
+
+  private static String regex = "^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
 
   protected SequenceStringElementsAreNumeric(PptSlice ppt) {
     super(ppt);
@@ -73,14 +77,22 @@ public class SequenceStringElementsAreNumeric extends SingleStringSequence {
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreNumeric this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Numeric";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Numeric";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => /" + regex + "/.test(element))).to.be.true";
+    }
+
+    return format_unimplemented(format);
   }
 
 
   @Override
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
-    Pattern pattern = Pattern.compile("^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$");
+    Pattern pattern = Pattern.compile(regex);
 
     if(a.length>0){
       alwaysEmpty = false;

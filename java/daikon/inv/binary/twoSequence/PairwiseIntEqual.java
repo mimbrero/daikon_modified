@@ -23,6 +23,8 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents an invariant between corresponding elements of two sequences of long values. The
  * length of the sequences must match for the invariant to hold. A comparison is made over each
@@ -215,12 +217,19 @@ public class PairwiseIntEqual extends TwoSequence {
     if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
 
   public String format_daikon(@GuardSatisfied PairwiseIntEqual this) {
     return var1().name() + " == " + var2().name() + " (elementwise)";
+  }
+
+  public String format_postman(@GuardSatisfied PairwiseIntEqual this) {
+    return "pm.expect(" + getPostmanVariableName(var1().name()) + ").to.eql(" + getPostmanVariableName(var2().name()) + ")";
   }
 
   public String format_esc(@GuardSatisfied PairwiseIntEqual this) {

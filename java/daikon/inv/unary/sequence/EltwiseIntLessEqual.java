@@ -17,7 +17,9 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
-  /**
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
+/**
    * Represents the invariant &le; between adjacent elements
    * (x[i], x[i+1]) of a long sequence. Prints as
    * {@code x[] sorted by <=}.
@@ -109,6 +111,9 @@ public class EltwiseIntLessEqual extends EltwiseIntComparison {
     if (format == OutputFormat.SIMPLIFY) {
       return format_simplify();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
@@ -119,6 +124,13 @@ public class EltwiseIntLessEqual extends EltwiseIntComparison {
     }
 
     return (var().name() + " sorted by <=");
+  }
+
+  public String format_postman(@GuardSatisfied EltwiseIntLessEqual this) {
+    // element represents the elements of the array from 1 to n
+    // index are the indexes from 0 to n
+    // We expect the elements of the array to be ordered in ascending order, i.e., x[i] >= x[i-1]
+    return "pm.expect(" + getPostmanVariableName(var().name()) + ".slice(1).every((element, index) => element >= arrayVariable[index])).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied EltwiseIntLessEqual this) {

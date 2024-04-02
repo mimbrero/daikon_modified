@@ -19,6 +19,8 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents an invariant between a double scalar and a a sequence of double values. Prints
  * as {@code x[] elements == y} where {@code x} is a double sequence and
@@ -155,12 +157,19 @@ public final class SeqFloatEqual extends SequenceFloat {
     if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp_contract();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
 
   public String format_daikon(@GuardSatisfied SeqFloatEqual this) {
     return seqvar().name() + " elements == " + sclvar().name();
+  }
+
+  public String format_postman(@GuardSatisfied SeqFloatEqual this) {
+    return "pm.expect(" + getPostmanVariableName(seqvar().name()) + ".every(element => element == " + getPostmanVariableName(sclvar().name()) + ")).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied SeqFloatEqual this) {

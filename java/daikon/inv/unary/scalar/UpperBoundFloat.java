@@ -21,7 +21,9 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
-  /**
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
+/**
    * Represents the invariant {@code x <= c}, where {@code c} is a constant and
    * {@code x} is a double scalar.
    */
@@ -159,6 +161,10 @@ public class UpperBoundFloat extends SingleFloat {
     if (format == OutputFormat.SIMPLIFY) {
 
       return "(<= " + name + " " + simplify_format_double(core.max1) + ")";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.be.lte(" + core.max1 + ")";
     }
 
     return format_unimplemented(format);

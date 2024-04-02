@@ -13,6 +13,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class IsTimestampYYYYMMHHThhmmssmm extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
@@ -23,6 +25,8 @@ public class IsTimestampYYYYMMHHThhmmssmm extends SingleString {
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
+
+    private static String regex = "^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}Z$";
 
     ///
     /// Required methods
@@ -51,12 +55,21 @@ public class IsTimestampYYYYMMHHThhmmssmm extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsTimestampYYYYMMHHThhmmssmm this, OutputFormat format) {
-        return var().name() + " is Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.match(/" + regex + "/)";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override
     public InvariantStatus check_modified(String v, int count) {
-        Pattern pattern = Pattern.compile("^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}Z$");
+        Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(v);
 

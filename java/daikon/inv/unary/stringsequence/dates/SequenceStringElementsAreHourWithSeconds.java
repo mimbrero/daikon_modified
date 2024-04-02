@@ -16,6 +16,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -32,6 +34,8 @@ public class SequenceStringElementsAreHourWithSeconds extends SingleStringSequen
 
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
+
+  private static String regex = "^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$";
 
   protected SequenceStringElementsAreHourWithSeconds(PptSlice ppt) {
     super(ppt);
@@ -74,14 +78,23 @@ public class SequenceStringElementsAreHourWithSeconds extends SingleStringSequen
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreHourWithSeconds this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Hours: HH:MM:SS 24-hour format with optional leading 0";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Hours: HH:MM:SS 24-hour format with optional leading 0";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => /" + regex + "/.test(element))).to.be.true";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 
   @Override
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
-    Pattern pattern = Pattern.compile("^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$");
+    Pattern pattern = Pattern.compile(regex);
 
     if(a.length>0){
       alwaysEmpty = false;

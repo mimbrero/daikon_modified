@@ -16,6 +16,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 /**
  * Represents string sequences that contain a common subset. Prints as {@code {s1, s2, s3, ...}
  * subset of x[]}.
@@ -32,6 +34,8 @@ public class SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm extends SingleS
 
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
+
+  private static String regex = "^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}Z$";
 
   protected SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm(PptSlice ppt) {
     super(ppt);
@@ -74,14 +78,23 @@ public class SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm extends SingleS
   @SideEffectFree
   @Override
   public String format_using(@GuardSatisfied SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm this, OutputFormat format) {
-    return "All the elements of " + var().name() + " are Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+    if (format == OutputFormat.DAIKON) {
+      return "All the elements of " + var().name() + " are Timestamp. Format: YYYY-MM-DDTHH:MM:SS.mmZ (Miliseconds are optional)";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var().name()) + ".every(element => /" + regex + "/.test(element))).to.be.true";
+    }
+
+    return format_unimplemented(format);
+
   }
 
 
   @Override
   public InvariantStatus check_modified(@Interned String @Interned [] a, int count) {
 
-    Pattern pattern = Pattern.compile("^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}Z$");
+    Pattern pattern = Pattern.compile(regex);
 
     if(a.length>0){
       alwaysEmpty = false;

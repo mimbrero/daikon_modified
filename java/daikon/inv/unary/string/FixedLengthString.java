@@ -23,6 +23,8 @@ import org.checkerframework.dataflow.qual.SideEffectFree;
 import org.checkerframework.framework.qual.Unused;
 import typequals.prototype.qual.Prototype;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class FixedLengthString extends SingleString {
 
     // We are Serializable, so we specify a version to allow changes to
@@ -67,9 +69,19 @@ public class FixedLengthString extends SingleString {
 
     @SideEffectFree
     @Override
-    public String format_using(@GuardSatisfied FixedLengthString this, OutputFormat format) { return "LENGTH(" + var().name() + ")==" + length; }
+    public String format_using(@GuardSatisfied FixedLengthString this, OutputFormat format) {
+        if (format == OutputFormat.DAIKON) {
+            return "LENGTH(" + var().name() + ")==" + length;
+        }
 
-    // TODO: CLONE?
+        if (format == OutputFormat.POSTMAN) {
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.have.length(" + length + ")";
+        }
+
+        return format_unimplemented(format);
+
+    }
+
 
     @Override
     public InvariantStatus add_modified(@Interned String a, int count) { return check_modified(a, count); }

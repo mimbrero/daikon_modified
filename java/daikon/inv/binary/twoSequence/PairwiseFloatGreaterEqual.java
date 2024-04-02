@@ -25,6 +25,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_agora_pp;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents an invariant between corresponding elements of two sequences of double values. The
@@ -236,12 +237,19 @@ public class PairwiseFloatGreaterEqual extends TwoSequenceFloat {
     if (format == OutputFormat.CSHARPCONTRACT) {
       return format_csharp();
     }
+    if (format == OutputFormat.POSTMAN) {
+      return format_postman();
+    }
 
     return format_unimplemented(format);
   }
 
   public String format_daikon(@GuardSatisfied PairwiseFloatGreaterEqual this) {
     return var1().name() + " >= " + var2().name() + " (elementwise)";
+  }
+
+  public String format_postman(@GuardSatisfied PairwiseFloatGreaterEqual this) {
+    return "pm.expect(" + getPostmanVariableName(var1().name()) + ".every((element, index) => element >= " + getPostmanVariableName(var2().name()) + "[index])).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied PairwiseFloatGreaterEqual this) {

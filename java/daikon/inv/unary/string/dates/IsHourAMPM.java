@@ -13,6 +13,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class IsHourAMPM extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
@@ -23,6 +25,8 @@ public class IsHourAMPM extends SingleString {
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
+
+    private static String regex = "^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$";
 
     ///
     /// Required methods
@@ -51,12 +55,21 @@ public class IsHourAMPM extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsHourAMPM this, OutputFormat format) {
-        return var().name() + " is Hour: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Hour: HH:MM 12-hour format, optional leading 0, mandatory meridiems (AM/PM)";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.match(/" + regex + "/)";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override
     public InvariantStatus check_modified(String v, int count) {
-        Pattern pattern = Pattern.compile("^((1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]))$");
+        Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(v);
 

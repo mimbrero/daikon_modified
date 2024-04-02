@@ -12,6 +12,8 @@ import typequals.prototype.qual.Prototype;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
 public class IsNumeric extends SingleString {
     // We are Serializable, so we specify a version to allow changes to
     // method signatures without breaking serialization.  If you add or
@@ -25,6 +27,8 @@ public class IsNumeric extends SingleString {
     // daikon.config.Configuration interface.
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
+
+    private static final String regex = "^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
 
     ///
     /// Required methods
@@ -56,14 +60,23 @@ public class IsNumeric extends SingleString {
     @SideEffectFree
     @Override
     public String format_using(@GuardSatisfied IsNumeric this, OutputFormat format) {
-        return var().name() + " is Numeric";
+        if (format == OutputFormat.DAIKON) {
+            return var().name() + " is Numeric";
+        }
+
+        if (format == OutputFormat.POSTMAN) {
+            return "pm.expect(" + getPostmanVariableName(var().name()) + ").to.match(/" + regex + "/)";
+        }
+
+        return format_unimplemented(format);
+
     }
 
     @Override
     public InvariantStatus check_modified(String v, int count) {
 
 //        Pattern pattern = Pattern.compile("^\\d+$");
-        Pattern pattern = Pattern.compile("^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$");
+        Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(v);
 
