@@ -21,6 +21,7 @@ import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
 import static daikon.Daikon.use_agora_pp;
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
 
 /**
  * Represents invariants between two sequences of long values. If order matters for each
@@ -180,6 +181,10 @@ public class SeqSeqIntLessEqual extends TwoSequence
         + name2
         + ")";
 
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+      return "pm.expect(" + getPostmanVariableName(var1().name()) + ".every((element, index) => element <= " + getPostmanVariableName(var2().name()) + "[index])).to.be.true";
     }
 
     return format_unimplemented(format);
