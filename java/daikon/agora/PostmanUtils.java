@@ -6,11 +6,15 @@ package daikon.agora;
 public class PostmanUtils {
 
 
-    // TODO: THIS METHOD MUST BE IDENTICAL TO THE ONE IN POSTMANASSERTIONGENERATOR, every modification performed here must be performed in PostmanAssertionGenerator too!!!
+    // TODO: THIS METHOD MUST BE IDENTICAL TO THE ONE IN DAIKON, every modification performed here must be performed in Daikon too!!!
+    // TODO: Document properly (with multiple input/output example)
+    // TODO: Consider moving to a different class
     // TODO: Program points that are nested arrays? (e.g., GitHub)
+    // TODO: Replace special characters (e.g., kebab case is not allowed in JS)
     // Returns the variable name in the format used in the Postman assertion
     public static String getPostmanVariableName(String originalVariableName) {
 
+        // TODO: Test this if clause
         if(!originalVariableName.startsWith("input.") &&
                 !originalVariableName.startsWith("return.") &&
                 !originalVariableName.startsWith("size(input.") &&
@@ -20,6 +24,19 @@ public class PostmanUtils {
         }
 
         String postmanVariableName = originalVariableName;
+
+        // If the variable contains shift
+        String shiftSuffix = "";
+        if (postmanVariableName.matches(".* [+]{1}[0-9]{1,}$")) {            // increase
+            int plusIndex = postmanVariableName.lastIndexOf(" +");
+            shiftSuffix = "_plus_" + postmanVariableName.substring(plusIndex+2);
+            postmanVariableName = postmanVariableName.substring(0, plusIndex);
+
+        } else if (postmanVariableName.matches(".* [-]{1}[0-9]{1,}$")) {    // decrease
+            int minusIndex = postmanVariableName.lastIndexOf(" -");
+            shiftSuffix = "_minus_" + postmanVariableName.substring(minusIndex+2);
+            postmanVariableName = postmanVariableName.substring(0, minusIndex);
+        }
 
         // If the variable is the size of an array
         if(postmanVariableName.startsWith("size(")) {
@@ -39,8 +56,11 @@ public class PostmanUtils {
             postmanVariableName = postmanVariableName.replace("[..]", "");
 
             // Add suffix
-            postmanVariableName = postmanVariableName + "_array";
+            postmanVariableName += "_array";
         }
+
+        // Add shift suffix
+        postmanVariableName += shiftSuffix;
 
         // Replace variable hierarchy separator with snake_case
         postmanVariableName = postmanVariableName.replace(".", "_");
