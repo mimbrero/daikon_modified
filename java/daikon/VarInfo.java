@@ -4119,7 +4119,7 @@ public final @Interned class VarInfo implements Cloneable, Serializable {
 
     String shift_str = "";
     if (shift != 0) {
-      shift_str = String.format("%+d", shift);
+      shift_str = String.format(" %+d", shift);
     }
 
     if (in_orig) {
@@ -4260,7 +4260,7 @@ public final @Interned class VarInfo implements Cloneable, Serializable {
     // Calculate the string to add for the shift.
     String shift_str = "";
     if (shift != 0) {
-      shift_str = String.format("%+d", shift);
+      shift_str = String.format(" %+d", shift);
     }
 
     // Determine whether orig should be swapped with the function.
