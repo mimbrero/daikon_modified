@@ -67,16 +67,15 @@ public class PostmanUtils {
 
             String arrayElementVariable = postmanVariableName.substring(firstBracketIndex + 1, lastBracketIndex);
 
-            String suffix = postmanVariableName.substring(lastBracketIndex+1);
-
-            // Update variableHierarchyString by applying this same function to the array element
-            postmanVariableName = postmanVariableName.substring(0, firstBracketIndex) +
-                    "_" + getPostmanVariableName(arrayElementVariable);
-
-            if(!suffix.trim().isEmpty()) {
-                postmanVariableName += "_" + suffix;
-            }
-
+            // Update Postman variable name by adding the formatted the array element variable
+            // e.g., return.data[return.offset] -> return_data_return_offset
+            // e.g., return.data[1] -> return_data_1
+            postmanVariableName = postmanVariableName.substring(0, firstBracketIndex) + "_" +
+                    (arrayElementVariable.matches("^[0-9]+$")
+                            // if the array element is a number (e.g., return.data.results[1])
+                            ? arrayElementVariable
+                            // if the array element is another variable (e.g., return.data.results[return.data.offset])
+                            : getPostmanVariableName(arrayElementVariable));
         }
 
         // Add shift suffix
