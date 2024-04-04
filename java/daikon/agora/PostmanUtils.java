@@ -59,6 +59,26 @@ public class PostmanUtils {
             postmanVariableName += "_array";
         }
 
+        // If the variable name is accessing an array element
+        // (e.g., return.data.results[return.data.offset] or return.data.results[return.data.count-1])
+        if (postmanVariableName.contains("[") && postmanVariableName.contains("]")) {
+            int firstBracketIndex = postmanVariableName.indexOf("[");
+            int lastBracketIndex = postmanVariableName.lastIndexOf("]");
+
+            String arrayElementVariable = postmanVariableName.substring(firstBracketIndex + 1, lastBracketIndex);
+
+            String suffix = postmanVariableName.substring(lastBracketIndex+1);
+
+            // Update variableHierarchyString by applying this same function to the array element
+            postmanVariableName = postmanVariableName.substring(0, firstBracketIndex) +
+                    "_" + getPostmanVariableName(arrayElementVariable);
+
+            if(!suffix.trim().isEmpty()) {
+                postmanVariableName += "_" + suffix;
+            }
+
+        }
+
         // Add shift suffix
         postmanVariableName += shiftSuffix;
 
