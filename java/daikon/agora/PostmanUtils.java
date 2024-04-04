@@ -81,6 +81,8 @@ public class PostmanUtils {
         // Add shift suffix
         postmanVariableName += shiftSuffix;
 
+        // Kebab case is not supported in JS
+        postmanVariableName = postmanVariableName.replace("-", "_");
         // Replace variable hierarchy separator with snake_case
         postmanVariableName = postmanVariableName.replace(".", "_");
 
