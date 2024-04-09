@@ -737,6 +737,11 @@ public final class PrintInvariants {
       pw.println("<INVARIANTS>");
     }
 
+    if (csv_print) {
+      // Print csv header
+      pw.println("pptname;invariant;invariantType;variables;postmanAssertion");
+    }
+
     PptTopLevel combined_exit = null;
     boolean enable_exit_swap = true; // !Daikon.dkconfig_df_bottom_up;
 
@@ -1490,11 +1495,6 @@ public final class PrintInvariants {
     // System.out.printf("  var %s canbemissing = %b%n", vi, vi.canBeMissing);
 
     int index = 0;
-
-    if (csv_print) {
-      // Print csv header
-      out.println("pptname;invariant;invariantType;variables;postmanAssertion");
-    }
 
     // Remove redundancies in invariants of type SubString
     if(remove_substring_redundancies){
