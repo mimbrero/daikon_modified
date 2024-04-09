@@ -1491,6 +1491,11 @@ public final class PrintInvariants {
 
     int index = 0;
 
+    if (csv_print) {
+      // Print csv header
+      out.println("pptname;invariant;invariantType;variables;postmanAssertion");
+    }
+
     // Remove redundancies in invariants of type SubString
     if(remove_substring_redundancies){
       List<Invariant> subStringInvariants = getSubStringInvariants(invariants);
