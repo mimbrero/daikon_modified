@@ -650,14 +650,11 @@ public final class Daikon {
       readParameterValues();
 
 //      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
-//      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
-      String configFile = use_modified_daikon_version ? "--config=C:\\Users\\jcav\\Documents\\GitHub\\daikon_modified\\out\\artifacts\\daikon_modified_jar\\utils\\config_oracleGeneration.txt" : "--config=C:\\Users\\jcav\\Documents\\GitHub\\daikon_modified\\out\\artifacts\\daikon_modified_jar\\utils\\config_original.txt";
+      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
 
       String[] files = {
-              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\OMDb\\byIdOrTitle\\10000\\declsFile.decls",
-              "C:\\Users\\jcav\\Documents\\GitHub\\Beet\\src\\test\\resources\\examples\\OMDb\\byIdOrTitle\\10000\\dtraceFile.dtrace",
-//              args[0],
-//              args[1],
+              args[0],
+              args[1],
               configFile
       };
       mainHelper(files);
