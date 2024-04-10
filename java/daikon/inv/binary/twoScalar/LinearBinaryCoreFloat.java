@@ -505,7 +505,8 @@ public final class LinearBinaryCoreFloat implements Serializable, Cloneable {
     if (format == OutputFormat.SIMPLIFY) {
       return format_simplify(vix, viy, u, v, w);
     }
-    throw new Error("Unknown OutputFormat: " + format);
+    return wrapper.format_unimplemented(format);
+//    throw new Error("Unknown OutputFormat: " + format);
   }
 
   public static String format_simplify(String str_x, String str_y, double a, double b, double c) {

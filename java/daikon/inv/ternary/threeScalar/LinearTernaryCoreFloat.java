@@ -1137,7 +1137,13 @@ public final class LinearTernaryCoreFloat implements Serializable, Cloneable {
           + eq + "0";
       }
 
-    throw new Error("unrecognized output format " + format);
+    return "warning: method "
+            + this.getClass().getName()
+            + ".format("
+            + format
+            + ")"
+            + " needs to be implemented";
+//    throw new Error("unrecognized output format " + format);
     // return null;
   }
 
