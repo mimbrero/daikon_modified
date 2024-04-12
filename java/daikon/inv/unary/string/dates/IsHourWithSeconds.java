@@ -26,7 +26,7 @@ public class IsHourWithSeconds extends SingleString {
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
 
-    private static String regex = "^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$";
+    private static String regex = "^(?:\\d|[01]\\d|2[0-4]):(?:[0-5]\\d):(?:[0-5]\\d)$";
 
     ///
     /// Required methods

@@ -26,7 +26,7 @@ public class IsHour extends SingleString {
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
 
-    private static String regex = "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
+    private static String regex = "^([0-9]|0[0-9]|1[0-9]|2[0-4]):[0-5][0-9]$";
 
     ///
     /// Required methods

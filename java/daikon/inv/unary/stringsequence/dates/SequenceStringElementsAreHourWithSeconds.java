@@ -35,7 +35,7 @@ public class SequenceStringElementsAreHourWithSeconds extends SingleStringSequen
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
 
-  private static String regex = "^(?:\\d|[01]\\d|2[0-3]):(?:[0-5]\\d):(?:[0-5]\\d)$";
+  private static String regex = "^(?:\\d|[01]\\d|2[0-4]):(?:[0-5]\\d):(?:[0-5]\\d)$";
 
   protected SequenceStringElementsAreHourWithSeconds(PptSlice ppt) {
     super(ppt);
