@@ -35,8 +35,7 @@ public class SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm extends SingleS
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
 
-  private static String regex = "^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}Z$";
-
+  private static String regex = "^[0-9]{4}-((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(02)-(0[1-9]|[12][0-9]))T(0[0-9]|1[0-9]|2[0-3]):(0[0-9]|[1-5][0-9]):(0[0-9]|[1-5][0-9])(\\.[0-9]{3}){0,1}(Z|(-|\\+)(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9])$";
   protected SequenceStringElementsAreTimestampYYYYMMHHThhmmssmm(PptSlice ppt) {
     super(ppt);
 
