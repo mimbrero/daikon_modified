@@ -332,7 +332,7 @@ public final class OneOfScalar extends SingleScalar implements OneOf {
         if (elts[0] == 0) {
           return "pm.expect(" + postmanVariableName + ").to.be.null";
         } else {
-          return ""; // We cannot check this in AGORA
+          return "//"; // We cannot check this in AGORA
         }
       } else {
         return "pm.expect([" + elts[0] + "].includes(" + postmanVariableName + ")).to.be.true";
