@@ -17,7 +17,7 @@ public class PostmanUtils {
                 !originalVariableName.startsWith("size(input.") &&
                 !originalVariableName.startsWith("size(return.")
         ) {
-            throw new RuntimeException("Unexpected variable name");
+            throw new RuntimeException("Unexpected variable name: " + originalVariableName);
         }
 
         String postmanVariableName = originalVariableName;
@@ -87,5 +87,4 @@ public class PostmanUtils {
         return postmanVariableName;
 
     }
-
 }
