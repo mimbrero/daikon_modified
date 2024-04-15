@@ -127,10 +127,13 @@ public class EltwiseIntGreaterThan extends EltwiseIntComparison {
   }
 
   public String format_postman(@GuardSatisfied EltwiseIntGreaterThan this) {
+
+    String postmanVariableName = getPostmanVariableName(var().name());
+
     // element represents the elements of the array from 1 to n
     // index are the indexes from 0 to n
     // We expect the elements of the array to be ordered in descending order, i.e., x[i] < x[i-1]
-    return "pm.expect(" + getPostmanVariableName(var().name()) + ".slice(1).every((element, index) => element < arrayVariable[index])).to.be.true";
+    return "pm.expect(" + postmanVariableName + ".slice(1).every((element, index) => element < " + postmanVariableName + "[index])).to.be.true";
   }
 
   public String format_esc(@GuardSatisfied EltwiseIntGreaterThan this) {
