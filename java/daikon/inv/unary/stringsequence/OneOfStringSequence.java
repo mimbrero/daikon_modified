@@ -268,7 +268,7 @@ public final class OneOfStringSequence extends SingleStringSequence implements O
       return "[]";
     }
 
-    StringBuilder arrayString = new StringBuilder("[\"" + inputArray[0] + "\"");
+    StringBuilder arrayString = new StringBuilder("[\"" + inputArray[0].replace("\"", "\\\"") + "\"");
     for(int i = 1; i < inputArray.length; i ++) {
       arrayString.append(", \"").append(inputArray[i].replace("\"", "\\\"")).append("\"");
     }

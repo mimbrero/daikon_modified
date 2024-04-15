@@ -294,9 +294,9 @@ public final class EltOneOfString extends SingleStringSequence implements OneOf 
 
   public String format_postman(@GuardSatisfied EltOneOfString this) {
 
-    String arrayString = "[\"" + elts[0] + "\"";
+    String arrayString = "[\"" + elts[0].replace("\"", "\\\"") + "\"";
     for(int i = 1; i <num_elts; i ++) {
-      arrayString = arrayString + ", \"" + elts[i] + "\"";
+      arrayString = arrayString + ", \"" + elts[i].replace("\"", "\\\"") + "\"";
     }
     arrayString = arrayString + "]";
 
