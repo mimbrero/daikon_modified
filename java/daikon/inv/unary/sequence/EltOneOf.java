@@ -328,7 +328,7 @@ public final class EltOneOf extends SingleScalarSequence implements OneOf {
         if (elts[0] == 0) {
           return "pm.expect(" + postmanVariableName + ".every(element => element == null)).to.be.true";
         } else {
-          return ""; // We cannot check this in AGORA
+          return "//"; // We cannot check this in AGORA
         }
       } else {
         return "pm.expect(" + postmanVariableName + ".every(element => " + Arrays.toString(elts) + ".includes(element))).to.be.true";
