@@ -270,7 +270,7 @@ public final class OneOfStringSequence extends SingleStringSequence implements O
 
     StringBuilder arrayString = new StringBuilder("[\"" + inputArray[0] + "\"");
     for(int i = 1; i < inputArray.length; i ++) {
-      arrayString.append(", \"").append(inputArray[i]).append("\"");
+      arrayString.append(", \"").append(inputArray[i].replace("\"", "\\\"")).append("\"");
     }
     arrayString.append("]");
 
