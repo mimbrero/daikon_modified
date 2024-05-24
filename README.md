@@ -1,5 +1,6 @@
 ## Table of contents
 
+1. [Minimizing false positives](#minimizing-false-positives)
 1. [Added invariants](#added-invariants)
 1. [Disabled invariants](#disabled-invariants)
 1. [Enabled invariants](#enabled-invariants)
@@ -12,6 +13,30 @@ This document describes the changes performed in Daikon version 5.8.10 (released
 Section [Invariants disabled in the default Daikon configuration](#invariants-disabled-in-the-default-daikon-configuration) contains the 13 invariants that we disabled in the default Daikon configuration to avoid a combinatorial explosions
 of string comparisons and a high number of false positives.
 
+## Minimizing false positives
+
+In the evaluation of the first version of [AGORA]((https://dl.acm.org/doi/10.1145/3597926.3598114)), we identified the 
+invariants of the arithmetic comparison category as the cause of 3 out of every 4 false positives. Specifically, most 
+false positives were invariants comparing two independent output properties. For example, the invariant 
+`return.duration_ms > size(return.artists[])` states that the duration of a song in milliseconds should always be 
+greater than the number of artists in the song. While this may be true in most cases, it clearly does not represent the 
+expected API behaviour and is considered a false positive. Finding counterexamples to automatically rule out these false 
+positives is extremely unlikely, and the number of reported false positives can become unbearable if the API has several 
+numerical response fields.
+
+To address this, AGORA integrates a novel heuristic to minimize false positives derived from arithmetic comparisons 
+based on the following observation: parameters with a different value range are unlikely to be related. In the previous 
+example, for instance, the duration of a song in milliseconds may oscillate in the order of thousands, whereas the 
+number of artists of a song may vary from 1 to around 10. 
+
+In practice, we propose a heuristic that discards the invariants that represent arithmetic inequalities 
+(i.e., `x < y`, `x <= y`, `x > y` and `x >= y`) if there is no overlap between the values of the two variables 
+involved. Specifically, we modified a total of 32 Daikon invariants so that invariants are not reported if the maximum 
+observed value for one of the involved variables (e.g., 10 artists) is less than the minimum observed value of the other 
+variable (e.g., 30K milliseconds). 
+
+**This heuristic is enabled by default, to disable it, set the boolean parameter `use_agora_pp` of the modified version 
+of Daikon to false.**
 
 ## Added invariants
 
