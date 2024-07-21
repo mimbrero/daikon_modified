@@ -28,7 +28,7 @@ public class IsNumeric extends SingleString {
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
 
-    private static final String regex = "^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
+    private static final String regex = "^[+-]{0,1}(0|([0-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
 
     ///
     /// Required methods

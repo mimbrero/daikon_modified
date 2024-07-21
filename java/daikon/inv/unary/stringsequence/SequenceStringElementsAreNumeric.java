@@ -34,7 +34,7 @@ public class SequenceStringElementsAreNumeric extends SingleStringSequence {
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
 
-  private static String regex = "^[+-]{0,1}(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
+  private static String regex = "^[+-]{0,1}(0|([0-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[0-9])?$";
 
   protected SequenceStringElementsAreNumeric(PptSlice ppt) {
     super(ppt);
