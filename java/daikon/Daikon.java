@@ -623,6 +623,7 @@ public final class Daikon {
   }
 
   public static boolean use_modified_daikon_version = true;
+  public static boolean use_only_unary_invariants = false;
   public static boolean use_agora_pp = true;
   public static boolean csv_print = true;
   public static boolean remove_substring_redundancies = true;
@@ -652,6 +653,10 @@ public final class Daikon {
 //      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
       String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
 
+      if (use_only_unary_invariants) {
+        configFile = "--config=utils/config_oracleGeneration_unary.txt";
+      }
+
       String[] files = {
               args[0],
               args[1],
@@ -674,6 +679,10 @@ public final class Daikon {
       if (!use_modified_daikon_version) {
         use_agora_pp = false;
       }
+    }
+
+    if (readParameterValue("use_only_unary_invariants") != null) {
+      use_only_unary_invariants = Boolean.parseBoolean(readParameterValue("use_only_unary_invariants"));
     }
 
     if (readParameterValue("use_agora_pp") != null) {
