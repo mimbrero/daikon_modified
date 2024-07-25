@@ -35,7 +35,7 @@ public class SequenceStringElementsAreDateMMDDYYYY extends SingleStringSequence 
   // Set to true if the array is empty. If we do not use this property, the invariant would be considered true if all the arrays are empty
   private boolean alwaysEmpty = true;
 
-  private static String regex = "^(?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])[-/.](?:19\\d{2}|20[01234][0-9]|2050)$";
+  private static String regex = "^(?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])[-/.](?:19\\d{2}|20[01234][0-9]|2050|9999)$";
 
   protected SequenceStringElementsAreDateMMDDYYYY(PptSlice ppt) {
     super(ppt);

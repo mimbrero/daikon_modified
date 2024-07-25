@@ -26,7 +26,7 @@ public class IsDateYYYYMMDD extends SingleString {
     /** Boolean. True iff Positive invariants should be considered. */
     public static boolean dkconfig_enabled = false;
 
-    private static final String regex = "^(?:19\\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$";
+    private static final String regex = "^(?:19\\d{2}|20[01234][0-9]|2050|9999)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$";
 
     ///
     /// Required methods
