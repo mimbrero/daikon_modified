@@ -39,7 +39,7 @@ public class SequenceStringElementsAreDateYYYYMMDD extends SingleStringSequence 
    *       - 2050-10-30
    */
   // ^(?:19\d{2}|20[01234][0-9]|2050)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$
-  private static final String regex = "^(?:1[89]\\d{2}|20[01234][0-9]|2050|9999)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$";
+  private static final String regex = "^(?:1\\d{3}|20[01234][0-9]|2050|9999)[-/.](?:0[1-9]|1[012])[-/.](?:0[1-9]|[12][0-9]|3[01])$";
 
   protected SequenceStringElementsAreDateYYYYMMDD(PptSlice ppt) {
     super(ppt);
