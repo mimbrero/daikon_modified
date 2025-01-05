@@ -1182,7 +1182,7 @@ public final class PrintInvariants {
 //        System.out.println(inv.getClass().getName());
         if(csv_print) {
 //          System.out.println("### DEBUG, Invariant name: " + inv.getClass().getName() + " Daikon format: " + inv_rep);
-          out.println(ppt.name() + ";" + inv_rep + ";" + inv.getClass().getName() + ";" + inv.varNames() + ";" + inv.format_using(OutputFormat.POSTMAN));     // CSV-like
+          out.println(ppt.name() + ";" + escapeCSVSpecialCharacters(inv_rep) + ";" + inv.getClass().getName() + ";" + inv.varNames() + ";" + escapeCSVSpecialCharacters(inv.format_using(OutputFormat.POSTMAN)));     // CSV-like
         } else {
           out.println(inv_rep);   // Original
         }
@@ -1192,6 +1192,17 @@ public final class PrintInvariants {
     if (debug.isLoggable(Level.FINE)) {
       debug.fine(inv.repr());
     }
+  }
+
+  private static String escapeCSVSpecialCharacters(String originalValue) {
+    String res = originalValue;
+
+    if(originalValue.contains(";")) {
+      res = res.replace("\"", "\"\"");
+      res = "\"" + res + "\"";
+    }
+
+    return res;
   }
 
   /**
