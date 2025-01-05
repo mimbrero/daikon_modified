@@ -296,9 +296,9 @@ public final class OneOfString extends SingleString implements OneOf {
   }
 
   public String format_postman(@GuardSatisfied OneOfString this) {
-    String arrayString = "[\"" + elts[0].replace("\"", "\\\"") + "\"";
+    String arrayString = "[\"" + elts[0].replace("\"", "\\\"").replace("\r", "\\r").replace("\n","\\n") + "\"";
     for(int i = 1; i <num_elts; i ++) {
-      arrayString = arrayString + ", \"" + elts[i].replace("\"", "\\\"") + "\"";
+      arrayString = arrayString + ", \"" + elts[i].replace("\"", "\\\"").replace("\r", "\\r").replace("\n","\\n") + "\"";
     }
     arrayString = arrayString + "]";
 
