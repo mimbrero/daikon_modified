@@ -5,17 +5,24 @@ package daikon.agora;
  */
 public class PostmanUtils {
 
+    // TODO: THIS METHOD MUST BE IDENTICAL TO THE ONE IN DAIKON, every modification performed here must be performed in Daikon too!!!
+    public static String getPostmanVariableName(String originalVariableName) {
+        return getPostmanVariableName(originalVariableName, true);
+    }
+
 
     // TODO: THIS METHOD MUST BE IDENTICAL TO THE ONE IN DAIKON, every modification performed here must be performed in Daikon too!!!
     // TODO: Document properly (with multiple input/output example)
     // TODO: Program points that are nested arrays? (e.g., GitHub)
     // Returns the variable name in the format used in the Postman assertion
-    public static String getPostmanVariableName(String originalVariableName) {
+    private static String getPostmanVariableName(String originalVariableName, boolean checkCorrectVariableNameFormat) {
 
-        if(!originalVariableName.startsWith("input") &&
-                !originalVariableName.startsWith("return") &&
-                !originalVariableName.startsWith("size(input") &&
-                !originalVariableName.startsWith("size(return")
+        if(checkCorrectVariableNameFormat && (
+                        !originalVariableName.startsWith("input") &&
+                        !originalVariableName.startsWith("return") &&
+                        !originalVariableName.startsWith("size(input") &&
+                        !originalVariableName.startsWith("size(return")
+        )
         ) {
             throw new RuntimeException("Unexpected variable name: " + originalVariableName);
         }
@@ -72,7 +79,7 @@ public class PostmanUtils {
                             // if the array element is a number (e.g., return.data.results[1])
                             ? arrayElementVariable
                             // if the array element is another variable (e.g., return.data.results[return.data.offset])
-                            : getPostmanVariableName(arrayElementVariable));
+                            : getPostmanVariableName(arrayElementVariable, false));
         }
 
         // Add shift suffix
