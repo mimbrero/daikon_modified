@@ -130,7 +130,6 @@ Section [5.5 Invariant list](https://plse.cs.washington.edu/daikon/download/doc/
 1. **daikon.inv.binary.twoString.StringGreaterThan**
 1. **daikon.inv.binary.twoString.StringLessEqual**
 1. **daikon.inv.binary.twoString.StringGreaterEqual**
-1. **daikon.inv.binary.twoSequence.SeqSeqStringEqual**
 1. **daikon.inv.binary.twoSequence.SeqSeqStringLessThan**
 1. **daikon.inv.binary.twoSequence.SeqSeqStringGreaterThan**
 1. **daikon.inv.binary.twoSequence.SeqSeqStringLessEqual**
