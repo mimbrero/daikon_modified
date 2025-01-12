@@ -21,7 +21,9 @@ import org.plumelib.util.Intern;
 import typequals.prototype.qual.NonPrototype;
 import typequals.prototype.qual.Prototype;
 
-/**
+import static daikon.agora.PostmanUtils.getPostmanVariableName;
+
+  /**
  * Represents invariants between two sequences of String values. If order matters for each
  * variable (which it does by default), then the sequences are compared lexically. Prints as
  * {@code x[] == y[] lexically}.
@@ -139,6 +141,19 @@ public class SeqSeqStringEqual extends TwoSequenceString
       String name2 = var2().name_using(format);
 
       return "daikon.Quant.pairwiseEqual(" + name1 + ", " + name2 + ")";
+    }
+
+    if (format == OutputFormat.POSTMAN) {
+
+      String array1 = getPostmanVariableName(var1().name());
+      String array2 = getPostmanVariableName(var2().name());
+
+      if(orderMatters) {
+        return "pm.expect(" + array1 + ").to.eql(" + array2 + ")";
+      } else {
+        return "pm.expect(" + array1 + ".every(element => " + array2 + ".includes(element)) && " + array2 + ".every(element => " + array1 + ".includes(element))).to.be.true";
+      }
+
     }
 
     return format_unimplemented(format);
