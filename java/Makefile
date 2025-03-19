@@ -386,10 +386,6 @@ all: all_stop_on_error
 all_stop_on_error:
 # if ../.git does not exist, then directory was created from
 # a daikon archive file and we cannot do git-hooks
-ifneq ($(shell ls ../.git 2>/dev/null),)
-	$(MAKE) -C .. git-hooks
-endif
-	$(MAKE) --stop all_directly junit
 
 ## In general, don't use this; it misses some files
 all_via_daikon: chicory daikon/Daikon.class daikon/diff/Diff.class
