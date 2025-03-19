@@ -3,7 +3,6 @@
 
 package daikon;
 
-import com.google.errorprone.bugpatterns.SystemOut;
 import daikon.config.Configuration;
 import daikon.derive.Derivation;
 import daikon.executionTimes.Timer;

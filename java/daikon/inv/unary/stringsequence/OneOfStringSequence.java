@@ -2,7 +2,6 @@
 
 package daikon.inv.unary.stringsequence;
 
-import com.sun.org.apache.regexp.internal.RE;
 import daikon.*;
 import daikon.inv.*;
 import daikon.inv.unary.OneOf;
