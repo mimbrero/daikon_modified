@@ -1,14 +1,13 @@
 package daikon;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import daikon.inv.Invariant;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.io.File;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
@@ -26,10 +25,8 @@ public class SuppressInvariantsByCategory {
     public static List<Invariant> getSuppressedCategoriesInvariants(List<Invariant> invariants) {
         List<String> invariantsToSuppress = new ArrayList<>();
 
-        // Read invariants taxonomy
-//        String filePath = "daikon/config/taxonomy.json";
-        String filePath = "utils/taxonomy.json";
-        JSONObject jsonObject = readJsonObject(filePath);
+        String resourcePath = "/daikon/config/taxonomy.json";
+        JSONObject jsonObject = readJsonObject(resourcePath);
         if(suppress_arithmetic_comparisons) {
             invariantsToSuppress.addAll(getInvariantsFromCategory(jsonObject, "arithmetic_comparisons"));
         }
@@ -60,22 +57,24 @@ public class SuppressInvariantsByCategory {
                 .collect(Collectors.toList());
     }
 
-    public static JSONObject readJsonObject(String filePath) {
+    public static JSONObject readJsonObject(String resourcePath) {
+        InputStream inputStream =
+                SuppressInvariantsByCategory.class.getResourceAsStream(resourcePath);
 
-        JSONObject jsonObject = null;
-
-        try {
-            String jsonContent = new String(Files.readAllBytes(Paths.get(filePath)));
-
-            // Parse the JSON content
-            jsonObject = new JSONObject(jsonContent);
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
+        if (inputStream == null) {
+            throw new RuntimeException("Cannot find resource in classpath: " + resourcePath);
         }
 
-        return jsonObject;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            String jsonContent = reader.lines()
+                    .collect(Collectors.joining(System.lineSeparator()));
 
+            return new JSONObject(jsonContent);
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading resource from classpath: " + resourcePath);
+        } catch (JSONException e) {
+            throw new RuntimeException("Error parsing JSON from resource: " + resourcePath);
+        }
     }
 
     private static List<String> getInvariantsFromCategory(JSONObject jsonObject, String category) {

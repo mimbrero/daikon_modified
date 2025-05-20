@@ -5,7 +5,6 @@ package daikon;
 
 import daikon.config.Configuration;
 import daikon.derive.Derivation;
-import daikon.executionTimes.Timer;
 import daikon.inv.Equality;
 import daikon.inv.Invariant;
 import daikon.inv.OutputFormat;
@@ -151,6 +150,7 @@ import gnu.getopt.LongOpt;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -645,25 +645,46 @@ public final class Daikon {
    */
   public static void main(final String[] args) throws IOException {
     try {
-
-      argsList = Arrays.asList(args);
+      argsList = new ArrayList<>(Arrays.asList(args));
       readParameterValues();
 
-//      String configFile = use_modified_daikon_version ? "--config=daikon/config/config_oracleGeneration.txt" : "--config=daikon/config/config_original.txt";
-      String configFile = use_modified_daikon_version ? "--config=utils/config_oracleGeneration.txt" : "--config=utils/config_original.txt";
-
+      String configFileName;
       if (use_only_unary_invariants) {
-        configFile = "--config=utils/config_oracleGeneration_unary.txt";
+        configFileName = "config_oracleGeneration_unary.txt";
+      } else {
+        configFileName = use_modified_daikon_version
+                ? "config_oracleGeneration.txt"
+                : "config_original.txt";
       }
 
-      String[] files = {
-              args[0],
-              args[1],
-              configFile
-      };
-      mainHelper(files);
+      String resourcePathInJar = "/daikon/config/" + configFileName;
+      try (InputStream resourceStream = Daikon.class.getResourceAsStream(resourcePathInJar)) {
+        if (resourceStream == null) {
+          throw new RuntimeException("Cannot find configuration resource in JAR: " + resourcePathInJar);
+        }
 
+        File tempConfigFile = File.createTempFile("daikon-config-", ".txt");
+        tempConfigFile.deleteOnExit();
 
+        try (OutputStream tempFileOutputStream = Files.newOutputStream(tempConfigFile.toPath())) {
+          byte[] buffer = new byte[4096];
+          int bytesRead;
+          while ((bytesRead = resourceStream.read(buffer)) != -1) {
+            tempFileOutputStream.write(buffer, 0, bytesRead);
+          }
+        }
+
+        String configFileArg = "--config=" + tempConfigFile.getAbsolutePath();
+        argsList.add(configFileArg);
+      } catch (IOException e) {
+        throw new RuntimeException(
+                "Failed to prepare Daikon configuration from resource: " +
+                resourcePathInJar,
+                e
+        );
+      }
+
+      mainHelper(argsList.toArray(new String[0]));
     } catch (DaikonTerminationException e) {
       handleDaikonTerminationException(e);
     }
