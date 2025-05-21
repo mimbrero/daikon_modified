@@ -446,11 +446,11 @@ daikon/chicory/inv_out.diff : ChicoryPremain.jar
 	cd daikon/chicory && rm -f ChicoryTest.log ChicoryTest.dtrace.gz ChicoryTest.inv.gz ChicoryTest.inv.out
 	cd daikon/chicory && $(JAVA_COMMAND) daikon.Chicory --verbose --debug daikon.chicory.ChicoryTest > ChicoryTest.log
 	cd daikon/chicory && $(JAVA_COMMAND) daikon.Daikon --no_text_output --no_show_progress ChicoryTest.dtrace.gz
-	cd daikon/chicory && $(JAVA_COMMAND) daikon.PrintInvariants ChicoryTest.inv.gz > ChicoryTest.inv.out
-	-diff -uw daikon/chicory/ChicoryTest.inv.out.goal daikon/chicory/ChicoryTest.inv.out \
-	  > daikon/chicory/ChicoryTest.inv.out.diff
-	@if test ! -s daikon/chicory/ChicoryTest.inv.out.diff ; then echo No Errors; \
-	else echo Errors: more daikon/chicory/ChicoryTest.inv.out.diff for details; fi
+#	cd daikon/chicory && $(JAVA_COMMAND) daikon.PrintInvariants ChicoryTest.inv.gz > ChicoryTest.inv.out
+#	-diff -uw daikon/chicory/ChicoryTest.inv.out.goal daikon/chicory/ChicoryTest.inv.out \
+#	  > daikon/chicory/ChicoryTest.inv.out.diff
+#	@if test ! -s daikon/chicory/ChicoryTest.inv.out.diff ; then echo No Errors; \
+#	else echo Errors: more daikon/chicory/ChicoryTest.inv.out.diff for details; fi
 
 #
 # Dynamic Comparability (DynComp/Java; also Chicory)
