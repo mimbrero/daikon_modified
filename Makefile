@@ -64,6 +64,10 @@ SCRIPT_PATHS := $(addprefix scripts/,$(SCRIPT_FILES))
 # This is so troublesome that it isn't used except as a list of dependences for make commands
 DAIKON_JAVA_FILES := $(shell find java -name '*daikon-java*' -prune -o -name '*.java' -print | ${SORT_DIRECTORY_ORDER})
 DAIKON_RESOURCE_FILES := daikon/config/example-settings.txt \
+	daikon/config/config_oracleGeneration.txt \
+	daikon/config/config_oracleGeneration_unary.txt \
+	daikon/config/config_original.txt \
+	daikon/config/taxonomy.json \
 	daikon/simplify/daikon-background.txt \
 	daikon/simplify/daikon-background-defined.txt \
 	daikon/test/InvariantFormatTest.commands \
